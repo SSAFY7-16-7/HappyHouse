@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.QnADAO">
+	<sql id="listCond">
+		<if test="word != null and word !=''">
+			<choose>
+				<when test="key == 'userid'">
+					and userid = #{word}
+				</when>
+				<when test="key == 'title'">
+					and title like concat('%',#{word},'%')
+				</when>
+				<when test="key == 'content'">
+					and content like concat('%',#{word},'%')
+				</when>
+			</choose>
+		</if>
+	</sql>
+
+	<select id="QnAList" parameterType="PageBean" resultType="QnA">
+		select * 
+		from qna
+		<where>
+			<include refid="listCond"/>
+		</where>
+		limit #{start},#{interval}
+	</select>
+	
+	<select id="QnACount" parameterType="PageBean" resultType="int">
+		select count(*) as cnt
+		from qna
+		<where>
+			<include refid="listCond"/>
+		</where>
+	</select>
+	
+	<select id="QnADetail" parameterType="String" resultType="QnA">
+		select * 
+		from qna
+		where idx = #{idx}
+	</select>
+	
+	<insert id="QRegist" parameterType="QnA">
+		insert into
+	 	qna(userid, title, content,date)
+		values (#{userid},#{title},#{content}, now())
+	</insert>	
+	
+	<update id="ARegist" parameterType="QnA">
+		update qna
+		set answer = #{answer}, answer_date = now()
+		where idx = #{idx}
+	</update>	
+	
+	<update id="QnAModify" parameterType="QnA">
+		update qna
+		<if test="key == null or key ==''">
+			set title = #{title}, content = #{content}
+		</if>
+		<if test="key == 'admin' ">
+			set answer = #{answer}, answer_date = now()
+		</if>
+		where idx = #{idx}
+	</update>	
+	
+	<delete id="QDelete" parameterType="String">
+		delete 
+		from qna
+		where idx = #{idx}
+	</delete>
+	
+	<update id="ADelete" parameterType="String">
+		update qna
+		set answer = null, answer_date = null
+		where idx = #{idx}
+	</update>	
+</mapper>
