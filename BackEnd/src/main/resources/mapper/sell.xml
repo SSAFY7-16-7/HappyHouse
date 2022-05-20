@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="com.ssafy.happyhouse.model.dao.SellDAO">
+	<sql id="listCond">
+		<if test="word != null and word !=''">
+			<choose>
+				<when test="key == 'title'">
+					title like concat('%',#{word},'%')
+				</when>
+				<when test="key == 'dong'">
+					dong = #{word}
+				</when>
+			</choose>
+		</if>
+		<if test="keyword !=null and keyword !=''">
+			
+		</if>
+	</sql>
+
+	<select id="list" parameterType="PageBean" resultType="HouseSell">
+		select * 
+		from house_sell
+		<where>
+			<include refid="listCond"/>
+		</where>
+		limit #{start},#{interval}
+	</select>
+	
+	<select id="detail" parameterType="String" resultType="HouseSell">
+		select * 
+		from house_sell
+		where idx = #{idx}
+	</select>
+	
+	<insert id="add" parameterType="HouseSell">
+		insert into
+	 	house_sell(id, title, date, type, price, admin_price, admin_desc, room_type, floor_now, floor_tot, size, content, image, keyword, address, dong)
+		values (#{id},#{title},now(), #{type},#{price},#{admin_price},#{admin_desc},#{room_type},#{floor_now},#{floor_tot},#{size},#{content},#{image},#{keyword},#{address},#{dong})
+	</insert>	
+
+	<update id="update" parameterType="HouseSell">
+		update house_sell
+		set title = #{title}, type=#{type},price=#{price},admin_price=#{admin_price},admin_desc=#{admin_desc},room_type=#{room_type},floor_now=#{floor_now},floor_tot=#{floor_tot},size=#{size},content=#{content},image=#{image},keyword=#{keyword},address=#{address},dong=#{dong}
+		where idx = #{idx}
+	</update>	
+	
+	<delete id="remove" parameterType="String">
+		delete 
+		from house_sell
+		where idx = #{idx}
+	</delete>
+	
+	<select id="count" parameterType="PageBean" resultType="int">
+		select count(*) as cnt
+		from house_sell
+		<where>
+			<include refid="listCond"/>
+		</where>
+	</select>
+</mapper>

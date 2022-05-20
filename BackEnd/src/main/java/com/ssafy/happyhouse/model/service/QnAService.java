@@ -2,8 +2,6 @@ package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.ssafy.happyhouse.model.dto.PageBean;
 import com.ssafy.happyhouse.model.dto.QnA;
 

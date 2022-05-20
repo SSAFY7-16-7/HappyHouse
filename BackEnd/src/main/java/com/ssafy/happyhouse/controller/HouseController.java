@@ -70,6 +70,4 @@ public class HouseController {
 		logger.info("houseList: {}", list);
 		return new ResponseEntity<List<HouseInfoDeal>>(list, HttpStatus.OK);
 	}
-
-
 }

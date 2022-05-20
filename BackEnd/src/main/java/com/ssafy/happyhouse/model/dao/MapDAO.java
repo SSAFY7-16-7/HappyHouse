@@ -9,7 +9,7 @@ import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
 
 @Mapper
-public interface HouseMapMapper {
+public interface MapDAO {
 
 	List<SidoGugunCodeDto> getSido() throws SQLException;
 	List<SidoGugunCodeDto> getGugunInSido(String sido) throws SQLException;
