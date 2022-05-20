@@ -17,48 +17,38 @@
                   </div>
                   <div class="card-body">
                     <form role="form">
+                      <p>ID : {{ userInfo.id }}</p>
                       <div class="mb-3">
-                        <vsud-input
+                        <label for="type - password">Password</label>
+                        <b-input
+                          v-model="user.id"
                           id="password"
-                          type="password"
-                          placeholder="Password"
                           aria-label="Password"
                         />
                       </div>
 
                       <div class="mb-3">
-                        <vsud-input
-                          id="name"
-                          type="text"
-                          placeholder="Name"
-                          aria-label="Name"
-                        />
+                        <label for="type - name">Name</label>
+                        <b-input v-model="user.name" id="name" />
                       </div>
                       <div class="mb-3">
-                        <vsud-input
-                          id="email"
-                          type="email"
-                          placeholder="Email"
-                          aria-label="Email"
-                        />
+                        <label for="type - email">Email</label>
+                        <b-input v-model="user.email" id="email" />
                       </div>
                       <div class="mb-3">
-                        <vsud-input
-                          id="age"
-                          type="age"
-                          placeholder="Age"
-                          aria-label="age"
-                        />
+                        <label for="type - age">Age</label>
+                        <b-input v-model="user.age" id="number" />
                       </div>
 
                       <div class="text-center">
-                        <vsud-button
+                        <b-button
+                          @click="updateUserInfo(user)"
                           color="dark"
                           full-width
                           variant="gradient"
                           class="my-4 mb-2"
                           >정보 수정
-                        </vsud-button>
+                        </b-button>
                       </div>
                     </form>
                   </div>
@@ -79,13 +69,19 @@ import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
-const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 
 export default {
   name: "MypageView",
   data() {
-    return {};
+    return {
+      user: {
+        id: "",
+        password: "",
+        email: "",
+        age: "",
+      },
+    };
   },
   components: {
     Navbar,
@@ -93,6 +89,19 @@ export default {
     VsudInput,
     VsudSwitch,
     VsudButton,
+  },
+  computed: {
+    ...mapState("memberStore", ["userInfo", "isLogin"]),
+  },
+  methods: {
+    ...mapActions("memberStore", ["updateUserInfo"]),
+  },
+  mounted() {
+    this.user.id = this.userInfo.id;
+    this.user.password = this.userInfo.password;
+    this.user.name = this.userInfo.name;
+    this.user.email = this.userInfo.email;
+    this.user.age = this.userInfo.age;
   },
 };
 </script>

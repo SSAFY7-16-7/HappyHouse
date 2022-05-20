@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
-import com.ssafy.happyhouse.model.service.HouseMapService;
+import com.ssafy.happyhouse.model.service.MapService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,12 +24,12 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/map")
 @CrossOrigin("*")
 @Api(tags = {"주소조회 컨트롤러"})
-public class HouseMapController {
+public class MapController {
 	
-	private final Logger logger = LoggerFactory.getLogger(HouseMapController.class);
+	private final Logger logger = LoggerFactory.getLogger(MapController.class);
 
 	@Autowired
-	private HouseMapService haHouseMapService;
+	private MapService haHouseMapService;
 	
 	@ApiOperation(value="시도 조회")
 	@GetMapping("/sido")

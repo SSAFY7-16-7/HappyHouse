@@ -8,7 +8,6 @@ public class PageBean implements Serializable{
 	private String key;
 	/**검색 단어*/
 	private String word;
-	/**페이징 처리에 대한 link정보*/
 	private String pageLink;
 	/**현재 페이지 번호*/
 	private int pageNo;
@@ -16,6 +15,7 @@ public class PageBean implements Serializable{
 	private int interval = 3;
 	/**페이지 시작 번호*/
 	private int start=0;
+	private String keyword;
 	public PageBean() {	}
 	public PageBean(String key, String word, int pageNo) {
 		setKey(key);
@@ -81,6 +81,12 @@ public class PageBean implements Serializable{
 	}
 	public void setStart(int start) {
 		this.start = start;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	@Override
 	public String toString() {

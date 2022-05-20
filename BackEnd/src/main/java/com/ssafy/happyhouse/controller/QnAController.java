@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/qna")
 @CrossOrigin("*")
-@Api("QNA 컨트롤러 V1")
+@Api(tags = {"QNA 컨트롤러 V1"})
 public class QnAController {
 	
 	@Autowired
@@ -62,11 +62,11 @@ public class QnAController {
 		bean.setInterval(10);
 		List<QnA> qnalist =service.QnAList(bean);
 		logger.info("qnaList:{}", qnalist);
-		if(qnalist != null && !qnalist.isEmpty()) {
+//		if(qnalist != null && !qnalist.isEmpty()) {
 			return new ResponseEntity<List<QnA>>(qnalist, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<List<QnA>>(HttpStatus.NO_CONTENT);
-		}
+//		} else {
+//			return new ResponseEntity<List<QnA>>(HttpStatus.NO_CONTENT);
+//		}
 	}
 	
 	@ApiOperation(value="QnA 디테일", notes = "idx에 해당하는 게시물에 대한 정보 가져오기")
