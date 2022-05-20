@@ -116,8 +116,8 @@ const memberStore = {
       });
     },
     testLogout({ commit }) {
-      commit("SET_IS_LOGIN", false);
       commit("SET_USER_INFO", null);
+      commit("SET_IS_LOGIN", false);
       commit("SET_IS_ADMIN", false);
     },
   },

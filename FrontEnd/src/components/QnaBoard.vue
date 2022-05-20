@@ -21,6 +21,7 @@
         검색
       </button>
       <button
+        v-if="isLogin"
         class="col-2 btn btn-primary"
         @click="qnaRegist"
         style="width: 80px"
@@ -60,6 +61,7 @@
 
 <script>
 import { apiInstance } from "@/api/index.js";
+import { mapState } from "vuex";
 
 const http = apiInstance();
 
@@ -78,6 +80,9 @@ export default {
   },
   created() {
     this.searchQna();
+  },
+  computed: {
+    ...mapState("memberStore", ["isLogin", "userInfo", "isAdmin"]),
   },
   methods: {
     /* goDetail(item) {}, */
