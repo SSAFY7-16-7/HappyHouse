@@ -8,6 +8,7 @@ const memberStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
+    isAdmin: false,
   },
   getters: {
     checkUserInfo: function (state) {
@@ -25,6 +26,9 @@ const memberStore = {
       state.isLogin = true;
       state.userInfo = userInfo;
     },
+    SET_IS_ADMIN: (state, isAdmin) => {
+      state.isAdmin = isAdmin;
+    },
   },
   actions: {
     async userConfirm({ commit }, user) {
@@ -37,6 +41,7 @@ const memberStore = {
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             sessionStorage.setItem("access-token", token);
+            if (user.id === "admin") commit("SET_IS_ADMIN", true);
           } else {
             console.log(response);
             commit("SET_IS_LOGIN", false);
