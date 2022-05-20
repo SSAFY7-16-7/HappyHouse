@@ -123,6 +123,11 @@
             </router-link>
           </li>
         </ul>
+        <div class="testbtns">
+          <b-button @click="testAdmin" size="sm">관리자</b-button>
+          <b-button @click="testUser" size="sm">일반유저 (id: ssafy)</b-button>
+          <b-button @click="testLogout" size="sm">로그아웃 </b-button>
+        </div>
       </div>
     </div>
   </nav>
@@ -132,7 +137,7 @@
 <script>
 import downArrWhite from "@/assets/img/down-arrow-white.svg";
 import downArrBlack from "@/assets/img/down-arrow-dark.svg";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "navbar",
@@ -150,6 +155,9 @@ export default {
       default: false,
     },
   },
+  methods: {
+    ...mapActions("memberStore", ["testAdmin", "testUser", "testLogout"]),
+  },
   computed: {
     ...mapState("memberStore", ["isLogin", "userInfo", "isAdmin"]),
 
@@ -161,3 +169,16 @@ export default {
   },
 };
 </script>
+
+<style lang="css">
+.testbtns {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.testbtns button {
+  display: block;
+  margin: 0;
+  margin-right: 3px;
+}
+</style>

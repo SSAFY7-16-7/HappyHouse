@@ -9,7 +9,7 @@ const memberStore = {
     isLoginError: false,
     userInfo: null,
     isAdmin: false,
-    //테스트용
+    /// 테스트용
     // isLogin: true,
     // isLoginError: false,
     // userInfo: {
@@ -20,6 +20,7 @@ const memberStore = {
     //   name: "admin",
     // },
     // isAdmin: true,
+    // end 테스트 값
   },
   getters: {
     checkUserInfo: function (state) {
@@ -89,6 +90,35 @@ const memberStore = {
         },
         () => {}
       );
+    },
+    // ui 테스트를 위한 함수
+    testAdmin({ commit }) {
+      commit("SET_IS_LOGIN", true);
+      commit("SET_IS_ADMIN", true);
+      commit("SET_USER_INFO", {
+        id: "admin",
+        password: "admin",
+        email: "admin",
+        age: "1",
+        name: "admin",
+      });
+    },
+    testUser({ commit }) {
+      commit("SET_IS_LOGIN", true);
+      commit("SET_IS_ADMIN", false);
+
+      commit("SET_USER_INFO", {
+        id: "ssafy",
+        password: "ssfay",
+        email: "ssafy123",
+        age: "1",
+        name: "ssafy",
+      });
+    },
+    testLogout({ commit }) {
+      commit("SET_IS_LOGIN", false);
+      commit("SET_USER_INFO", null);
+      commit("SET_IS_ADMIN", false);
     },
   },
 };
