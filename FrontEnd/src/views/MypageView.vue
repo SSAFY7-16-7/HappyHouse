@@ -21,7 +21,7 @@
                       <div class="mb-3">
                         <label for="type - password">Password</label>
                         <b-input
-                          v-model="user.id"
+                          v-model="user.password"
                           id="password"
                           aria-label="Password"
                         />
