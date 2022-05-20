@@ -11,6 +11,8 @@ import SignupView from "@/views/SignupView.vue";
 import RecommendView from "@/views/RecommendView.vue";
 import NoticeBoard from "@/components/NoticeBoard.vue";
 import QnaBoard from "@/components/QnaBoard.vue";
+import QnaDetail from "@/components/Board/Qna/Qna/QnaDetail.vue";
+import QnaRegist from "@/components/Board/Qna/Qna/QnaRegist.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -81,6 +83,17 @@ const routes = [
         path: "qna",
         name: "qna",
         component: QnaBoard,
+        children: [{ path: "article/:no", name: "qnaDetail" }],
+      },
+      {
+        path: "qnadetail",
+        component: QnaDetail,
+        name: "QnaDetail",
+      },
+      {
+        path: "qnaregist",
+        component: QnaRegist,
+        name: "QnaRegist",
       },
     ],
   },
