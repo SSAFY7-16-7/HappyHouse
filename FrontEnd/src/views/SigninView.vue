@@ -37,13 +37,14 @@
                         Remember me
                       </vsud-switch>
                       <div class="text-center">
-                        <vsud-button
-                          class="my-4 mb-2"
-                          variant="gradient"
-                          color="success"
-                          full-width
+                        <b-button
+                          block
+                          @click="login"
+                          class="my-4 mb-2 logbtn"
+                          variant="success"
+                          size="lg"
                           >로그인
-                        </vsud-button>
+                        </b-button>
                       </div>
                     </form>
                   </div>
@@ -90,7 +91,7 @@ import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
-
+import { apiInstance } from "@/api/index.js";
 export default {
   name: "SigninView",
   data() {
@@ -106,6 +107,11 @@ export default {
     VsudInput,
     VsudSwitch,
     VsudButton,
+  },
+  methods: {
+    login() {
+      console.log("login");
+    },
   },
 };
 </script>
