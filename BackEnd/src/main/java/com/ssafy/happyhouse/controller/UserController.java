@@ -147,7 +147,7 @@ public class UserController {
 
 	// 회원 삭제 delete /user
 	@ApiOperation(value="회원 삭제", notes = "id가 일치하는 회원 데이터 1개 삭제")
-	@DeleteMapping("/remove")
+	@PostMapping("/remove")
 	public ResponseEntity<?> userRemove(@RequestBody String id,HttpServletRequest request) {
 		try {
 			System.out.println(id);
