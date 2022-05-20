@@ -28,6 +28,13 @@ const routes = [
     path: "/map",
     name: "map",
     component: MapView,
+    children: [
+      {
+        path: "api",
+        name: "api",
+        component: () => import("@/components/Map/KakaoMap.vue"),
+      },
+    ],
   },
   {
     path: "/deals",
