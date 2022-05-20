@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,23 +29,29 @@ import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.InterestApt;
 import com.ssafy.happyhouse.model.dto.LikeCount;
 import com.ssafy.happyhouse.model.dto.User;
+import com.ssafy.happyhouse.model.service.JwtServiceImpl;
 import com.ssafy.happyhouse.model.service.userService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
 @Api(tags = {"회원 컨트롤러"})
 public class UserController {
+	
+	@Autowired
+	private JwtServiceImpl jwtService;
 
+	
 	@Autowired
 	private userService service;
 	
 	private static final Logger logger  = LoggerFactory.getLogger(UserController.class);
 	private static final String SUCCESS ="success";
-	
+	private static final String FAIL = "fail";
 	@ExceptionHandler
 	public ResponseEntity<String> handler(Exception e){
 		logger.info("ErrorHandler.......................................");
@@ -159,18 +166,25 @@ public class UserController {
 	// 로그인 post/login
 	@ApiOperation(value="회원 1명 조회", notes = "id가 일치하는 회원 데이터 1개 조회")
 	@PostMapping("/login")
-	public ResponseEntity<?> userLogin(@RequestBody Map<String, String> info,HttpServletRequest request) {
+	public ResponseEntity<?> userLogin(@RequestBody Map<String, String> info) {
 		System.out.println(info.get("id")+" "+info.get("password"));
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
 		try {
-			User user = service.login(info.get("id"), info.get("password"));
-			HttpSession session = request.getSession();
-			session.setAttribute("userInfo", user);
-			System.out.println("로그인 - id:"+user.getId());
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			User loginUser = service.login(info.get("id"), info.get("password"));
+			String token = jwtService.create("userid", loginUser.getId(), "access-token");
+			logger.debug("로그인 토큰정보 : {}", token);
+			System.out.println(token);
+			resultMap.put("access-token", token);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
 		} catch (Exception e) {
-			System.out.println("Error(" + this.getClass().getName() + ") "
-					+ "("+Thread.currentThread().getStackTrace()[1].getMethodName() + "):" + e.getMessage());
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+			logger.error("로그인 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}finally {
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
 		}
 	}
 	
@@ -187,6 +201,35 @@ public class UserController {
 		}
 
 	}
+	
+	@GetMapping("/info/{userid}")
+	public ResponseEntity<Map<String, Object>> getInfo(
+			@PathVariable("userid") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userid,
+			HttpServletRequest request) {
+//		logger.debug("userid : {} ", userid);
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		if (jwtService.isUsable(request.getHeader("access-token"))) {
+			logger.info("사용 가능한 토큰!!!");
+			try {
+//				로그인 사용자 정보.
+				User loginUser = service.infoUser(userid);
+				resultMap.put("userInfo", loginUser);
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} catch (Exception e) {
+				logger.error("정보조회 실패 : {}", e);
+				resultMap.put("message", e.getMessage());
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} else {
+			logger.error("사용 불가능 토큰!!!");
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 	
 	@ApiOperation(value="관심아파트 설정", notes = "관심 아파트테이블에 해당 id와 aptCode 저장")
 	@PostMapping("/likeList")
