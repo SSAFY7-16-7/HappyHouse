@@ -80,7 +80,7 @@
               HELP DESK
             </router-link>
           </li>
-
+          <!-- 
           <li class="nav-item">
             <router-link class="nav-link me-2" to="/signup">
               <i
@@ -90,18 +90,9 @@
               ></i>
               Sign Up
             </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/signin">
-              <i
-                class="fas fa-key opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              Sign In
-            </router-link>
-          </li>
-          <li class="nav-item">
+          </li> -->
+
+          <li class="nav-item" v-if="userInfo">
             <router-link class="nav-link me-2" to="/mypage">
               <i
                 class="fas fa-key opacity-6 me-1"
@@ -111,7 +102,17 @@
               My Page
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-else>
+            <router-link class="nav-link me-2" to="/signin">
+              <i
+                class="fas fa-key opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              Sign In
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="isAdmin">
             <router-link class="nav-link me-2" to="/admin">
               <i
                 class="fas fa-key opacity-6 me-1"
@@ -131,6 +132,7 @@
 <script>
 import downArrWhite from "@/assets/img/down-arrow-white.svg";
 import downArrBlack from "@/assets/img/down-arrow-dark.svg";
+import { mapState } from "vuex";
 
 export default {
   name: "navbar",
@@ -149,6 +151,8 @@ export default {
     },
   },
   computed: {
+    ...mapState("memberStore", ["isLogin", "userInfo", "isAdmin"]),
+
     darkModes() {
       return {
         "text-dark": this.darkMode,

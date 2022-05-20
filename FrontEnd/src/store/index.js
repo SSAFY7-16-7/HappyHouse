@@ -3,11 +3,13 @@ import Vuex, { Store } from "vuex";
 import bootstrap from "bootstrap/dist/js/bootstrap.min.js";
 
 import uiStrore from "@/store/modules/uiStore.js";
+import memberStore from "@/store/modules/memberStore.js";
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     uiStrore,
+    memberStore,
   },
   plugins: [
     // createPersistedState({
