@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { login } from "@/api/member.js";
+import { login, update } from "@/api/member.js";
 import { findById } from "../../api/member";
 
 const memberStore = {
@@ -9,6 +9,17 @@ const memberStore = {
     isLoginError: false,
     userInfo: null,
     isAdmin: false,
+    //테스트용
+    // isLogin: true,
+    // isLoginError: false,
+    // userInfo: {
+    //   id: "admin",
+    //   password: "admin",
+    //   email: "admin",
+    //   age: "1",
+    //   name: "admin",
+    // },
+    // isAdmin: true,
   },
   getters: {
     checkUserInfo: function (state) {
@@ -66,6 +77,17 @@ const memberStore = {
         (error) => {
           console.log(error);
         }
+      );
+    },
+    async updateUserInfo({ commit }, user) {
+      console.log("updateuser");
+      await update(
+        user,
+        (res) => {
+          console.log(res.data);
+          commit("SET_USER_INFO", res.data);
+        },
+        () => {}
       );
     },
   },
