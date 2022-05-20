@@ -19,7 +19,7 @@
                     <form role="form" class="text-start">
                       <label>Id</label>
                       <b-form-input
-                        v-model="id"
+                        v-model="user.id"
                         id="email"
                         type="email"
                         placeholder="Id"
@@ -27,7 +27,7 @@
                       ></b-form-input>
                       <label>Password</label>
                       <b-form-input
-                        v-model="password"
+                        v-model="user.password"
                         id="password"
                         type="password"
                         placeholder="Password"
@@ -39,7 +39,7 @@
                       <div class="text-center">
                         <b-button
                           block
-                          @click="login"
+                          @click="confirm"
                           class="my-4 mb-2 logbtn"
                           variant="success"
                           size="lg"
@@ -89,16 +89,18 @@ import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
-const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
-import { apiInstance } from "@/api/index.js";
+import { mapState, mapActions } from "vuex";
+import { login } from "@/api/member.js";
+
+const memberStore = "memberStore";
 export default {
   name: "SigninView",
   data() {
     return {
-      id: "",
-
-      password: "",
+      user: {
+        id: null,
+        password: null,
+      },
     };
   },
   components: {
@@ -108,9 +110,18 @@ export default {
     VsudSwitch,
     VsudButton,
   },
+  computed: {
+    ...mapState(memberStore, ["isLogin", "isLoginError"]),
+  },
   methods: {
-    login() {
-      console.log("login");
+    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+    async confirm() {
+      await this.userConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
+      if (this.isLogin) {
+        await this.getUserInfo(token);
+        this.$router.push({ name: "home" });
+      }
     },
   },
 };

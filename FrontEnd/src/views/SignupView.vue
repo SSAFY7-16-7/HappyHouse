@@ -135,54 +135,55 @@
             <div class="card-body">
               <form role="form">
                 <div class="mb-3">
-                  <vsud-input
+                  <b-input
+                    v-model="user.id"
                     id="id"
-                    type="text"
                     placeholder="Id"
                     aria-label="id"
                   />
                 </div>
                 <div class="mb-3">
-                  <vsud-input
+                  <b-input
+                    v-model="user.password"
                     id="password"
-                    type="password"
                     placeholder="Password"
                     aria-label="Password"
                   />
                 </div>
 
                 <div class="mb-3">
-                  <vsud-input
+                  <b-input
+                    v-model="user.name"
                     id="name"
-                    type="text"
                     placeholder="Name"
                     aria-label="Name"
                   />
                 </div>
                 <div class="mb-3">
-                  <vsud-input
+                  <b-input
+                    v-model="user.email"
                     id="email"
-                    type="email"
                     placeholder="Email"
                     aria-label="Email"
                   />
                 </div>
                 <div class="mb-3">
-                  <vsud-input
+                  <b-input
+                    v-model="user.age"
                     id="age"
-                    type="age"
                     placeholder="Age"
                     aria-label="age"
                   />
                 </div>
 
                 <div class="text-center">
-                  <vsud-button
+                  <b-button
+                    @click="submit"
                     color="dark"
                     full-width
-                    variant="gradient"
+                    variant="dark"
                     class="my-4 mb-2"
-                    >회원 가입</vsud-button
+                    >회원 가입</b-button
                   >
                 </div>
                 <p class="text-sm mt-3 mb-0">
@@ -211,15 +212,41 @@ import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
-
+import { signup } from "@/api/member.js";
 export default {
   name: "SignupView",
+  data() {
+    return {
+      user: {
+        id: "",
+        password: "",
+        name: "",
+        email: "",
+        age: "",
+      },
+    };
+  },
   components: {
     Navbar,
     AppFooter,
     VsudInput,
     VsudSwitch,
     VsudButton,
+  },
+  methods: {
+    async submit() {
+      await signup(
+        this.user,
+        ({ data }) => {
+          alert("환영합니다 ! ");
+          this.moveLogin();
+        },
+        (err) => console.log(err)
+      );
+    },
+    moveLogin() {
+      this.$router.push({ name: "signin" });
+    },
   },
 };
 </script>
