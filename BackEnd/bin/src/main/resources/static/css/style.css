@@ -1486,6 +1486,7 @@ select {
   align-items: center;
   justify-content: center;
 }
+
 .main_map {
   padding: 0;
 }
@@ -1493,4 +1494,66 @@ select {
 .map_area {
   width: 100vw;
   height: 400px;
+}
+
+.search_comp{
+	width: 120px;
+    height: 35px;
+}
+
+.search_btn{
+	width: 70px;
+    height: 35px;
+}
+
+#searchInfoDiv{
+	margin-bottom:10px;
+}
+
+#res_info{
+	display:inline;
+}
+
+div#pagination-container {
+    padding: 20px;
+}
+
+.works h2{
+	text-align:center;
+	color :#55608f;
+}
+
+.tbcont{
+	color: #fff;
+	background: linear-gradient(45deg, #8986b5, #31ccbe);
+    padding: 20px;
+}
+
+
+.rank-table{
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+.rank-table {
+		padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+.rank-table th{
+		text-align: left;
+}
+.rank-table td{
+		text-align: center;
+}
+
+.rank-table thead{
+	background-color: #55608f;
+}
+
+.rank-th,.rank-td{
+	color:#fff
+	
 }

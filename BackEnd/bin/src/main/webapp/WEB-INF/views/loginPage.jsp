@@ -76,16 +76,9 @@
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="password"
-                />
-<<<<<<< HEAD
-                <button class="login-btn" type="submit">로그인</button>
-=======
-                <button class="login-btn"  id="login-btn" type="button">
-                  로그인
-                </button>
+                  placeholder="password"/>
+                <button class="login-btn"  id="login-btn" type="button"> 로그인 </button>
            
->>>>>>> refs/remotes/origin/master
               </form>
             </div>
           </div>

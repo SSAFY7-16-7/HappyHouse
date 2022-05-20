@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.InterestAptDao">
+
+	<select id="interestApts" parameterType="string" resultType="HouseInfo">
+		select i.*
+		from interest_apt as a
+		join houseinfo as i
+		on a.apt_code = i.aptCode and a.user_id=#{user_id};
+	</select>
+
+	<insert id="addInterest" parameterType="InterestApt">
+		insert into interest_apt values(#{userId},#{aptCode});
+	</insert>
+	
+	<delete id="remove" parameterType="InterestApt" >
+		delete from interest_apt where user_id=#{userId} and apt_code=#{aptCode}
+		
+	</delete>
+	
+	<select id="likeCountList" resultType="LikeCount">
+select i.*,c.cnt
+from  houseinfo as i,(select count(apt_code) as cnt , apt_code  from interest_apt group by apt_code) c
+where i.aptCode = c.apt_code;
+	</select>
+
+
+</mapper>

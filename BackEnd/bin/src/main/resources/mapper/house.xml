@@ -3,38 +3,32 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
-
-	<resultMap id="houseInfo" type="HouseInfo">
-		<result column="aptCode" property="aptCode"/>
-		<result column="aptName" property="aptName"/>
-		<result column="dongName" property="dongName"/>
-	</resultMap>
-
-	<resultMap id="houseList" type="HouseDeal">
-		<result column="aptCode" property="articleNo"/>
-		<result column="dealAmount" property="dealAmount"/>
-		<result column="dealYear" property="dealYear"/>
-		<result column="dealMonth" property="dealMonth"/>
-		<result column="dealDay" property="dealDay"/>
-		<collection property="houseInfo" resultMap="HouseInfo" />
-	</resultMap>
-	
 	<sql id="searchCond">
 		<if test="word != null and word !=''">
 			<choose>
 				<when test="key == 'name'">
-					aptName like concat('%',#{word},'%')
+					and aptName like concat('%',#{word},'%')
 				</when>
 				<when test="key == 'dong'">
-					dongName = #{word}
+					and dongName = #{word}
 				</when>
 			</choose>
 		</if>
 	</sql>
 
 
-	<select id="getList" parameterType="PageBean" resultMap="houseList">
-		select i.aptCode, i.aptName, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay
+	<select id="getList" parameterType="PageBean" resultType="HouseInfoDeal">
+		select i.aptCode, i.aptName, i.dongName, i.jibun,i.lat,i.lng, d.area, d.floor, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay
+		from housedeal d, houseinfo i
+		<where>
+			d.aptCode = i.aptCode
+			<include refid="searchCond"/>
+		</where>
+		limit #{start},#{interval}
+	</select>
+	
+	<select id="count" parameterType="PageBean" resultType="int">
+		select count(*) as cnt
 		from housedeal d, houseinfo i
 		<where>
 			d.aptCode = i.aptCode
@@ -42,12 +36,11 @@
 		</where>
 	</select>
 	
-	<select id="count" parameterType="PageBean" resultType="int">
-		select count(*) as cnt from notebook
+	<select id="countAll" resultType="int">
+		select count(*) as cnt
+		from housedeal d, houseinfo i
 		<where>
-			<include refid="searchcond"/>
+			d.aptCode = i.aptCode
 		</where>
 	</select>
-	
-	
 </mapper>

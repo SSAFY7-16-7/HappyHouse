@@ -89,31 +89,59 @@
 				let str = `
 					<tr id="user_${'${user.id}'}" class="view" data-id="${'${user.id}'}">
 						<td >${'${user.id}'}</td>
-						<td ><input id="userpwd${'${user.id}'}" value="${'${user.password}'}" size=10/></td>
-						<td ><input id="username${'${user.id}'}" value="${'${user.name}'}" size=10/></td>
-						<td ><input id="useremail${'${user.id}'}" value="${'${user.email}'}" size=10/></td>
-						<td ><input id="userage${'${user.id}'}" value="${'${user.age}'}" size=10/></td>
+						<td ><input id=userpwd"${'${user.id}'}" value="${'${user.password}'}" size=10/></td>
+						<td ><input id=username"${'${user.id}'}" value="${'${user.name}'}" size=10/></td>
+						<td ><input id=useremail"${'${user.id}'}" value="${'${user.email}'}" size=10/></td>
+						<td ><input id=userage"${'${user.id}'}" value="${'${user.age}'}" size=10/></td>
 						<td >
 							<button type="button" class="modiBtn btn btn-outline-primary btn-sm">수정</button>
 							<button type="button" class="delBtn btn btn-outline-danger btn-sm">삭제</button>
 						</td>
 					</tr>
-		/* 			<tr id="mview_${'${user.id}'}" data-id="${'${user.id}'}" style="display: none;">
-						<td>${'${user.id}'}</td>
-						<td><input type="text" name="password" id="userpwd${'${user.id}'}" value="${'${user.password}'}"></td>
-						<td>${'${user.name}'}</td>
-						<td><input type="text" name="email" id="email${'${user.id}'}" value="${'${user.email}'}"></td>
-						<td>${'${user.age}'}</td>
-						<td>
-							<button type="button" class="modifyBtn btn btn-primary btn-sm">수정</button>
-							<button type="button" class="cancelBtn btn btn-danger btn-sm">취소</button>
-						</td>
-					</tr> */
 					`;
 					$("#userlist").append(str);
 				});//each
 			
 		}
+		$("#search").click(function(){
+			let key = $("#key").val();
+			let word = $("#word").val();
+			let info=JSON.stringify({
+				"key":key,
+				"word":word
+				
+			});
+			$.ajax({
+				url:'${root}/user/search',  
+				type:'POST',
+				contentType:'application/json;charset=utf-8',
+				dataType:'json',
+				data:info,
+				success:function(users) {
+					console.log(users);
+					if(users.length==0){
+						alert("해당 조건에 맞는 회원이 없습니다.");
+						return;
+					}
+					makeList(users);
+				},
+				error:function(xhr, status, error){
+					console.log("상태값 : " + xhr.status + "\tHttp 에러메시지 : " + xhr.responseText);
+				},
+				statusCode: {
+					500: function() {
+						alert("서버에러.");
+						// location.href = "/error/e500";
+					},
+					404: function() {
+						alert("페이지없다.");
+						// location.href = "/error/e404";
+					}
+				}	
+			});
+			
+		});
+		
  })
  
  </script>
@@ -151,6 +179,16 @@
 		<main class="container">
 		 <div class="col-lg-12 mx-auto">
             <h2 class="p-3 mb-3 shadow bg-light"><mark class="pink">회원목록</mark></h2>
+            <div class="kewordSearch">
+            <select name="key" id="key" style="width:120px" class="keyword_select">
+									<option value="all">---선택하세요---</option>
+									<option value="id">아이디</option>
+									<option value="name">이름</option>
+									<option value="email">이메일</option>
+								</select>
+								<input type="text" 		id="word" 		name="word" />
+								<input class ='btn btn-primary' type="button" 	value="검색" 	id="search" style="margin-left:5px; height:30px">
+            </div>
 		  	<table class="table table-hover">
 		  		<colgroup>
 		            <col width="120">
