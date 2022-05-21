@@ -7,7 +7,7 @@
 		<if test="word != null and word !=''">
 			<choose>
 				<when test="key == 'name'">
-					and aptName like concat('%',#{word},'%')
+					and apartmentName like concat('%',#{word},'%')
 				</when>
 				<when test="key == 'dong'">
 					and dongName = #{word}
@@ -18,7 +18,7 @@
 
 
 	<select id="getList" parameterType="PageBean" resultType="HouseInfoDeal">
-		select i.aptCode, i.aptName, i.dongName, i.jibun,i.lat,i.lng, d.area, d.floor, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay
+		select i.aptCode, i.apartmentName, i.dong, i.jibun,i.lat,i.lng, d.area, d.floor, d.dealAmount, d.dealYear, d.dealMonth, d.dealDay
 		from housedeal d, houseinfo i
 		<where>
 			d.aptCode = i.aptCode

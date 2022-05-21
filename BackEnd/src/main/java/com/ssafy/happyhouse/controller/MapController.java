@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/map")
 @CrossOrigin("*")
-@Api(tags = {"주소조회 컨트롤러"})
+@Api(tags = {"주소조회 컨트롤러 XX"})
 public class MapController {
 	
 	private final Logger logger = LoggerFactory.getLogger(MapController.class);
@@ -50,7 +50,7 @@ public class MapController {
 		return new ResponseEntity<List<HouseInfo>>(haHouseMapService.getDongInGugun(gugun), HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="동으로 아파트 정보 조회", notes="houseinfo, housedeal 정보 조인해서 가져옴")
+	@ApiOperation(value="동코드로 아파트 정보 조회", notes="houseinfo, housedeal 정보 조인해서 가져옴")
 	@GetMapping("/apt")
 	public ResponseEntity<List<HouseInfo>> apt(@RequestParam("dong") String dong) throws Exception {
 		System.out.println("apt요청");

@@ -31,6 +31,16 @@
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
+            <router-link class="nav-link me-2" to="/house">
+              <i
+                class="fa fa-solid fa-map opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              실거래
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link me-2" to="/map">
               <i
                 class="fa fa-solid fa-map opacity-6 me-1"

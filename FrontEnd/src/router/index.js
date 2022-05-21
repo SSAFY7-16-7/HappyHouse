@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import SigninView from "@/views/SigninView.vue";
 import HomeView from "@/views/HomeView.vue";
+import HouseView from "@/views/HouseView.vue";
 import AdminView from "@/views/AdminView.vue";
 import DealsView from "@/views/DealsView.vue";
 import HelpdeskView from "@/views/HelpdeskView.vue";
@@ -27,6 +28,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/house",
+    name: "house",
+    component: HouseView,
+  },
+  {
     path: "/map",
     name: "map",
     component: MapView,
@@ -34,7 +40,7 @@ const routes = [
       {
         path: "api",
         name: "api",
-        component: () => import("@/components/Map/KakaoMap.vue"),
+        component: () => import("@/components/Map/KakaoMap copy.vue"),
       },
     ],
   },
