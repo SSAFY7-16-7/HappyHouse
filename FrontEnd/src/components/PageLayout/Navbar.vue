@@ -51,7 +51,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link me-2" to="/deals">
+            <router-link class="nav-link me-2" to="/sell">
               <i
                 class="fa-solid fa-house opacity-6 me-1"
                 aria-hidden="true"

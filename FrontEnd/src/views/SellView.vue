@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="mx-3 mt-3 border-radius-xl position-relative">
-      <main class="mt-0 main-content main-content-bg">
+      <main class="mt-7 main-content main-content-bg board-area">
         <section>
           <div class="page-header min-vh-75">
             <div class="container">
-              <h1>매물 보여줄 페이지</h1>
+              <router-view></router-view>
             </div>
           </div>
         </section>
@@ -20,11 +20,9 @@ import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
-const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
 
 export default {
-  name: "SignIn",
+  name: "HelpdeskView",
   components: {
     Navbar,
     AppFooter,
@@ -34,3 +32,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>
