@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import SigninView from "@/views/SigninView.vue";
 import HomeView from "@/views/HomeView.vue";
 import AdminView from "@/views/AdminView.vue";
-import DealsView from "@/views/DealsView.vue";
+import SellView from "@/views/SellView.vue";
 import HelpdeskView from "@/views/HelpdeskView.vue";
 import MapView from "@/views/MapView.vue";
 import MypageView from "@/views/MypageView.vue";
@@ -13,6 +13,7 @@ import NoticeBoard from "@/components/NoticeBoard.vue";
 import QnaBoard from "@/components/QnaBoard.vue";
 import QnaDetail from "@/components/Board/Qna/Qna/QnaDetail.vue";
 import QnaRegist from "@/components/Board/Qna/Qna/QnaRegist.vue";
+import SellRegist from "@/components/Sell/SellRegist.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -39,10 +40,19 @@ const routes = [
     ],
   },
   {
-    path: "/deals",
-    name: "deals",
-    component: DealsView,
+    path: "/sell",
+    name: "sell",
+    component: SellView,
+    redirect: "/sell/sellregist",
+    children: [
+      {
+        path: "sellregist",
+        name: "sellregist",
+        component: SellRegist,
+      },
+    ],
   },
+
   {
     path: "/recommend",
     name: "recommend",
