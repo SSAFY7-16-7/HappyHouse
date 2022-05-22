@@ -1,4 +1,10 @@
-import { sidoList, gugunList, dongList, houseList } from "@/api/house.js";
+import {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  housDeal,
+} from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -8,6 +14,8 @@ const houseStore = {
     dongs: {},
     houses: [],
     house: null,
+    deals: null,
+    none: true,
   },
 
   getters: {},
@@ -20,21 +28,44 @@ const houseStore = {
     },
     SET_GUGUN_LIST: (state, guguns) => {
       guguns.forEach((gugun) => {
-        state.guguns.push({ value: gugun, text: gugun });
+        state.guguns.push(gugun);
       });
     },
+    SET_DONG_LIST: (state, dongs) => {
+      dongs.forEach((dong) => {
+        state.dongs.push(dong);
+      });
+    },
+
     CLEAR_SIDO_LIST: (state) => {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [];
     },
     CLEAR_GUGUN_LIST: (state) => {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [];
+    },
+    CLEAR_DONG_LIST: (state) => {
+      state.dongs = [];
+    },
+
+    CLEAR_HOUSE_LIST: (state) => {
+      state.houses = [];
     },
     SET_HOUSE_LIST: (state, houses) => {
-      //   console.log(houses);
-      state.houses = houses;
+      console.log("SET_HOUSE_LIST", houses);
+      houses.forEach((house) => {
+        state.houses.push(house);
+      });
+      // state.houses = houses;
     },
     SET_DETAIL_HOUSE: (state, house) => {
       state.house = house;
+    },
+    SET_DETAIL_DEAL: (state, deals) => {
+      console.log("SET_DETAIL_DEAL", deals);
+      state.deals = deals;
+    },
+    SET_NONE: (state, data) => {
+      state.none = data;
     },
   },
 
@@ -50,9 +81,9 @@ const houseStore = {
         }
       );
     },
-    getGugun: ({ commit }, sidoCode) => {
+    getGugun: ({ commit }, sidoName) => {
       const params = {
-        sido: sidoCode,
+        sidoName: sidoName,
       };
       gugunList(
         params,
@@ -65,32 +96,56 @@ const houseStore = {
         }
       );
     },
-    getHouseList: ({ commit }, gugunCode) => {
-      // vue cli enviroment variables 검색
-      //.env.local file 생성.
-      // 반드시 VUE_APP으로 시작해야 한다.
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      //   const SERVICE_KEY =
-      //     "9Xo0vlglWcOBGUDxH8PPbuKnlBwbWU6aO7%2Bk3FV4baF9GXok1yxIEF%2BIwr2%2B%2F%2F4oVLT8bekKU%2Bk9ztkJO0wsBw%3D%3D";
+    getDong: ({ commit }, gugunName) => {
       const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202110",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
+        gugunName: gugunName,
       };
-      houseList(
+      dongList(
         params,
-        (response) => {
-          //   console.log(response.data.response.body.items.item);
-          commit("SET_HOUSE_LIST", response.data.response.body.items.item);
+        ({ data }) => {
+          // console.log(commit, response);
+          commit("SET_DONG_LIST", data);
         },
         (error) => {
           console.log(error);
         }
       );
     },
+    getHouseList: ({ commit }, dongName) => {
+      const params = {
+        dongName: dongName,
+      };
+      houseList(
+        params,
+        ({ data }) => {
+          commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log("getHouseList 에러", error);
+        }
+      );
+    },
     detailHouse: ({ commit }, house) => {
-      // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", house);
+
+      const params = {
+        aptCode: house.aptCode,
+      };
+      housDeal(
+        params,
+        ({ data }) => {
+          // 나중에 house.일련번호를 이용하여 API 호출
+          console.log("detailHouse", data);
+          commit("SET_DETAIL_DEAL", data);
+        },
+        (error) => {
+          console.log("detailHouse 에러", error);
+        }
+      );
+    },
+    setNoneFalse: ({ commit }, data) => {
+      console.log("setNoneFalse");
+      commit("SET_NONE", data);
     },
   },
 };

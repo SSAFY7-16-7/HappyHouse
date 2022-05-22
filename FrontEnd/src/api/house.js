@@ -1,7 +1,6 @@
-import { apiInstance, houseInstance } from "./index.js";
+import { apiInstance } from "./index.js";
 
 const api = apiInstance();
-const house = houseInstance();
 
 function sidoList(success, fail) {
   api.get(`/address/sido`).then(success).catch(fail);
@@ -16,7 +15,11 @@ function dongList(params, success, fail) {
 }
 
 function houseList(params, success, fail) {
-  house.get(``, { params: params }).then(success).catch(fail);
+  api.get(`/deal/dong`, { params: params }).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList };
+function housDeal(params, success, fail) {
+  api.get(`/deal/deal`, { params: params }).then(success).catch(fail);
+}
+
+export { sidoList, gugunList, dongList, houseList, housDeal };

@@ -13,7 +13,7 @@
 
 <script>
 import HouseListItem from "@/components/house/HouseListItem.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const houseStore = "houseStore";
 
@@ -22,14 +22,8 @@ export default {
   components: {
     HouseListItem,
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapState(houseStore, ["houses"]),
-    // houses() {
-    //   return this.$store.state.houses;
-    // },
   },
 };
 </script>

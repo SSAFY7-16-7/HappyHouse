@@ -34,18 +34,6 @@ const routes = [
     component: HouseView,
   },
   {
-    path: "/map",
-    name: "map",
-    component: MapView,
-    children: [
-      {
-        path: "api",
-        name: "api",
-        component: () => import("@/components/Map/KakaoMap copy.vue"),
-      },
-    ],
-  },
-  {
     path: "/sell",
     name: "sell",
     component: SellView,

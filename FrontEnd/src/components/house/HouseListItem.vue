@@ -5,7 +5,7 @@
     @mouseover="colorChange(true)"
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
-    style="display: flex"
+    style="display: flex; align-items: center"
   >
     <div class="apt-img-div">
       <img
@@ -16,14 +16,14 @@
     </div>
     <div class="apt-info-div">
       <div style="text-overflow: ellipsis">
-        [{{ house.법정동 }}] {{ house.아파트 }}
+        [{{ house.dong }}] {{ house.apartmentName }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 const houseStore = "houseStore";
 
@@ -37,12 +37,14 @@ export default {
   props: {
     house: Object,
   },
+  computed: {
+    ...mapState(houseStore, ["none"]),
+  },
   methods: {
-    ...mapActions(houseStore, ["detailHouse"]),
+    ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
     selectHouse() {
-      // console.log("listRow : ", this.house);
-      // this.$store.dispatch("getHouse", this.house);
       this.detailHouse(this.house);
+      this.setNoneFalse(false);
     },
     colorChange(flag) {
       this.isColor = flag;
@@ -59,9 +61,9 @@ export default {
   background-color: rgb(214, 211, 211);
 }
 .apt-img-div {
-  margin-right: 40px;
+  margin: 2px 13px 2px 0;
 }
 .apt-img {
-  width: 75px;
+  width: 44px;
 }
 </style>

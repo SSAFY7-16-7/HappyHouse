@@ -11,7 +11,7 @@
                 <house-list class="house-list" />
               </div>
             </div>
-            <div class="detail-div type1">
+            <div class="detail-div type1" :class="{ none: none }">
               <house-detail class="house-detail" />
             </div>
           </div>
@@ -33,6 +33,8 @@ import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 
 import KakaoMap from "@/components/Map/KakaoMap.vue";
 
+import { mapState } from "vuex";
+
 export default {
   name: "HouseView",
   components: {
@@ -45,6 +47,9 @@ export default {
     VsudSwitch,
     VsudButton,
     KakaoMap,
+  },
+  computed: {
+    ...mapState("houseStore", ["none"]),
   },
 };
 </script>
@@ -84,6 +89,10 @@ export default {
   left: 417px;
   background-color: #fcfbf6e0;
   overflow-y: scroll;
+}
+
+.none {
+  display: none;
 }
 
 .house-search-bar {
