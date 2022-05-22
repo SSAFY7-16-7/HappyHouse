@@ -2,18 +2,12 @@ package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import com.ssafy.happyhouse.model.dto.Address;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
-import com.ssafy.happyhouse.model.dto.HouseInfoDeal;
-import com.ssafy.happyhouse.model.dto.PageBean;
+import com.ssafy.happyhouse.model.dto.HouseInfo;
 
 public interface HouseService {
-	public List<HouseInfoDeal> 	getList(PageBean bean);
-	public List<HouseInfoDeal> 	getListRandom(PageBean bean);
-	public List<HouseDeal> 	detailList(int aptCode);
-	public HouseDeal 		detail(int aptCode);
-	public void 			add(HouseDeal houseDeal);
-	public void 			update(HouseDeal houseDeal);
-	public void 			remove(int aptCode);
+	public List<HouseInfo> 	getDongList(String dongName);
+	public List<HouseInfo> 	getAddressList(Address address);
+	public List<HouseDeal> 	getDealList(String aptCode);
 }

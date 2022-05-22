@@ -1,57 +1,40 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class HouseDeal {
-	private int no;
-	private int aptCode;
+	private long no;
 	private String dealAmount;
 	private int dealYear;
 	private int dealMonth;
 	private int dealDay;
 	private String area;
 	private String floor;
-	private String type;
-	private String rentMoney;
-
-	private String aptName;
-	private String dongName;
-	private String jibun;
+	private String cancelDealType;
+	private String aptCode;
 
 	public HouseDeal() {
 		super();
 	}
 
-	public HouseDeal(int no, int aptCode, String dealAmount, int dealYear, int dealMonth, int dealDay, String area,
-			String floor, String type, String rentMoney, String aptName, String dongName, String jibun) {
+	public HouseDeal(long no, String dealAmount, int dealYear, int dealMonth, int dealDay, String area, String floor,
+			String cancelDealType, String aptCode) {
 		super();
 		this.no = no;
-		this.aptCode = aptCode;
 		this.dealAmount = dealAmount;
 		this.dealYear = dealYear;
 		this.dealMonth = dealMonth;
 		this.dealDay = dealDay;
 		this.area = area;
 		this.floor = floor;
-		this.type = type;
-		this.rentMoney = rentMoney;
-		this.aptName = aptName;
-		this.dongName = dongName;
-		this.jibun = jibun;
+		this.cancelDealType = cancelDealType;
+		this.aptCode = aptCode;
 	}
 
-	public int getNo() {
+	public long getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(long no) {
 		this.no = no;
-	}
-
-	public int getAptCode() {
-		return aptCode;
-	}
-
-	public void setAptCode(int aptCode) {
-		this.aptCode = aptCode;
 	}
 
 	public String getDealAmount() {
@@ -102,51 +85,27 @@ public class HouseDeal {
 		this.floor = floor;
 	}
 
-	public String getType() {
-		return type;
+	public String getCancelDealType() {
+		return cancelDealType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCancelDealType(String cancelDealType) {
+		this.cancelDealType = cancelDealType;
 	}
 
-	public String getRentMoney() {
-		return rentMoney;
+	public String getAptCode() {
+		return aptCode;
 	}
 
-	public void setRentMoney(String rentMoney) {
-		this.rentMoney = rentMoney;
-	}
-
-	public String getAptName() {
-		return aptName;
-	}
-
-	public void setAptName(String aptName) {
-		this.aptName = aptName;
-	}
-
-	public String getDongName() {
-		return dongName;
-	}
-
-	public void setDongName(String dongName) {
-		this.dongName = dongName;
-	}
-
-	public String getJibun() {
-		return jibun;
-	}
-
-	public void setJibun(String jibun) {
-		this.jibun = jibun;
+	public void setAptCode(String aptCode) {
+		this.aptCode = aptCode;
 	}
 
 	@Override
 	public String toString() {
-		return "HouseDeal [no=" + no + ", aptCode=" + aptCode + ", dealAmount=" + dealAmount + ", dealYear=" + dealYear
-				+ ", dealMonth=" + dealMonth + ", dealDay=" + dealDay + ", area=" + area + ", floor=" + floor
-				+ ", type=" + type + ", rentMoney=" + rentMoney + ", aptName=" + aptName + ", dongName=" + dongName
-				+ ", jibun=" + jibun + "]";
+		return "HouseDeal [no=" + no + ", dealAmount=" + dealAmount + ", dealYear=" + dealYear + ", dealMonth="
+				+ dealMonth + ", dealDay=" + dealDay + ", area=" + area + ", floor=" + floor + ", cancelDealType="
+				+ cancelDealType + ", aptCode=" + aptCode + "]";
 	}
+
 }

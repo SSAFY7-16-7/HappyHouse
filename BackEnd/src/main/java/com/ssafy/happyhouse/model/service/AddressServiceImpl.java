@@ -24,6 +24,10 @@ public class AddressServiceImpl implements AddressService {
 		return dao.getGugun(sidoName);
 	}
 
+//	@Override
+//	public List<Address> getDong(String gugunName) throws Exception {
+//		return dao.getDong(gugunName);
+//	}
 	@Override
 	public List<String> getDong(String gugunName) throws Exception {
 		return dao.getDong(gugunName);

@@ -16,8 +16,15 @@
 		order by gugunName
 	</select> 
 	
+	<!-- <select id="getDong" parameterType="string" resultType="Address">
+		select dongName, dongCode
+		from dongcode 
+		where gugunName =#{gugunName} and dongName is not null
+		order by dongName
+	</select> -->
+	
 	<select id="getDong" parameterType="string" resultType="string">
-		select dongName 
+		select dongNam
 		from dongcode 
 		where gugunName =#{gugunName} and dongName is not null
 		order by dongName

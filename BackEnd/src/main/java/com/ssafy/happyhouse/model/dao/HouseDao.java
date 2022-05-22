@@ -4,18 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssafy.happyhouse.model.dto.Address;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
-import com.ssafy.happyhouse.model.dto.HouseInfoDeal;
-import com.ssafy.happyhouse.model.dto.PageBean;
+import com.ssafy.happyhouse.model.dto.HouseInfo;
 
 @Mapper
 public interface HouseDao {
-	public List<HouseInfoDeal> 	getList(PageBean bean);
-	public List<HouseDeal> 	detailList(int aptCode);
-	public HouseDeal 		detail(int aptCode);
-	public void 			add(HouseDeal houseDeal);
-	public void 			update(HouseDeal houseDeal);
-	public void 			remove(int aptCode);
-	public int 				count(PageBean bean);
-	public int 				countAll();
+	public List<HouseInfo> 	getDongList(String dongName);
+	public List<HouseInfo> 	getAddressList(Address address);
+	public List<HouseDeal> 	getDealList(String aptCode);
 }

@@ -14,18 +14,23 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssafy.happyhouse.model.dto.Address;
 import com.ssafy.happyhouse.model.dto.HappyHouseException;
+import com.ssafy.happyhouse.model.dto.HouseDeal;
+import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.HouseInfoDeal;
 import com.ssafy.happyhouse.model.dto.PageBean;
 import com.ssafy.happyhouse.model.service.HouseService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @Controller
-@RequestMapping("/showDeals")
+@RequestMapping("/deal")
 @CrossOrigin("*")
 @Api(tags = {"실거래가 아파트 컨트롤러"})
 public class HouseController {
@@ -50,24 +55,33 @@ public class HouseController {
 		}
 	}
 	
-	@ApiOperation(value="실거래가 아파트 목록 조회 + 페이지 이동", notes = "페이징 처리+검색조건")
-	@GetMapping("/list")
-	public String getList(PageBean bean, Model model) throws Exception {
-		logger.info("houseList+move....................{}", bean.getKey()+","+bean.getWord());
-		List<HouseInfoDeal> list = service.getList(bean);
-		model.addAttribute("deals", list);
-		logger.info("houseList+move: {}", list);
-		return "showDeals";
+	@ApiOperation(value="동으로 아파트 목록 조회", notes = "dongName로 houseinfo 검색")
+	@GetMapping("/dongList")
+	@ResponseBody
+	public ResponseEntity<?> getDongList(@RequestParam String dongName) throws Exception {
+		logger.info("dongList....................{}", dongName);
+		List<HouseInfo> list = service.getDongList(dongName);
+		logger.info("dongList: {}", list);
+		return new ResponseEntity<List<HouseInfo>>(list, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="실거래가 아파트 목록 조회", notes = "페이징 처리+검색조건")
-	@GetMapping("/searchList")
+	@ApiOperation(value="좌표로 아파트 목록 조회", notes = "남서, 북동 좌표로 houseinfo 검색")
+	@GetMapping("/addressList")
 	@ResponseBody
-	public ResponseEntity<?> searchList(PageBean bean, Model model) throws Exception {
-		logger.info("houseList....................{}", bean.getKey()+","+bean.getWord());
-		List<HouseInfoDeal> list = service.getList(bean);
-		model.addAttribute("deals", list);
-		logger.info("houseList: {}", list);
-		return new ResponseEntity<List<HouseInfoDeal>>(list, HttpStatus.OK);
+	public ResponseEntity<?> getAddressList(@RequestBody Address address) throws Exception {
+		logger.info("addressList....................{}");
+		List<HouseInfo> list = service.getAddressList(address);
+		logger.info("addressList: {}", list);
+		return new ResponseEntity<List<HouseInfo>>(list, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="아파트 거래내역 조회", notes = "aptCode로 housedeal 검색")
+	@GetMapping("/dealList")
+	@ResponseBody
+	public ResponseEntity<?> getDealList(@RequestParam String aptCode) throws Exception {
+		logger.info("addressList....................{}");
+		List<HouseDeal> list = service.getDealList(aptCode);
+		logger.info("addressList: {}", list);
+		return new ResponseEntity<List<HouseDeal>>(list, HttpStatus.OK);
 	}
 }
