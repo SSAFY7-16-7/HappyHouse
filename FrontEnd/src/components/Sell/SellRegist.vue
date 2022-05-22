@@ -223,11 +223,15 @@
 </template>
 
 <script>
+import { apiInstance } from "@/api/index.js";
+const http = apiInstance();
 export default {
   name: "sellRegist",
   data() {
     return {
       form: {
+        idx: "",
+        date: "",
         title: "", //글 제목
         image: "", // 이미지 : 여러개는 ,로 구분
         id: "", // 유저 id
@@ -262,7 +266,16 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      console.log(JSON.stringify(this.form));
+
+      const form = { ...this.form, keyword: this.form.keyword.toString() };
+      http
+        .post("/sell", form)
+        .then((res) => {
+          console.log("매물 등록 성공");
+        })
+        .catch(() => {
+          console.log("매물 등록 실패 ");
+        });
     },
     onReset(event) {
       event.preventDefault();
