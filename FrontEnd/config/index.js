@@ -1,4 +1,3 @@
-const DDD = "왜이래";
 const API_BASE_URL = "http://localhost/happyhouse";
 const APT_DEAL_URL =
   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
