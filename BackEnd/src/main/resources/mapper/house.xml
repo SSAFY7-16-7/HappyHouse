@@ -17,6 +17,13 @@
 		order by apartmentName
 	</select>
 	
+	<select id="getNameList" parameterType="string" resultType="HouseInfo">
+		select *
+		from houseinfo
+		where apartmentName like concat('%',#{apartmentName},'%')
+		order by apartmentName
+	</select>
+	
 	<select id="getDealList" parameterType="string" resultType="HouseDeal">
 		select * from housedeal
 		where aptCode = #{aptCode}

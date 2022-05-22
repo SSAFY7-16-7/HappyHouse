@@ -27,7 +27,13 @@ public class HouseServiceImp implements HouseService {
 	}
 
 	@Override
+	public List<HouseInfo> getNameList(String apartmentName) {
+		return dao.getNameList(apartmentName);
+	}
+	
+	@Override
 	public List<HouseDeal> getDealList(String aptCode) {
 		return dao.getDealList(aptCode);
 	}
+
 }

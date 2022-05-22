@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,6 @@ import com.ssafy.happyhouse.model.dto.Address;
 import com.ssafy.happyhouse.model.dto.HappyHouseException;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
-import com.ssafy.happyhouse.model.dto.HouseInfoDeal;
-import com.ssafy.happyhouse.model.dto.PageBean;
 import com.ssafy.happyhouse.model.service.HouseService;
 
 import io.swagger.annotations.Api;
@@ -38,7 +35,6 @@ public class HouseController {
 	private HouseService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
-	private static final String SUCCESS ="success";
 	
 	@ExceptionHandler
 	public ResponseEntity<String> handler(Exception e){
@@ -56,7 +52,7 @@ public class HouseController {
 	}
 	
 	@ApiOperation(value="동으로 아파트 목록 조회", notes = "dongName로 houseinfo 검색")
-	@GetMapping("/dongList")
+	@GetMapping("/dong")
 	@ResponseBody
 	public ResponseEntity<?> getDongList(@RequestParam String dongName) throws Exception {
 		logger.info("dongList....................{}", dongName);
@@ -66,7 +62,7 @@ public class HouseController {
 	}
 	
 	@ApiOperation(value="좌표로 아파트 목록 조회", notes = "남서, 북동 좌표로 houseinfo 검색")
-	@GetMapping("/addressList")
+	@GetMapping("/address")
 	@ResponseBody
 	public ResponseEntity<?> getAddressList(@RequestBody Address address) throws Exception {
 		logger.info("addressList....................{}");
@@ -75,8 +71,18 @@ public class HouseController {
 		return new ResponseEntity<List<HouseInfo>>(list, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="아파트 이름으로 아파트 목록 조회", notes = "apartmentName로 houseinfo 검색")
+	@GetMapping("/name")
+	@ResponseBody
+	public ResponseEntity<?> getNameList(@RequestParam String apartmentName) throws Exception {
+		logger.info("nameList....................{}", apartmentName);
+		List<HouseInfo> list = service.getNameList(apartmentName);
+		logger.info("nameList: {}", list);
+		return new ResponseEntity<List<HouseInfo>>(list, HttpStatus.OK);
+	}
+	
 	@ApiOperation(value="아파트 거래내역 조회", notes = "aptCode로 housedeal 검색")
-	@GetMapping("/dealList")
+	@GetMapping("/deal")
 	@ResponseBody
 	public ResponseEntity<?> getDealList(@RequestParam String aptCode) throws Exception {
 		logger.info("addressList....................{}");
