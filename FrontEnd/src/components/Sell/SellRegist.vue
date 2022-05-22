@@ -35,12 +35,14 @@
                           label="글 내용 작성 "
                           label-for="content"
                         >
-                          <b-form-input
+                          <b-form-textarea
                             id="content"
                             v-model="form.content"
                             placeholder="Enter content"
+                            rows="4"
+                            max-rows="7"
                             required
-                          ></b-form-input>
+                          ></b-form-textarea>
                         </b-form-group>
                         <div class="type-group">
                           <b-form-group
@@ -62,6 +64,7 @@
                           >
                             <b-form-select
                               id="room_type"
+                              name="방개수"
                               v-model="form.room_type"
                               :options="room_types"
                               required
@@ -164,25 +167,24 @@
                         <b-form-group
                           id="address-group"
                           label="address :  "
-                          label-for="address"
+                          label-for="address1"
                         >
-                          <b-form-input
-                            id="address"
-                            v-model="form.address"
-                            placeholder="Enter address"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
+                          <div class="address-group">
+                            <b-form-input
+                              id="address1"
+                              v-model="form.address"
+                              placeholder="주소 (검색 버튼으로 검색)"
+                              readonly
+                            ></b-form-input>
+                            <b-button @click="juso" class="btn-addrSearch"
+                              ><i class="fa-solid fa-magnifying-glass"></i
+                            ></b-button>
+                          </div>
 
-                        <b-form-group
-                          id="dong-group"
-                          label="dong :  "
-                          label-for="dong"
-                        >
                           <b-form-input
-                            id="dong"
-                            v-model="form.dong"
-                            placeholder="Enter dong"
+                            id="address2"
+                            v-model="address2"
+                            placeholder="상세 주소 입력"
                             required
                           ></b-form-input>
                         </b-form-group>
@@ -223,8 +225,10 @@
 </template>
 
 <script>
-import { apiInstance } from "@/api/index.js";
+import { apiInstance, kakaoInstance } from "@/api/index.js";
+import { mapState } from "vuex";
 const http = apiInstance();
+const kakao = kakaoInstance();
 export default {
   name: "sellRegist",
   data() {
@@ -239,15 +243,19 @@ export default {
         price: "", //월세면 보증금/월세(만원)
         admin_price: "", //관리비(만원)
         admin_desc: "", // 관리비포함내역 설명(ex.전기세, 관리비 포함)
-        room_type: "", // 원룸/투룸/쓰리룸+
+        room_type: "방 개수", // 원룸/투룸/쓰리룸+
         floor_now: "", // 현재 층
         floor_tot: "", // 총 층수
         size: "", //
         content: "", // 글 내용
         keyword: [], //키워드 (3개까지 컴마로 작성 가능 )
-        address: "", //주소
+        address: "", //주소 (api에서 정한 주소  )
+
         dong: "", //동
+        lat: "",
+        lng: "",
       },
+      address2: "", //상세 주소 (사용자가 입력할 상세 주소 )
       types: [{ text: "거래방식", value: null }, "매매", "전세", "월세"],
       room_types: [{ text: "방 개수", value: null }, "원룸", "투룸", "쓰리룸+"],
       show: true,
@@ -263,11 +271,35 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapState("memberStore", ["isLogin", "userInfo", "isAdmin"]),
+  },
+  created() {},
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
+    getPosition() {
+      kakao
+        .get(
+          `/search/address.json?analyze_type=exact&page=1&size=10&query=${this.form.address}`
+        )
+        .then(({ data }) => {
+          const addr = data.documents[0];
+          this.form.lng = addr.x;
+          this.form.lat = addr.y;
+          const form = {
+            ...this.form,
+            keyword: this.form.keyword.toString(),
+            address: this.form.address + "," + this.address2,
+            user: this.userInfo.id,
+          };
+          this.sendData(form);
+        })
+        .catch(() => {
+          console.log("getPosition() 에러 ");
+        });
+    },
+    sendData(form) {
+      console.log("send:", form);
 
-      const form = { ...this.form, keyword: this.form.keyword.toString() };
       http
         .post("/sell", form)
         .then((res) => {
@@ -276,6 +308,10 @@ export default {
         .catch(() => {
           console.log("매물 등록 실패 ");
         });
+    },
+    onSubmit(event) {
+      event.preventDefault();
+      this.getPosition();
     },
     onReset(event) {
       event.preventDefault();
@@ -306,7 +342,7 @@ export default {
       this.form = {
         title: "제목", //글 제목
         image: "이미지", // 이미지 : 여러개는 ,로 구분
-        id: "ssafy", // 유저 id
+        id: this.userInfo.id, // 유저 id
         type: "전세", // 매매,전세,월세
         price: "4000", //월세면 보증금/월세(만원)
         admin_price: "33", //관리비(만원)
@@ -317,9 +353,21 @@ export default {
         size: "4", //
         content: "내용테스트", // 글 내용
         keyword: ["안전", "역세권"], //키워드 (3개까지 컴마로 작성 가능 )
-        address: "주소", //주소
-        dong: "휘경종", //동
+        address: "서울 강남구 테헤란로 212", //주소
+        dong: "역삼동", //동
       };
+      this.address2 = "1층 101호";
+    },
+    juso() {
+      console.log(this);
+      new daum.Postcode({
+        oncomplete: (data) => {
+          console.log(data);
+          // 행정동코드 : bcode , 동이름 :bname
+          this.form.address = data.address;
+          this.form.dong = data.bname;
+        },
+      }).open();
     },
   },
 };
@@ -349,8 +397,16 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+.address-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
 #keyword {
   display: flex;
   flex-wrap: wrap;
+}
+.btn-addrSearch {
+  margin: 0 0 0 3px !important ;
 }
 </style>
