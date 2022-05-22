@@ -3,22 +3,25 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
-
+	
 	<select id="getDongList" parameterType="string" resultType="HouseInfo">
 		select *
 		from houseinfo
 		where dong = #{dongName}
+		order by apartmentName
 	</select>
 	
 	<select id="getAddressList" parameterType="Address" resultType="HouseInfo">
 		select *
 		from houseinfo
 		where lat between #{qa} and #{pa} and lng between #{ha} and #{oa}
+		order by apartmentName
 	</select>
 	
 	<select id="getDealList" parameterType="string" resultType="HouseDeal">
 		select * from housedeal
-		where aptCode = #{aptCode};
+		where aptCode = #{aptCode}
+		order by dealYear desc, dealMonth desc, dealDay desc
 	</select>
 	
 </mapper>

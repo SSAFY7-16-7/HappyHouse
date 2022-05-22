@@ -24,7 +24,7 @@
 	</select> -->
 	
 	<select id="getDong" parameterType="string" resultType="string">
-		select dongNam
+		select dongName
 		from dongcode 
 		where gugunName =#{gugunName} and dongName is not null
 		order by dongName

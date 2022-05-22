@@ -26,14 +26,16 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from "@/config/index.js";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HouseSearchBar",
   data() {
     return {
-      sidos: {},
-      guguns: {},
-      dongs: {},
+      house: [],
+      // sidos: {},
+      // guguns: {},
+      // dongs: {},
       sido: "",
       gugun: "",
       dong: "",
@@ -42,12 +44,16 @@ export default {
   created() {
     this.sidoList();
   },
+  computed: {
+    ...mapState("houseStore", ["sidos", "guguns", "houses"]),
+  },
   methods: {
     sidoList() {
       axios
         .get(`${API_BASE_URL}/address/sido`)
         .then((response) => {
-          this.sidos = response.data;
+          // this.sidos = response.data;
+          state.sidos = response.data;
           console.log("시도", response.data);
         })
         .catch((response) => {
@@ -76,7 +82,17 @@ export default {
           console.log("에러", response);
         });
     },
-    aptList() {},
+    aptList() {
+      axios
+        .get(`${API_BASE_URL}/deal/dongList?dongName=${this.dong}`)
+        .then((response) => {
+          this.house = response;
+          console.log(this.house);
+        })
+        .catch((response) => {
+          console.log("에러", response);
+        });
+    },
   },
 };
 </script>

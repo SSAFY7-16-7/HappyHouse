@@ -37,13 +37,13 @@
 	
 	<insert id="add" parameterType="HouseSell">
 		insert into
-	 	house_sell(id, title, date, type, price, admin_price, admin_desc, room_type, floor_now, floor_tot, size, content, image, keyword, address, dong)
-		values (#{id},#{title},now(), #{type},#{price},#{admin_price},#{admin_desc},#{room_type},#{floor_now},#{floor_tot},#{size},#{content},#{image},#{keyword},#{address},#{dong})
+	 	house_sell(id, title, date, type, price, admin_price, admin_desc, room_type, floor_now, floor_tot, size, content, image, keyword, address, dong,lat,lng)
+		values (#{id},#{title},now(), #{type},#{price},#{admin_price},#{admin_desc},#{room_type},#{floor_now},#{floor_tot},#{size},#{content},#{image},#{keyword},#{address},#{dong},#{lat},#{lng})
 	</insert>	
 
 	<update id="update" parameterType="HouseSell">
 		update house_sell
-		set title = #{title}, type=#{type},price=#{price},admin_price=#{admin_price},admin_desc=#{admin_desc},room_type=#{room_type},floor_now=#{floor_now},floor_tot=#{floor_tot},size=#{size},content=#{content},image=#{image},keyword=#{keyword},address=#{address},dong=#{dong}
+		set title = #{title}, type=#{type},price=#{price},admin_price=#{admin_price},admin_desc=#{admin_desc},room_type=#{room_type},floor_now=#{floor_now},floor_tot=#{floor_tot},size=#{size},content=#{content},image=#{image},keyword=#{keyword},address=#{address},dong=#{dong},lat=#{lat},lng=#{lng}
 		where idx = #{idx}
 	</update>	
 	
