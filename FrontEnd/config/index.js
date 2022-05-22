@@ -4,4 +4,4 @@ const APT_DEAL_URL =
 
 const KAKAO_LOCAL_URL = "https://dapi.kakao.com/v2/local";
 
-export { KAKAO_LOCAL_URL, API_BASE_URL, APT_DEAL_URL, DDD };
+export { KAKAO_LOCAL_URL, API_BASE_URL, APT_DEAL_URL };
