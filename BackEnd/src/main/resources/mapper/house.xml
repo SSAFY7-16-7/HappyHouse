@@ -3,7 +3,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
-	
 	<select id="getDongList" parameterType="string" resultType="HouseInfo">
 		select *
 		from houseinfo
