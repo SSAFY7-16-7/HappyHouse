@@ -15,6 +15,7 @@ import QnaBoard from "@/components/QnaBoard.vue";
 import QnaDetail from "@/components/Board/Qna/Qna/QnaDetail.vue";
 import QnaRegist from "@/components/Board/Qna/Qna/QnaRegist.vue";
 import SellRegist from "@/components/Sell/SellRegist.vue";
+import InterestView from "@/views/InterestView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -51,6 +52,11 @@ const routes = [
     path: "/recommend",
     name: "recommend",
     component: RecommendView,
+  },
+  {
+    path: "/interest",
+    name: "interest",
+    component: InterestView,
   },
   {
     path: "/signin",
