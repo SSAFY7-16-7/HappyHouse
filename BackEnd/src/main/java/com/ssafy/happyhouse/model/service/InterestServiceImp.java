@@ -50,4 +50,23 @@ public class InterestServiceImp implements InterestService {
 		sellDao.remove(sellCode, userid);
 	}
 
+	@Override
+	public boolean checkLikedApt(String aptCode, String userid) {
+		
+		List<HouseInfo> list = aptDao.list(userid);
+		for(HouseInfo info : list) {
+			if(info.getAptCode().equals(aptCode)) return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkLikedSell(String sellCode, String userid) {
+		List<HouseSell> list = sellDao.list(userid);
+		for(HouseSell info:list) {
+			if(info.getIdx()==Integer.parseInt(sellCode)) return true;
+		}
+		return false; 
+	}
+
 }

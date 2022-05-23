@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +93,34 @@ public class InterestController {
 	public ResponseEntity<Void>removeSell(@RequestBody Map<String,String> info) throws Exception {
 		service.removeSell(info.get("aptCode"), info.get("user_id"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@PostMapping("/check/likeApt")
+	public ResponseEntity<Map<String,String>>findLikeApt(@RequestBody Map<String,String> info) throws Exception {
+		System.out.println("찜목록에 있는 아파트 인지 체크 "+info.get("code"));
+		Map<String,String> resMap = new HashMap<String, String>() ;
+		boolean res = service.checkLikedApt(info.get("code"), info.get("user_id"));
+		if(res) {
+			System.out.println("이미 찜목록에 있는 아파트"+info.get("code"));
+			resMap.put("isLiked", "Y");
+		}else {
+			System.out.println("찜목록에 없는 아파트 "+info.get("code"));
+			resMap.put("isLiked", "N");
+		}
+		return new ResponseEntity<Map<String,String>>(resMap,HttpStatus.OK);
+	}
+	@PostMapping("/check/likeSell")
+	public ResponseEntity<Map<String,String>>findLikeSell(@RequestBody Map<String,String> info) throws Exception {
+		Map<String,String> resMap = new HashMap<String, String>()  ;
+		boolean res = service.checkLikedSell(info.get("code"), info.get("user_id"));
+		if(res) {
+			System.out.println("이미 찜목록에 있는 매물 "+info.get("code"));
+			resMap.put("isLiked", "Y");
+		}else {
+			System.out.println("찜목록에 없는 매물 "+info.get("code"));
+			resMap.put("isLiked", "N");
+		}
+		return new ResponseEntity<Map<String,String>>(resMap,HttpStatus.OK);
 	}
 	
 	
