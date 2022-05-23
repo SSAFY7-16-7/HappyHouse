@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +55,8 @@ public class InterestController {
 		}
 	}
 	@ApiOperation(value="찜한 아파트 목록 조회 ", notes = "해당 userid의 아파트 찜 목록을 조회")
-	@GetMapping("/aptlist")
-	public ResponseEntity<?> aptList(@RequestBody String userid) throws Exception {
+	@GetMapping("/aptlist/{userid}")
+	public ResponseEntity<?> aptList(@PathVariable("userid") String userid)throws Exception {
 		List<HouseInfo> list = service.getApts(userid);
 		return new ResponseEntity<List<HouseInfo>>( list,HttpStatus.OK);
 	}
@@ -63,20 +64,20 @@ public class InterestController {
 	@ApiOperation(value="아파트 찜하기  ", notes = "해당 userid의 아파트 찜 목록에 아파트 코드에 해당하는 아파트 추가 ")
 	@PostMapping("/apt")
 	public ResponseEntity<Void> aptAdd(@RequestBody Map<String,String> info) throws Exception {
-		service.addApt(info.get("aptCode"), info.get("user_id"));
+		service.addApt(info.get("code"), info.get("user_id"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="아파트 찜 삭제 ", notes = "해당 userid의 아파트 찜 목록에 아파트 코드에 해당하는 아파트 삭제 ")
 	@PostMapping("/delete/apt")
 	public ResponseEntity<Void>removeApt(@RequestBody Map<String,String> info) throws Exception {
-		service.removeApt(info.get("aptCode"), info.get("user_id"));
+		service.removeApt(info.get("code"), info.get("user_id"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="찜한 매물 목록 조회 ", notes = "해당 userid의 매 찜 목록을 조회")
-	@GetMapping("/selllist")
-	public ResponseEntity<?> selltList(@RequestBody String userid) throws Exception {
+	@GetMapping("/selllist/{userid}")
+	public ResponseEntity<?> selltList(@PathVariable("userid") String userid) throws Exception {
 		List<HouseSell> list = service.getSells(userid);
 		return new ResponseEntity<List<HouseSell> >( list,HttpStatus.OK);
 	}
@@ -84,14 +85,14 @@ public class InterestController {
 	@ApiOperation(value="매물 찜하기  ", notes = "해당 userid의 매물 찜 목록에 아파트 코드에 해당하는 아파트 추가 ")
 	@PostMapping("/sell")
 	public ResponseEntity<Void> sellAdd(@RequestBody Map<String,String> info) throws Exception {
-		service.addSell(info.get("aptCode"), info.get("user_id"));
+		service.addSell(info.get("code"), info.get("user_id"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="매물 찜 삭제  ", notes = "해당 userid의 매물 찜 목록에 아파트 코드에 해당하는 아파트 삭제 ")
 	@PostMapping("/delete/sell")
 	public ResponseEntity<Void>removeSell(@RequestBody Map<String,String> info) throws Exception {
-		service.removeSell(info.get("aptCode"), info.get("user_id"));
+		service.removeSell(info.get("code"), info.get("user_id"));
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
