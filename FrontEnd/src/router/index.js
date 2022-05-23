@@ -44,7 +44,7 @@ const routes = [
     children: [
       {
         path: "list",
-        name: "list",
+        name: "sellList",
         component: SellList,
       },
       {
