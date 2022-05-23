@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <div v-if="list.length > 0">
-      <interest-item
-        @deleteLkie="deleteItem"
-        v-for="(item, index) in list"
-        :key="index"
-        :item="item"
-        :category="category"
-        :index="index"
-      ></interest-item>
-    </div>
-    <div v-else>찜 목록이 비었습니다.</div>
+  <div v-if="list.length > 0">
+    <interest-item
+      @deleteLkie="deleteItem"
+      v-for="(item, index) in list"
+      :key="index"
+      :item="item"
+      :category="category"
+      :index="index"
+    ></interest-item>
   </div>
+  <div v-else>찜 목록이 비었습니다.</div>
 </template>
 
 <script>

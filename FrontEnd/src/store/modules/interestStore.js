@@ -6,7 +6,7 @@ import {
   housDeal,
 } from "@/api/house.js";
 
-const houseStore = {
+const interestStore = {
   namespaced: true,
   state: {
     sidos: {},
@@ -16,11 +16,15 @@ const houseStore = {
     house: null,
     deals: null,
     none: true,
+    category: "apt",
   },
 
   getters: {},
 
   mutations: {
+    SET_CATEGORY: (state, category) => {
+      state.category = category;
+    },
     SET_SIDO_LIST: (state, sidos) => {
       sidos.forEach((sido) => {
         state.sidos.push(sido);
@@ -147,7 +151,11 @@ const houseStore = {
       console.log("setNoneFalse");
       commit("SET_NONE", data);
     },
+    setCategory: ({ commit }, data) => {
+      console.log("set category");
+      commit("SET_CATEGORY", data);
+    },
   },
 };
 
-export default houseStore;
+export default interestStore;

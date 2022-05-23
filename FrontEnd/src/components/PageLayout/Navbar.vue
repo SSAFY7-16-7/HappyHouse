@@ -41,26 +41,6 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link me-2" to="/sell">
-              <i
-                class="fa-solid fa-house opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              매물
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/recommend">
-              <i
-                class="fa-solid fa-magnifying-glass-location opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              지역 추천
-            </router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link me-2" to="/interest">
               <i
                 class="fa-solid fa-house opacity-6 me-1"
@@ -70,6 +50,27 @@
               관심 리스트
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link me-2" to="/sell">
+              <i
+                class="fa-solid fa-house opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              매물
+            </router-link>
+          </li>
+          <!-- <li class="nav-item">
+            <router-link class="nav-link me-2" to="/recommend">
+              <i
+                class="fa-solid fa-magnifying-glass-location opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              지역 추천
+            </router-link>
+          </li> -->
+
           <li class="nav-item">
             <router-link class="nav-link me-2" to="/helpdesk">
               <i

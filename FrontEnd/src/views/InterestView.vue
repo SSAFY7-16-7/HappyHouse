@@ -1,18 +1,46 @@
 <template>
-  <div>
-    <div class="mx-3 mt-3 border-radius-xl position-relative">
+  <div style="width: 100%; height: 100%">
+    <div class="position-relative">
       <main class="mt-0 main-content main-content-bg">
         <section>
-          <div class="page-header min-vh-75">
-            <div class="container">
-              <div class="inter-sells">
-                <h3>관심매물리스트</h3>
-                <interest-list :list="listSell" category="sell"></interest-list>
+          <kakao-map></kakao-map>
+          <div>
+            <div class="search-div">
+              <!-- <dong-search-bar class="house-search-bar"></dong-search-bar> -->
+              <div class="list-div type1">
+                <div class="house-list">
+                  <div class="buttons">
+                    <b-button @click="SET_CATEGORY('apt')"
+                      >관심 아파트</b-button
+                    >
+                    <b-button @click="SET_CATEGORY('sell')">관심 매물</b-button>
+                  </div>
+                  <div class="inter-sells" v-if="category === 'sell'">
+                    <h3>관심매물리스트</h3>
+                    <interest-list
+                      :list="listSell"
+                      category="sell"
+                    ></interest-list>
+                  </div>
+                  <div class="ineter-apts" v-else>
+                    <h3>관심 아파트 리스트</h3>
+                    <interest-list
+                      :list="listApt"
+                      category="apt"
+                    ></interest-list>
+                  </div>
+                </div>
               </div>
-
-              <div class="ineter-apts">
-                <h3>관심 아파트 리스트</h3>
-                <interest-list :list="listApt" category="apt"></interest-list>
+            </div>
+            <div
+              class="detail-div type1"
+              :class="{ none: this.$store.state.houseStore.none }"
+            >
+              <div v-if="category === 'apt'">
+                <house-detail class="house-detail" />
+              </div>
+              <div v-else>
+                <sell-detail class="house-detail" />
               </div>
             </div>
           </div>
@@ -30,8 +58,12 @@ import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 import InterestItem from "@/components/Interest/InterestList.vue";
 import { apiInstance } from "@/api/index.js";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 import InterestList from "../components/Interest/InterestList.vue";
+import KakaoMap from "../components/Interest/KakaoMap.vue";
+import DongSearchBar from "../components/Interest/DongSearchBar.vue";
+import HouseDetail from "@/components/house/HouseDetail.vue";
+import SellDetail from "../components/Sell/SellDetail.vue";
 const http = apiInstance();
 export default {
   name: "InterestView",
@@ -43,12 +75,22 @@ export default {
     VsudButton,
     InterestItem,
     InterestList,
+    KakaoMap,
+    DongSearchBar,
+    HouseDetail,
+    SellDetail,
   },
   data() {
     return {
       listSell: [],
       listApt: [],
     };
+  },
+  computed: {
+    ...mapState("interestStore", ["none", "category"]),
+  },
+  methods: {
+    ...mapMutations("interestStore", ["SET_CATEGORY"]),
   },
   mounted() {
     http.get("/interest/aptlist/ssafy").then(({ data }) => {
@@ -60,3 +102,90 @@ export default {
   },
 };
 </script>
+<style scoped>
+.underline-orange {
+  display: inline-block;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(231, 149, 27, 0.3) 30%
+  );
+}
+
+.search-div {
+  position: absolute;
+  width: 418px;
+  height: 100vh;
+  z-index: 2;
+  top: 54px;
+  left: 0;
+  background-color: #fcfbf6e0;
+}
+
+.list-div {
+  position: relative;
+  width: 418px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.detail-div {
+  position: absolute;
+  width: 401px;
+  height: 100vh;
+  z-index: 2;
+  top: 54px;
+  left: 417px;
+  background-color: #fcfbf6e0;
+  overflow-y: scroll;
+}
+
+.none {
+  display: none;
+}
+
+.house-search-bar {
+  z-index: 3;
+  position: absolute;
+  top: 34px;
+  left: 28px;
+  width: 340px;
+}
+.house-list {
+  position: absolute;
+  z-index: 3;
+  top: 91px;
+  left: 27px;
+}
+
+.kakao-map {
+  height: 100vh;
+  z-index: 1;
+  position: relative;
+}
+.house-search-bar {
+  z-index: 3;
+  position: absolute;
+  top: 26px;
+  left: 28px;
+  width: 340px;
+}
+
+/* 스크롤바 설정*/
+.type1::-webkit-scrollbar {
+  width: 14px;
+}
+
+/* 스크롤바 막대 설정*/
+.type1::-webkit-scrollbar-thumb {
+  height: 17%;
+  background-color: rgb(174 180 191);
+  /* 스크롤바 둥글게 설정    */
+  border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+.type1::-webkit-scrollbar-track {
+  background-color: rgb(222 222 222);
+}
+</style>
