@@ -1,6 +1,8 @@
 <template>
   <div v-if="house">
-    <div class="btn" @click="dispalynone">X</div>
+    <div class="close-div">
+      <div class="btn btn-secondary close" @click="dispalynone">X</div>
+    </div>
     <div class="detail-name">
       <h3>{{ house.apartmentName }}</h3>
       준공 : {{ house.buildYear }} | {{ house.roadName }} ({{ house.dong }})
@@ -71,6 +73,17 @@ export default {
 .mouse-over-bgcolor {
   background-color: rgb(214, 211, 211);
 }
+
+.close-div {
+  width: 100vw;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  width: 10px;
+}
+
 .detail-row {
   /* text-align: end; */
   font-size: 19px;

@@ -4,6 +4,7 @@ import {
   dongList,
   houseList,
   housDeal,
+  houseAddress,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -16,6 +17,7 @@ const houseStore = {
     house: null,
     deals: null,
     none: true,
+    markerPositions: [],
   },
 
   getters: {},
@@ -51,9 +53,9 @@ const houseStore = {
       state.houses = [];
     },
     SET_HOUSE_LIST: (state, houses) => {
-      console.log("SET_HOUSE_LIST", houses);
       houses.forEach((house) => {
         state.houses.push(house);
+        state.markerPositions.push([house.lat, house.lng]);
       });
       // state.houses = houses;
     },
@@ -61,7 +63,6 @@ const houseStore = {
       state.house = house;
     },
     SET_DETAIL_DEAL: (state, deals) => {
-      console.log("SET_DETAIL_DEAL", deals);
       state.deals = deals;
     },
     SET_NONE: (state, data) => {
@@ -135,7 +136,6 @@ const houseStore = {
         params,
         ({ data }) => {
           // 나중에 house.일련번호를 이용하여 API 호출
-          console.log("detailHouse", data);
           commit("SET_DETAIL_DEAL", data);
         },
         (error) => {
@@ -144,8 +144,26 @@ const houseStore = {
       );
     },
     setNoneFalse: ({ commit }, data) => {
-      console.log("setNoneFalse");
       commit("SET_NONE", data);
+    },
+    addressHouse: ({ commit }, data) => {
+      const params = {
+        pa: data.pa,
+        qa: data.qa,
+        ha: data.ha,
+        oa: data.oa,
+      };
+      houseAddress(
+        params,
+        ({ data }) => {
+          // 나중에 house.일련번호를 이용하여 API 호출
+          commit("CLEAR_HOUSE_LIST");
+          commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log("addressHouse 에러", error);
+        }
+      );
     },
   },
 };

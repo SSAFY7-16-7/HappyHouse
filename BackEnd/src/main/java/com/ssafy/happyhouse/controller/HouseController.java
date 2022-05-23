@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,10 +65,11 @@ public class HouseController {
 	@ApiOperation(value="좌표로 아파트 목록 조회", notes = "남서, 북동 좌표로 houseinfo 검색")
 	@GetMapping("/address")
 	@ResponseBody
-	public ResponseEntity<?> getAddressList(@RequestBody Address address) throws Exception {
-		logger.info("addressList....................{}");
+	public ResponseEntity<?> getAddressList(@RequestParam String qa,@RequestParam String pa,@RequestParam String ha,@RequestParam String oa) throws Exception {
+		Address address = new Address(null, null, null, null, qa, pa, ha, oa);
+		logger.info("addressList....................{}",address);
 		List<HouseInfo> list = service.getAddressList(address);
-		logger.info("addressList: {}", list);
+		logger.info("addressLisst: {}", list);
 		return new ResponseEntity<List<HouseInfo>>(list, HttpStatus.OK);
 	}
 	

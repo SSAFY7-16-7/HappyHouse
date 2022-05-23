@@ -16,13 +16,6 @@ public class Address implements Serializable{
 	public Address() {
 		super();
 	}
-	public Address(String dongCode, String sidoName, String gugunName, String dongName) {
-		super();
-		this.dongCode = dongCode;
-		this.sidoName = sidoName;
-		this.gugunName = gugunName;
-		this.dongName = dongName;
-	}
 	
 	public Address(String dongCode, String sidoName, String gugunName, String dongName, String qa, String pa, String ha,
 			String oa) {
@@ -89,7 +82,9 @@ public class Address implements Serializable{
 	@Override
 	public String toString() {
 		return "Address [dongCode=" + dongCode + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", dongName="
-				+ dongName + "]";
+				+ dongName + ", qa=" + qa + ", pa=" + pa + ", ha=" + ha + ", oa=" + oa + "]";
 	}
+	
+	
 
 }

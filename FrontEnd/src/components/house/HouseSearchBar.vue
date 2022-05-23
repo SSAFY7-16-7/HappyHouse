@@ -25,6 +25,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+import { BUS } from "@/store/modules/EventBus";
 
 const houseStore = "houseStore";
 
@@ -72,6 +73,9 @@ export default {
       console.log("houselist vue", this.dong);
       this.CLEAR_HOUSE_LIST();
       if (this.dong) this.getHouseList(this.dong);
+
+      console.log("searchBar moveDong");
+      BUS.$emit("moveDong", this.dong);
     },
   },
 };

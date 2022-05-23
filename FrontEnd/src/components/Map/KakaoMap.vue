@@ -2,9 +2,7 @@
   <div>
     <div id="map"></div>
     <div class="button-group">
-      <button @click="changeSize(400)">show</button>
       <button @click="displayMarker(markerPositions1)">marker set 1</button>
-      <button @click="displayMarker(markerPositions2)">marker set 2</button>
       <button @click="displayMarker([])">marker set 3 (empty)</button>
       <button @click="displayInfoWindow">infowindow</button>
     </div>
@@ -12,70 +10,115 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import { BUS } from "@/store/modules/EventBus";
+
+const houseStore = "houseStore";
+
 export default {
   name: "KakaoMap",
   data() {
     return {
-      markerPositions1: [
-        [33.452278, 126.567803],
-        [33.452671, 126.574792],
-        [33.451744, 126.572441],
-      ],
-      markerPositions2: [
-        [37.499590490909185, 127.0263723554437],
-        [37.499427948430814, 127.02794423197847],
-        [37.498553760499505, 127.02882598822454],
-        [37.497625593121384, 127.02935713582038],
-        [37.49629291770947, 127.02587362608637],
-        [37.49754540521486, 127.02546694890695],
-        [37.49646391248451, 127.02675574250912],
-      ],
+      bounds: {
+        qa: null,
+        pa: null,
+        ha: null,
+        oa: null,
+      },
       markers: [],
       infowindow: null,
+      place: null,
     };
+  },
+  computed: {
+    ...mapState(houseStore, ["house", "markerPositions"]),
+    // house() {
+    //   return this.$store.state.house;
+    // },
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
       const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
+      /* globalkakao */
       script.src =
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
       document.head.appendChild(script);
+      script.onload = () => kakao.maps.load(this.initMap);
     }
+
+    // const base = this;
+
+    BUS.$on("moveDong", function (dong) {
+      console.log("moveDong", dong);
+      // console.log("moveDong", base);
+      // base.findDong(dong);
+    });
   },
   methods: {
+    ...mapActions(houseStore, ["addressHouse"]),
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 5,
+        center: new kakao.maps.LatLng(37.5283169, 126.9294254),
+        level: 3,
       };
 
       //지도 객체를 등록합니다.
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
 
-      // kakao.maps.event.addListener(this.map, "center_changed", function () {
-      //   alert("center changed!");
-      // });
+      const ps = new kakao.maps.services.Places();
+
+      // 키워드로 장소를 검색합니다
+      ps.keywordSearch("이태원 맛집", placesSearchCB);
+
+      const base = this;
+      kakao.maps.event.addListener(this.map, "dragend", function () {
+        base.getBounds();
+      });
+
+      kakao.maps.event.addListener(this.map, "zoom_changed", function () {
+        base.getBounds();
+      });
     },
-    changeSize(size) {
-      const container = document.getElementById("map");
-      container.style.width = `${size}px`;
-      container.style.height = `${size}px`;
-      this.map.relayout();
+    placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i = 0; i < data.length; i++) {
+          displayMarker(data[i]);
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+      }
+    },
+    getBounds() {
+      // 지도 영역정보를 얻어옵니다
+      const bounds = this.map.getBounds();
+
+      this.bounds.qa = bounds.qa;
+      this.bounds.pa = bounds.pa;
+      this.bounds.ha = bounds.ha;
+      this.bounds.oa = bounds.oa;
+
+      this.addressHouse(this.bounds);
+      this.displayMarker(this.markerPositions);
     },
     displayMarker(markerPositions) {
-      if (this.markers.length > 0) {
-        this.markers.forEach((marker) => marker.setMap(null));
-      }
+      const areas = new kakao.maps.LatLngBounds();
 
       const positions = markerPositions.map(
         (position) => new kakao.maps.LatLng(...position)
       );
+
+      console.log("markers : ", this.markers);
+      console.log("positions : ", positions);
 
       if (positions.length > 0) {
         this.markers = positions.map(
@@ -91,9 +134,37 @@ export default {
           new kakao.maps.LatLngBounds()
         );
 
-        this.map.setBounds(bounds);
+        // this.map.setBounds(bounds);
       }
     },
+    // displayMarker(markerPositions) {
+    //   const areas = new kakao.maps.LatLngBounds();
+
+    //   if (this.markers.length > 0) {
+    //     this.markers.forEach((marker) => marker.setMap(null));
+    //   }
+
+    //   const positions = markerPositions.map(
+    //     (position) => new kakao.maps.LatLng(...position)
+    //   );
+
+    //   if (positions.length > 0) {
+    //     this.markers = positions.map(
+    //       (position) =>
+    //         new kakao.maps.Marker({
+    //           map: this.map,
+    //           position,
+    //         })
+    //     );
+
+    //     const bounds = positions.reduce(
+    //       (bounds, latlng) => bounds.extend(latlng),
+    //       new kakao.maps.LatLngBounds()
+    //     );
+
+    //     // this.map.setBounds(bounds);
+    //   }
+    // },
     displayInfoWindow() {
       if (this.infowindow && this.infowindow.getMap()) {
         //이미 생성한 인포윈도우가 있기 때문에 지도 중심좌표를 인포윈도우 좌표로 이동시킨다.
