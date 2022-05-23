@@ -43,18 +43,18 @@ export default {
       const script = document.createElement("script");
       /* globalkakao */
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0&libraries=services";
       document.head.appendChild(script);
       script.onload = () => kakao.maps.load(this.initMap);
     }
 
-    // const base = this;
-
-    BUS.$on("moveDong", function (dong) {
-      console.log("moveDong", dong);
-      // console.log("moveDong", base);
-      // base.findDong(dong);
-    });
+    BUS.$on(
+      "moveDong",
+      function (dong) {
+        console.log("moveDong", this.place);
+        this.place.keywordSearch(dong, this.placesSearchCB);
+      }.bind(this)
+    );
   },
   methods: {
     ...mapActions(houseStore, ["addressHouse"]),
@@ -69,10 +69,9 @@ export default {
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
 
+      // 장소 검색 객체를 생성합니다
       const ps = new kakao.maps.services.Places();
-
-      // 키워드로 장소를 검색합니다
-      ps.keywordSearch("이태원 맛집", placesSearchCB);
+      this.place = ps;
 
       const base = this;
       kakao.maps.event.addListener(this.map, "dragend", function () {
@@ -87,18 +86,19 @@ export default {
       if (status === kakao.maps.services.Status.OK) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
-        var bounds = new kakao.maps.LatLngBounds();
+        const bounds = new kakao.maps.LatLngBounds();
 
         for (var i = 0; i < data.length; i++) {
-          displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
+        this.map.setBounds(bounds);
+        this.getBounds();
       }
     },
     getBounds() {
+      console.log("getBounds");
       // 지도 영역정보를 얻어옵니다
       const bounds = this.map.getBounds();
 
@@ -111,6 +111,7 @@ export default {
       this.displayMarker(this.markerPositions);
     },
     displayMarker(markerPositions) {
+      console.log("displayMarker");
       const areas = new kakao.maps.LatLngBounds();
 
       const positions = markerPositions.map(
