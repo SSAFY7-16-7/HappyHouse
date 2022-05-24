@@ -3,13 +3,12 @@
     <div
       class="pt-5 m-3 page-header align-items-start min-vh-20 pb-11 border-radius-lg"
       :style="{
-        backgroundImage:
-          'url(' + require('@/assets/img/curved-images/curved6.jpg') + ')',
+        backgroundImage: 'url(' + require('@/assets/img/apt/apt3.jpeg') + ')',
       }"
     >
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-0">
           <div class="mx-auto text-center col-lg-5">
             <h1 class="mt-5 mb-2 text-white">Welcome!</h1>
             <p class="text-white text-lead">회원 가입 페이지 입니다.</p>
