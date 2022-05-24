@@ -60,34 +60,37 @@ export default {
     });
   },
   mounted() {
-    this.initMap();
+    const script = document.createElement("script");
+    /* global kakao */
+    script.onload = () => kakao.maps.load(this.initMap);
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=ff39ee8d511b533648d3baac6dd7efff&libraries=services";
+    document.head.appendChild(script);
   },
   methods: {
     initMap() {
-      kakao.maps.load(() => {
-        const container = document.getElementById("map");
-        const adjLng = -0.018 + parseFloat(this.position.lng);
-        console.log("조정 lng", adjLng);
-        const options = {
-          center: new kakao.maps.LatLng(this.position.lat, adjLng),
-          level: 5,
-        };
+      const container = document.getElementById("map");
+      const adjLng = -0.018 + parseFloat(this.position.lng);
+      console.log("조정 lng", adjLng);
+      const options = {
+        center: new kakao.maps.LatLng(this.position.lat, adjLng),
+        level: 5,
+      };
 
-        this.map = new kakao.maps.Map(container, options);
-        const marker = new kakao.maps.LatLng(
-          this.position.lat,
-          this.position.lng
-        );
-        this.itemMarker = new kakao.maps.Marker({
-          position: marker,
-        });
-
-        this.itemMarker.setMap(this.map);
+      this.map = new kakao.maps.Map(container, options);
+      const marker = new kakao.maps.LatLng(
+        this.position.lat,
+        this.position.lng
+      );
+      this.itemMarker = new kakao.maps.Marker({
+        position: marker,
       });
+
+      this.itemMarker.setMap(this.map);
     },
     changeItem(position) {
       // 지도 중심 이동
-      const adjLng = parseFloat(this.position.lng) - 0.02; // 센터 위도 조정
+      const adjLng = parseFloat(this.position.lng) - 0.02; // 센터 경도 조정
       this.center = new kakao.maps.LatLng(position.lat, adjLng);
       this.marker = new kakao.maps.LatLng(position.lat, this.position.lng);
       this.map.panTo(this.center);
