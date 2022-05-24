@@ -60,39 +60,30 @@ export default {
     });
   },
   mounted() {
-    if (window.kakao && window.kakao.maps) {
-      console.log("맵 등록 되어 있음 ");
-      this.initMap();
-    } else {
-      console.log("맵 등록 안되어 있음 ");
-      const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
-      document.head.appendChild(script);
-    }
+    this.initMap();
   },
   methods: {
     initMap() {
-      const container = document.getElementById("map");
-      const adjLng = -0.018 + parseFloat(this.position.lng);
-      console.log("조정 lng", adjLng);
-      const options = {
-        center: new kakao.maps.LatLng(this.position.lat, adjLng),
-        level: 5,
-      };
+      kakao.maps.load(() => {
+        const container = document.getElementById("map");
+        const adjLng = -0.018 + parseFloat(this.position.lng);
+        console.log("조정 lng", adjLng);
+        const options = {
+          center: new kakao.maps.LatLng(this.position.lat, adjLng),
+          level: 5,
+        };
 
-      this.map = new kakao.maps.Map(container, options);
-      const marker = new kakao.maps.LatLng(
-        this.position.lat,
-        this.position.lng
-      );
-      this.itemMarker = new kakao.maps.Marker({
-        position: marker,
+        this.map = new kakao.maps.Map(container, options);
+        const marker = new kakao.maps.LatLng(
+          this.position.lat,
+          this.position.lng
+        );
+        this.itemMarker = new kakao.maps.Marker({
+          position: marker,
+        });
+
+        this.itemMarker.setMap(this.map);
       });
-
-      this.itemMarker.setMap(this.map);
     },
     changeItem(position) {
       // 지도 중심 이동

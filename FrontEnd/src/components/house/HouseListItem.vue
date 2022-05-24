@@ -20,6 +20,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { BUS } from "@/store/modules/EventBus";
 
 const houseStore = "houseStore";
 
@@ -39,6 +40,11 @@ export default {
   methods: {
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
     selectHouse() {
+      console.log("선택:", this.house);
+      BUS.$emit("change-hposition", {
+        lat: this.house.lat,
+        lng: this.house.lng,
+      });
       this.detailHouse(this.house);
       this.setNoneFalse(false);
     },

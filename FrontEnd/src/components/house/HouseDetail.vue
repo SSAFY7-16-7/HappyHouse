@@ -12,7 +12,9 @@
         ></like-button>
         <h3>{{ house.apartmentName }}</h3>
       </div>
-      준공 : {{ house.buildYear }} | {{ house.roadName }} ({{ house.dong }})
+      <div class="title-sub-info">
+        준공 : {{ house.buildYear }} | {{ house.roadName }} ({{ house.dong }})
+      </div>
     </div>
     <div class="detail-img-div">
       <img :src="require('@/assets/img/apt.png')" />
@@ -142,8 +144,10 @@ export default {
 }
 
 .close-div {
-  position: absolute;
-  right: 0;
+  position: relative;
+  width: 323px;
+  padding-top: 31px;
+  right: -295px;
 }
 
 .close {
@@ -153,7 +157,6 @@ export default {
   color: white;
   padding: 9px;
   border-radius: 3px;
-  margin: 29px;
 }
 
 .detail-row {
@@ -171,8 +174,10 @@ export default {
 }
 
 .detail-name {
-  padding-top: 30px;
-  width: 295px;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .detail-img-div img {
