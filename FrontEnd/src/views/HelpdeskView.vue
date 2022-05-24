@@ -1,38 +1,25 @@
 <template>
-  <div>
-    <div class="mx-3 mt-3 border-radius-xl position-relative">
-      <main class="mt-7 main-content main-content-bg board-area">
-        <section>
-          <div class="page-header min-vh-75">
-            <div class="container">
-              <b-card title="Card Title" no-body>
-                <b-card-header header-tag="nav">
-                  <b-nav card-header tabs>
-                    <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
-                    <b-nav-item
-                      to="/helpdesk/notice/"
-                      exact
-                      exact-active-class="active"
-                      >NOTICE</b-nav-item
-                    >
-                    <b-nav-item
-                      to="/helpdesk/qna/"
-                      exact
-                      exact-active-class="active"
-                      >Q&A</b-nav-item
-                    >
-                  </b-nav>
-                </b-card-header>
+  <div class="mx-3 mt-3 border-radius-xl position-relative">
+    <main class="mt-7 main-content main-content-bg board-area">
+      <div class="board" title="Card Title" no-body>
+        <nav>
+          <nav>
+            <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
+            <!-- <router-link
+              to="/helpdesk/notice/"
+              exact
+              exact-active-class="active"
+              >NOTICE</router-link
+            > -->
+            <!-- <router-link to="/helpdesk/qna/" exact exact-active-class="active"
+              >Q&A</router-link
+            > -->
+          </nav>
+        </nav>
 
-                <b-card-body>
-                  <router-view></router-view>
-                </b-card-body>
-              </b-card>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+        <router-view></router-view>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -57,4 +44,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.board {
+  width: 100%;
+  height: 100%;
+}
+.board-area {
+  height: 80vh;
+}
+</style>

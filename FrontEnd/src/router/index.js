@@ -93,7 +93,7 @@ const routes = [
     path: "/helpdesk",
     name: "helpdesk",
     component: HelpdeskView,
-    redirect: "/helpdesk/notice/",
+    redirect: "/helpdesk/qna/",
     children: [
       {
         path: "notice",

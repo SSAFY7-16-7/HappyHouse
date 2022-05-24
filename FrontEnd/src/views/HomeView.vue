@@ -2,7 +2,7 @@
   <div
     class="main-bg"
     :style="{
-      backgroundImage: 'url(' + require('@/assets/img/apt/apt3.jpeg') + ')',
+      backgroundImage: 'url(' + require('@/assets/img/apt/apt5.jpeg') + ')',
       backgroundSize: 'cover',
     }"
   >
