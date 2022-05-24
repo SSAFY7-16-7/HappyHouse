@@ -14,6 +14,8 @@ import QnaBoard from "@/components/QnaBoard.vue";
 import QnaDetail from "@/components/Board/Qna/Qna/QnaDetail.vue";
 import QnaRegist from "@/components/Board/Qna/Qna/QnaRegist.vue";
 import SellRegist from "@/components/Sell/SellRegist.vue";
+import SellList from "@/components/Sell/SellList.vue";
+import SellItemDetail from "@/components/Sell/SellItemDetail.vue";
 import InterestView from "@/views/InterestView.vue";
 Vue.use(VueRouter);
 
@@ -37,8 +39,18 @@ const routes = [
     path: "/sell",
     name: "sell",
     component: SellView,
-    redirect: "/sell/sellregist",
+    redirect: "/sell/list",
     children: [
+      {
+        path: "list",
+        name: "sellList",
+        component: SellList,
+      },
+      {
+        path: "detail",
+        name: "sellDeatil",
+        component: SellItemDetail,
+      },
       {
         path: "sellregist",
         name: "sellregist",

@@ -304,6 +304,7 @@ export default {
         .post("/sell", form)
         .then((res) => {
           console.log("매물 등록 성공");
+          this.$router.push({ name: "sellList" });
         })
         .catch(() => {
           console.log("매물 등록 실패 ");

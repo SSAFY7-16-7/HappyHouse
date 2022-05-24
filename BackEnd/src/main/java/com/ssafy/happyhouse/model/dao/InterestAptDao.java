@@ -16,4 +16,5 @@ public interface InterestAptDao {
 	public void remove(InterestApt info);
 	public List<LikeCount> likeCountList();
 
+
 }
