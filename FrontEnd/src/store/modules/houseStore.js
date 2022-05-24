@@ -5,6 +5,7 @@ import {
   houseList,
   housDeal,
   houseAddress,
+  houseName,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -51,12 +52,14 @@ const houseStore = {
 
     CLEAR_HOUSE_LIST: (state) => {
       state.houses = [];
+      state.markerPositions = [];
     },
     SET_HOUSE_LIST: (state, houses) => {
       houses.forEach((house) => {
         state.houses.push(house);
         state.markerPositions.push([house.lat, house.lng]);
       });
+      console.log("SET_HOUSE_LIST", state.markerPositions);
       // state.houses = houses;
     },
     SET_DETAIL_HOUSE: (state, house) => {
@@ -147,6 +150,7 @@ const houseStore = {
       commit("SET_NONE", data);
     },
     addressHouse: ({ commit }, data) => {
+      console.log("addressHouse", data);
       const params = {
         pa: data.pa,
         qa: data.qa,
@@ -162,6 +166,22 @@ const houseStore = {
         },
         (error) => {
           console.log("addressHouse 에러", error);
+        }
+      );
+    },
+    getNameList: ({ commit }, data) => {
+      const params = {
+        apartmentName: data,
+      };
+      houseName(
+        params,
+        ({ data }) => {
+          // 나중에 house.일련번호를 이용하여 API 호출
+          commit("CLEAR_HOUSE_LIST");
+          commit("SET_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log("houseAddress 에러", error);
         }
       );
     },

@@ -77,6 +77,7 @@ export default {
   position: relative;
   width: 418px;
   height: 100vh;
+  top: 142px;
   overflow-y: scroll;
 }
 
@@ -105,13 +106,12 @@ export default {
 .house-list {
   position: absolute;
   z-index: 3;
-  top: 91px;
-  left: 27px;
+  width: 418px;
+  padding: 20px 30px 20px 20px;
 }
 
 .kakao-map {
   height: 100vh;
-  z-index: 1;
   position: relative;
 }
 .house-search-bar {

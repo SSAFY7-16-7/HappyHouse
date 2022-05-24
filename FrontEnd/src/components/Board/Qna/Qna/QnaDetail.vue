@@ -128,7 +128,7 @@ export default {
         });
     },
     goList() {
-      this.$router.push({ name: "QnaList" });
+      this.$router.push({ name: "qna" });
     },
     updateHandler() {
       this.$router.push({ name: "QnaRegist", query: { idx: this.qna.idx } });

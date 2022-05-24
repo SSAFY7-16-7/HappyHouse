@@ -1,7 +1,7 @@
 <template>
   <div v-if="house">
     <div class="close-div">
-      <div class="btn btn-secondary close" @click="dispalynone">X</div>
+      <b-icon-x-lg class="close" @click="dispalynone" />
     </div>
     <div class="detail-name">
       <h3>{{ house.apartmentName }}</h3>
@@ -75,13 +75,18 @@ export default {
 }
 
 .close-div {
-  width: 100vw;
+  position: absolute;
+  right: 0;
 }
 
 .close {
-  position: absolute;
-  right: 0;
-  width: 10px;
+  background-color: #9ca3b1;
+  width: 32px;
+  height: 32px;
+  color: white;
+  padding: 9px;
+  border-radius: 3px;
+  margin: 29px;
 }
 
 .detail-row {
@@ -100,6 +105,7 @@ export default {
 
 .detail-name {
   padding-top: 30px;
+  width: 295px;
 }
 
 .detail-img-div img {

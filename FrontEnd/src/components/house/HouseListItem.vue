@@ -7,12 +7,8 @@
     :class="{ 'mouse-over-bgcolor': isColor }"
     style="display: flex; align-items: center"
   >
-    <div class="apt-img-div">
-      <img
-        src="https://picsum.photos/250/250/?image=58"
-        alt="Image 1"
-        class="apt-img"
-      />
+    <div class="apt-icon-div">
+      <b-icon-house-door-fill class="apt-icon" />
     </div>
     <div class="apt-info-div">
       <div style="text-overflow: ellipsis">
@@ -57,13 +53,23 @@ export default {
 .apt {
   width: 50px;
 }
+
+.apt-info-div div {
+  white-space: nowrap;
+  width: 278px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 16px;
+}
 .mouse-over-bgcolor {
   background-color: rgb(214, 211, 211);
 }
-.apt-img-div {
-  margin: 2px 13px 2px 0;
+.apt-icon-div {
+  margin: 8px 21px 8px 15px;
 }
-.apt-img {
-  width: 44px;
+.apt-icon {
+  font-size: 25px;
+  color: #bcb81e;
 }
 </style>

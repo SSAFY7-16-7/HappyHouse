@@ -26,4 +26,16 @@ function houseAddress(params, success, fail) {
   api.get(`/deal/address`, { params: params }).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, dongList, houseList, housDeal, houseAddress };
+function houseName(params, success, fail) {
+  api.get(`/deal/name`, { params: params }).then(success).catch(fail);
+}
+
+export {
+  sidoList,
+  gugunList,
+  dongList,
+  houseList,
+  housDeal,
+  houseAddress,
+  houseName,
+};

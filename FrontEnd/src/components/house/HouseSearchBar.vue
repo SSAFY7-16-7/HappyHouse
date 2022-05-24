@@ -20,6 +20,22 @@
         </option>
       </select>
     </div>
+    <div class="map-name-div">
+      <div>
+        <input
+          type="text"
+          class="form-control name-search"
+          default="아파트명 검색"
+          style="width: 256px"
+          v-model="name"
+        />
+      </div>
+      <div>
+        <button class="btn btn-primary" style="margin: 0" @click="nameList">
+          검색
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,6 +52,7 @@ export default {
       sido: null,
       gugun: null,
       dong: null,
+      name: null,
     };
   },
   created() {
@@ -51,6 +68,7 @@ export default {
       "getGugun",
       "getDong",
       "getHouseList",
+      "getNameList",
     ]),
     ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
@@ -74,8 +92,12 @@ export default {
       this.CLEAR_HOUSE_LIST();
       if (this.dong) this.getHouseList(this.dong);
 
-      console.log("searchBar moveDong");
-      BUS.$emit("moveDong", this.dong);
+      BUS.$emit("moveDong", this.gugun + " " + this.dong);
+    },
+    nameList() {
+      console.log("housename", this.name);
+      this.CLEAR_HOUSE_LIST();
+      if (this.name) this.getNameList(this.name);
     },
   },
 };
@@ -85,5 +107,13 @@ export default {
 .map-select-div {
   display: flex;
   justify-content: center;
+}
+
+.map-name-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 17px;
 }
 </style>

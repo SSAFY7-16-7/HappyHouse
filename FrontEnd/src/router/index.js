@@ -6,7 +6,6 @@ import HouseView from "@/views/HouseView.vue";
 import AdminView from "@/views/AdminView.vue";
 import SellView from "@/views/SellView.vue";
 import HelpdeskView from "@/views/HelpdeskView.vue";
-import MapView from "@/views/MapView.vue";
 import MypageView from "@/views/MypageView.vue";
 import SignupView from "@/views/SignupView.vue";
 import RecommendView from "@/views/RecommendView.vue";

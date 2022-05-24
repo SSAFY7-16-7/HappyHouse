@@ -13,7 +13,7 @@
 
 <script>
 import HouseListItem from "@/components/house/HouseListItem.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 const houseStore = "houseStore";
 
