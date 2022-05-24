@@ -105,8 +105,7 @@ export default {
       // 마커 변경
       this.itemMarker.setMap(null); // 기존의 설정된 마커 제거
 
-      var imageSrc =
-          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
+      var imageSrc = "https://ifh.cc/g/rxQT1B.png", // 마커이미지의 주소입니다
         imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -284,7 +283,8 @@ export default {
 
     // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
     addMarker(position, order) {
-      var imageSrc = "https://ifh.cc/g/52wXwB.png"; // 마커 이미지 url, 스프라이트 이미지를 씁니다
+      var imageSrc =
+        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png"; // 마커 이미지 url, 스프라이트 이미지를 씁니다
       const imageSize = new kakao.maps.Size(27, 28); // 마커 이미지의 크기
       const imgOptions = {
         spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
@@ -426,65 +426,69 @@ export default {
       }
     },
     displayMarker(markerPositions) {
-      console.log("displayMarker-----------------", markerPositions);
+      kakao.maps.load(() => {
+        console.log("displayMarker-----------------", markerPositions);
 
-      const positions = markerPositions.map(
-        (position) => new kakao.maps.LatLng(...position)
-      );
+        const positions = markerPositions.map(
+          (position) => new kakao.maps.LatLng(...position)
+        );
 
-      console.log("markers : ", this.markers);
-      console.log("positions : ", positions);
+        console.log("markers : ", this.markers);
+        console.log("positions : ", positions);
 
-      const imageSrc = "https://ifh.cc/g/bNWdz3.png";
-      // var imageSrc =
-      //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png";
-      const imageSize = new kakao.maps.Size(50, 55); // 마커 이미지의 크기
-      const imgOptions = {
-        offset: new kakao.maps.Point(27, 69),
-      };
-      const markerImage = new kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imgOptions
-      );
+        const imageSrc = "https://ifh.cc/g/bNWdz3.png";
+        // var imageSrc =
+        //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png";
+        const imageSize = new kakao.maps.Size(50, 55); // 마커 이미지의 크기
+        const imgOptions = {
+          offset: new kakao.maps.Point(27, 69),
+        };
+        const markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imgOptions
+        );
 
-      if (positions.length > 0) {
-        this.markers = positions.map((position) => {
-          if (
-            this.marker == null ||
-            !(
-              position.lat == this.marker.lat && position.lng == this.marker.lng
-            )
-          ) {
+        if (positions.length > 0) {
+          this.markers = positions.map((position) => {
+            // if (
+            //   this.marker == null ||
+            //   (this.marker != null &&
+            //     !(
+            //       position.lat == this.marker.lat &&
+            //       position.lng == this.marker.lng
+            //     ))
+            // ) {
             new kakao.maps.Marker({
               map: this.map,
               position: position,
               image: markerImage,
             });
-          }
-        });
-      }
-    },
-    displayInfoWindow() {
-      if (this.infowindow && this.infowindow.getMap()) {
-        //이미 생성한 인포윈도우가 있기 때문에 지도 중심좌표를 인포윈도우 좌표로 이동시킨다.
-        this.map.setCenter(this.infowindow.getPosition());
-        return;
-      }
-
-      var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwPosition = new kakao.maps.LatLng(33.450701, 126.570667), //인포윈도우 표시 위치입니다
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-      this.infowindow = new kakao.maps.InfoWindow({
-        map: this.map, // 인포윈도우가 표시될 지도
-        position: iwPosition,
-        content: iwContent,
-        removable: iwRemoveable,
+            // }
+          });
+        }
       });
-
-      this.map.setCenter(iwPosition);
     },
+    // displayInfoWindow() {
+    //   if (this.infowindow && this.infowindow.getMap()) {
+    //     //이미 생성한 인포윈도우가 있기 때문에 지도 중심좌표를 인포윈도우 좌표로 이동시킨다.
+    //     this.map.setCenter(this.infowindow.getPosition());
+    //     return;
+    //   }
+
+    //   var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    //     iwPosition = new kakao.maps.LatLng(33.450701, 126.570667), //인포윈도우 표시 위치입니다
+    //     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+    //   this.infowindow = new kakao.maps.InfoWindow({
+    //     map: this.map, // 인포윈도우가 표시될 지도
+    //     position: iwPosition,
+    //     content: iwContent,
+    //     removable: iwRemoveable,
+    //   });
+
+    //   this.map.setCenter(iwPosition);
+    // },
   },
 };
 </script>
