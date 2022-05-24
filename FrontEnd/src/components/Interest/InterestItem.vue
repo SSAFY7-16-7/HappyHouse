@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { BUS } from "@/store/modules/EventBus";
 import LikeButton from "./LikeButton.vue";
 import { apiInstance } from "@/api/index.js";
 import { mapActions, mapState } from "vuex";
@@ -60,7 +61,12 @@ export default {
       }
     },
     itemClick() {
-      console.log("아이템 클릭", this.index);
+      // console.log("아이템 클릭", this.index);
+
+      BUS.$emit("change-postion", {
+        lat: this.item.lat,
+        lng: this.item.lng,
+      });
       if (this.category === "sell") {
         this.showSellDetail();
       } else {
@@ -68,13 +74,13 @@ export default {
       }
     },
     showSellDetail() {
-      console.log(this.item);
+      // console.log(this.item);
       this.$store.state.interestStore.house = this.item;
       this.$store.state.houseStore.none = false;
     },
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
     showHouseDetail() {
-      console.log(this.$store.state.houseStore);
+      console.log("아파트 디테일", this.item);
       this.detailHouse(this.item);
       this.$store.state.houseStore.none = false;
     },

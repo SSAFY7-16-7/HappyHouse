@@ -64,6 +64,7 @@ import KakaoMap from "../components/Interest/KakaoMap.vue";
 import DongSearchBar from "../components/Interest/DongSearchBar.vue";
 import HouseDetail from "@/components/house/HouseDetail.vue";
 import SellDetail from "../components/Sell/SellDetail.vue";
+import { BUS } from "@/store/modules/EventBus";
 const http = apiInstance();
 export default {
   name: "InterestView",
@@ -92,9 +93,10 @@ export default {
   methods: {
     ...mapMutations("interestStore", ["SET_CATEGORY"]),
   },
-  mounted() {
+  created() {
     http.get("/interest/aptlist/ssafy").then(({ data }) => {
       this.listApt = data;
+      BUS.$emit("init-position", { lat: data[0].lat, lng: data[0].lng });
     });
     http.get("/interest/selllist/ssafy").then(({ data }) => {
       this.listSell = data;

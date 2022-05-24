@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       overColumn: null,
-      likeStatus: false,
+      likeStatus: true,
     };
   },
   components: {
