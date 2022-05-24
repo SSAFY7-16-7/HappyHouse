@@ -4,7 +4,14 @@
       <b-icon-x-lg class="close" @click="dispalynone" />
     </div>
     <div class="detail-name">
-      <h3>{{ house.apartmentName }}</h3>
+      <div class="title-area">
+        <like-button
+          @btnClick="setLike"
+          :isLiked="likeStatus"
+          class="sellLikebtn"
+        ></like-button>
+        <h3>{{ house.apartmentName }}</h3>
+      </div>
       준공 : {{ house.buildYear }} | {{ house.roadName }} ({{ house.dong }})
     </div>
     <div class="detail-img-div">
@@ -29,8 +36,11 @@
 </template>
 
 <script>
+import LikeButton from "@/components/Interest/LikeButton.vue";
+import { BUS } from "@/store/modules/EventBus";
 import { mapActions, mapState } from "vuex";
-
+import { apiInstance } from "@/api/index.js";
+const http = apiInstance();
 const houseStore = "houseStore";
 
 export default {
@@ -38,7 +48,11 @@ export default {
   data() {
     return {
       overColumn: null,
+      likeStatus: false,
     };
+  },
+  components: {
+    LikeButton,
   },
   computed: {
     ...mapState(houseStore, ["house", "deals", "none"]),
@@ -65,6 +79,59 @@ export default {
     dispalynone() {
       this.setNoneFalse(true);
     },
+    setLike() {
+      let param = { code: "", user_id: "ssafy" };
+
+      param.code = this.house.aptCode;
+
+      console.log(param);
+      if (this.likeStatus) {
+        http
+          .post(`/interest/delete/apt`, param)
+          .then(() => {
+            console.log("좋아요 취소 성공 ");
+            this.likeStatus = !this.likeStatus;
+
+            BUS.$emit("deleteLike", param.code);
+          })
+          .catch(() => {
+            console.log("좋아요 취소 실패 ");
+          });
+      } else {
+        console.log("좋아요 설정");
+        http
+          .post(`/interest/apt`, param)
+          .then(() => {
+            console.log("좋아요 성공 ");
+            BUS.$emit("addLike", this.house);
+          })
+          .catch(() => {
+            console.log("좋아요 실패 ");
+          });
+        this.likeStatus = !this.likeStatus;
+      }
+    },
+  },
+  updated() {
+    const code = this.house.aptCode;
+    // http
+    //   .get(`/apt/${code}`)
+    //   .then(({ data }) => {
+    //     // this.item = data;
+    //   })
+    //   .catch(() => {
+    //     console.log("거래 매물 정보 가져오기오류 ");
+    //   });
+
+    http
+      .post(`/interest/check/likeApt`, { code, user_id: "ssafy" })
+      .then(({ data }) => {
+        if (data.isLiked === "Y") {
+          this.likeStatus = true;
+        } else {
+          this.likeStatus = false;
+        }
+      });
   },
 };
 </script>

@@ -1,8 +1,18 @@
 <template>
   <div v-if="house">
-    <div class="btn" @click="dispalynone">X</div>
+    <div class="close-div">
+      <b-icon-x-lg class="close" @click="dispalynone" />
+    </div>
     <div class="detail-name">
-      <h3>{{ house.title }}</h3>
+      <div class="title-area">
+        <like-button
+          @btnClick="setLike"
+          :isLiked="likeStatus"
+          class="sellLikebtn"
+        ></like-button>
+        <h3>{{ house.title }}</h3>
+      </div>
+
       가격 : {{ house.price }}<br />
       주소: {{ house.address }} <br />
       층수 : {{ house.floor_now }}층/{{ house.floor_tot }}<br />
@@ -18,15 +28,21 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-
+import LikeButton from "@/components/Interest/LikeButton.vue";
+import { BUS } from "@/store/modules/EventBus";
+import { apiInstance } from "@/api/index.js";
 const Store = "interestStore";
-
+const http = apiInstance();
 export default {
   name: "SellDetail",
   data() {
     return {
       overColumn: null,
+      likeStatus: true,
     };
+  },
+  components: {
+    LikeButton,
   },
   computed: {
     ...mapState(Store, ["house", "deals", "none"]),
@@ -52,6 +68,38 @@ export default {
     },
     dispalynone() {
       this.setNoneFalse(true);
+    },
+    setLike() {
+      let param = { code: "", user_id: "ssafy" };
+
+      param.code = this.house.idx;
+
+      console.log(param);
+      if (this.likeStatus) {
+        http
+          .post(`/interest/delete/sell`, param)
+          .then(() => {
+            console.log("좋아요 취소 성공 ");
+            this.likeStatus = !this.likeStatus;
+
+            BUS.$emit("deleteLike", param.code);
+          })
+          .catch(() => {
+            console.log("좋아요 취소 실패 ");
+          });
+      } else {
+        console.log("좋아요 설정");
+        http
+          .post(`/interest/sell`, param)
+          .then(() => {
+            console.log("좋아요 성공 ");
+            BUS.$emit("addLike", this.house);
+          })
+          .catch(() => {
+            console.log("좋아요 실패 ");
+          });
+        this.likeStatus = !this.likeStatus;
+      }
     },
   },
 };

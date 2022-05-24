@@ -14,6 +14,7 @@
 
 <script>
 import InterestItem from "./InterestItem.vue";
+import { BUS } from "@/store/modules/EventBus";
 export default {
   name: "InterestList",
   components: {
@@ -30,7 +31,35 @@ export default {
   },
 
   mounted() {
-    // console.log(this.list);
+    BUS.$on(
+      "deleteLike",
+      function (code) {
+        console.log("delete", this.category, code);
+        if (this.category === "apt") {
+          this.list.forEach((item, index) => {
+            if (item.aptCode === code) {
+              this.list.splice(index, 1);
+              return;
+            }
+          });
+        } else {
+          this.list.forEach((item, index) => {
+            if (item.idx === code) {
+              this.list.splice(index, 1);
+              return;
+            }
+          });
+        }
+      }.bind(this)
+    );
+    BUS.$on(
+      "addLike",
+      function (house) {
+        console.log("addlike");
+        console.log(house);
+        this.list.push(house);
+      }.bind(this)
+    );
   },
 };
 </script>
