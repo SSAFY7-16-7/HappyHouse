@@ -2,11 +2,7 @@
   <div class="card sell-card" @click="moveDetail">
     <div class="sell-card-img">
       <b-badge class="room-type">{{ item.room_type }}</b-badge>
-      <img
-        class="sell-thumbnail"
-        src="https://picsum.photos/250/250/?image=54"
-        alt="Image 1"
-      />
+      <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
     </div>
     <div class="sell-card-info">
       <h4>{{ item.title }}</h4>
@@ -27,16 +23,22 @@
 </template>
 
 <script>
+import { ramdomImg } from "@/api/image.js";
+
 export default {
   name: "SelllistItem",
   props: ["item"],
   data() {
     return {
       keywords: [],
+      img_url: "",
     };
   },
   created() {
     this.keywords = this.item.keyword.split(",");
+
+    // console.log(img_num);
+    this.img_url = ramdomImg();
   },
   methods: {
     moveDetail() {

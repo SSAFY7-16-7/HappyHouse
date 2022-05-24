@@ -96,7 +96,7 @@ export default {
     },
     changeItem(position) {
       // 지도 중심 이동
-      const adjLng = parseFloat(this.position.lng) - 0.02; // 센터 경도 조정
+      const adjLng = parseFloat(this.position.lng) - 0.02; // 센터 위도 조정
       this.center = new kakao.maps.LatLng(position.lat, adjLng);
       this.marker = new kakao.maps.LatLng(position.lat, this.position.lng);
       this.map.panTo(this.center);
