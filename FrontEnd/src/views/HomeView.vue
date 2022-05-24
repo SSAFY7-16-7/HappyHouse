@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div
-      class="mx-3 mt-3 border-radius-xl position-relative"
-      :style="{
-        backgroundImage: 'url(' + require('@/assets/img/vr-bg.jpg') + ')',
-        backgroundSize: 'cover',
-      }"
-    >
+  <div
+    class="main-bg"
+    :style="{
+      backgroundImage: 'url(' + require('@/assets/img/apt/apt5.jpeg') + ')',
+      backgroundSize: 'cover',
+    }"
+  >
+    <div class="mx-3 mt-3 border-radius-xl position-relative">
       <main class="mt-7 main-content main-content-bg">
         <section>
           <div class="page-header min-vh-75">
@@ -205,3 +205,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.main-bg {
+  height: 100vh;
+  position: absolute;
+  width: 100vw;
+  top: 0;
+}
+</style>

@@ -15,7 +15,7 @@
                     </h3>
                     <p class="mb-0">아이디와 패스워드를 입력하세요.</p>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body signin-body">
                     <form role="form" class="text-start">
                       <label>Id</label>
                       <b-form-input
@@ -39,9 +39,7 @@
                       <div class="text-center">
                         <b-button
                           block
-
                           @click="confirm"
-
                           class="my-4 mb-2 logbtn"
                           variant="success"
                           size="lg"
@@ -50,7 +48,9 @@
                       </div>
                     </form>
                   </div>
-                  <div class="px-1 pt-0 text-center card-footer px-lg-2">
+                  <div
+                    class="px-1 pt-0 text-center card-footer signin-body px-lg-2"
+                  >
                     <p class="mx-auto mb-4 text-sm">
                       계정이 없다면?
                       <router-link
@@ -70,9 +70,7 @@
                     class="bg-cover oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                     :style="{
                       backgroundImage:
-                        'url(' +
-                        require('@/assets/img/curved-images/curved9.jpg') +
-                        ')',
+                        'url(' + require('@/assets/img/apt/apt2.jpeg') + ')',
                     }"
                   ></div>
                 </div>
@@ -127,8 +125,13 @@ export default {
         await this.getUserInfo(token);
         this.$router.push({ name: "home" });
       }
-
     },
   },
 };
 </script>
+
+<style>
+.signin-body {
+  background-color: #fff !important;
+}
+</style>
