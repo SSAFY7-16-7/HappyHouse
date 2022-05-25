@@ -51,6 +51,9 @@ export default {
   computed: {
     ...mapState("houseStore", ["none"]),
   },
+  beforeDestroy() {
+    this.$store.state.houseStore.none = true;
+  },
 };
 </script>
 <style scoped>

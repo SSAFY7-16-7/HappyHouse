@@ -108,6 +108,9 @@ export default {
       this.listSell = data;
     });
   },
+  beforeDestroy() {
+    this.$store.state.houseStore.none = true;
+  },
 };
 </script>
 <style scoped>

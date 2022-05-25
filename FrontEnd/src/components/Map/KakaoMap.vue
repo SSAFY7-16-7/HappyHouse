@@ -285,8 +285,7 @@ export default {
 
     // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
     addMarker(position, order) {
-      var imageSrc =
-        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png"; // 마커 이미지 url, 스프라이트 이미지를 씁니다
+      var imageSrc = "https://i.imgur.com/0YLLw79.png"; // 마커 이미지 url, 스프라이트 이미지를 씁니다
       const imageSize = new kakao.maps.Size(27, 28); // 마커 이미지의 크기
       const imgOptions = {
         spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
@@ -516,7 +515,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scss>
 #map {
   width: 100vw;
   height: 100vh;
@@ -581,8 +580,7 @@ button {
   height: 28px;
 }
 #category li .category_bg {
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
-    no-repeat;
+  background: url("@/assets/img/marker/places_category.png") no-repeat;
 }
 #category li .bank {
   background-position: -10px 0;
