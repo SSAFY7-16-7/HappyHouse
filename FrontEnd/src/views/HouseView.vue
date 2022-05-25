@@ -132,13 +132,12 @@ export default {
 /* 스크롤바 막대 설정*/
 .type1::-webkit-scrollbar-thumb {
   height: 17%;
-  background-color: rgb(174 180 191);
-  /* 스크롤바 둥글게 설정    */
-  border-radius: 10px;
+  background-color: rgb(179 204 224 / 54%);
+  border-radius: 47px;
 }
 
 /* 스크롤바 뒷 배경 설정*/
 .type1::-webkit-scrollbar-track {
-  background-color: rgb(222 222 222);
+  background-color: rgb(255 255 254 / 35%);
 }
 </style>
