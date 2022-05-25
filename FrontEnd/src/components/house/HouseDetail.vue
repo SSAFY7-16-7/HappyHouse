@@ -16,23 +16,35 @@
       <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
     </div>
     <div class="detail-menu-bar">
-      <div>
-        <router-link to="/house/info" class="menu" id="info"
-          >매물정보</router-link
-        >
-      </div>
-      <div>
-        <router-link to="/house/deal" class="menu" id="deal"
-          >실거래가</router-link
-        >
-      </div>
-      <div>
-        <router-link to="/house/infra" class="menu" id="infra"
-          >인프라</router-link
-        >
-      </div>
+      <b-button
+        @click="showInfo"
+        class="menu"
+        :class="{ active: detail_type.info }"
+        id="info"
+      >
+        매물정보
+      </b-button>
+      <b-button
+        @click="showDeal"
+        class="menu"
+        :class="{ active: detail_type.deal }"
+        id="deal"
+      >
+        실거래가
+      </b-button>
+      <b-button
+        @click="showInfra"
+        class="menu"
+        :class="{ active: detail_type.infra }"
+        id="infra"
+      >
+        인프라
+      </b-button>
     </div>
-    <router-view />
+    <!-- <router-view /> -->
+    <detail-info v-if="detail_type.info"></detail-info>
+    <detail-deal v-else-if="detail_type.deal"></detail-deal>
+    <detail-infra v-else-if="detail_type.infra"></detail-infra>
   </div>
 </template>
 
@@ -42,6 +54,9 @@ import HouseInfo from "@/components/house/detail/HouseInfo.vue";
 import { BUS } from "@/store/modules/EventBus";
 import { mapActions, mapState } from "vuex";
 import { apiInstance } from "@/api/index.js";
+import DetailInfra from "@/components/house/detail/HouseInfra.vue";
+import DetailInfo from "@/components/house/detail/HouseInfo.vue";
+import DetailDeal from "@/components/house/detail/HouseDeal.vue";
 const http = apiInstance();
 const houseStore = "houseStore";
 import { ramdomImg } from "@/api/image.js";
@@ -52,11 +67,20 @@ export default {
       overColumn: null,
       likeStatus: true,
       img_url: "",
+      detail_type: { info: true, deal: false, infra: false },
+      buttons: [
+        { caption: "매물정보", state: true },
+        { caption: "실거래가", state: false },
+        { caption: "인프라", state: false },
+      ],
     };
   },
   components: {
     LikeButton,
     HouseInfo,
+    DetailInfra,
+    DetailInfo,
+    DetailDeal,
   },
   computed: {
     ...mapState(houseStore, ["house", "none"]),
@@ -68,6 +92,21 @@ export default {
     this.img_url = ramdomImg();
   },
   methods: {
+    showInfo() {
+      this.detail_type.info = true;
+      this.detail_type.deal = false;
+      this.detail_type.infra = false;
+    },
+    showDeal() {
+      this.detail_type.info = false;
+      this.detail_type.deal = true;
+      this.detail_type.infra = false;
+    },
+    showInfra() {
+      this.detail_type.info = false;
+      this.detail_type.deal = false;
+      this.detail_type.infra = true;
+    },
     ...mapActions(houseStore, ["setNoneFalse"]),
     hi() {
       alert("hi");
@@ -185,5 +224,8 @@ export default {
 
 .detail-menu-bar .menu {
   font-weight: bold;
+}
+.menu.active {
+  background-color: #2196f3 !important;
 }
 </style>
