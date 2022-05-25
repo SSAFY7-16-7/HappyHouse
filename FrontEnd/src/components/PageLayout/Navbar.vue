@@ -60,6 +60,16 @@
               매물
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link me-2" to="/infomation">
+              <i
+                class="fa-solid fa-newspaper opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              NEWS
+            </router-link>
+          </li>
           <!-- <li class="nav-item">
             <router-link class="nav-link me-2" to="/recommend">
               <i

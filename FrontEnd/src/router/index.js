@@ -22,6 +22,7 @@ import DealChart from "@/components/Chart/DealChart.vue";
 import HouseInfo from "@/components/house/detail/HouseInfo.vue";
 import HouseDeal from "@/components/house/detail/HouseDeal.vue";
 import HouseInfra from "@/components/house/detail/HouseInfra.vue";
+import InformationView from "@/views/InformationView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -39,6 +40,11 @@ const routes = [
     path: "/home",
     name: "home",
     component: IndexView,
+  },
+  {
+    path: "/infomation",
+    name: "information",
+    component: InformationView,
   },
   {
     path: "/house",
