@@ -14,4 +14,5 @@ public interface HouseDao {
 	public List<HouseInfo> 	getAddressList(Address address);
 	public List<HouseInfo> 	getNameList(String apartmentName);
 	public List<HouseDeal> 	getDealList(String aptCode);
+	public String 	getKapt(HouseInfo houseinfo);
 }

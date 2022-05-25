@@ -36,4 +36,9 @@ public class HouseServiceImp implements HouseService {
 		return dao.getDealList(aptCode);
 	}
 
+	@Override
+	public String getKapt(HouseInfo houseinfo) {
+		return dao.getKapt(houseinfo);
+	}
+
 }

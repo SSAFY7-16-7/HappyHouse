@@ -21,6 +21,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { BUS } from "@/store/modules/EventBus";
+import { LineElement } from "chart.js";
 
 const houseStore = "houseStore";
 
@@ -29,6 +30,11 @@ export default {
   data() {
     return {
       isColor: false,
+      houseinfo: {
+        roadName: "",
+        roadNameBonbun: "",
+        roadNameBubun: "",
+      },
     };
   },
   props: {
@@ -38,7 +44,7 @@ export default {
     ...mapState(houseStore, ["none"]),
   },
   methods: {
-    ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
+    ...mapActions(houseStore, ["detailHouse", "setNoneFalse", "getDetail"]),
     selectHouse() {
       console.log("선택:", this.house);
       BUS.$emit("change-hposition", {
@@ -47,6 +53,18 @@ export default {
       });
       this.detailHouse(this.house);
       this.setNoneFalse(false);
+
+      this.houseinfo.roadName = this.house.roadName;
+
+      let roadNameBonbun = this.house.roadNameBonbun;
+      roadNameBonbun = Number(roadNameBonbun).toString();
+      this.houseinfo.roadNameBonbun = roadNameBonbun;
+
+      let roadNameBubun = this.house.roadNameBubun;
+      roadNameBubun = Number(roadNameBubun).toString();
+      this.houseinfo.roadNameBubun = roadNameBubun;
+      console.log("houseinfo", this.houseinfo);
+      this.getDetail(this.houseinfo);
     },
     colorChange(flag) {
       this.isColor = flag;

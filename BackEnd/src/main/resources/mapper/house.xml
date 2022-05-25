@@ -30,4 +30,9 @@
 		order by dealYear desc, dealMonth desc, dealDay desc
 	</select>
 	
+	<select id="getKapt" parameterType="HouseInfo" resultType="string">
+		SELECT kaptCode FROM kaptcode 
+		where doroJuso =#{roadName} and doroBonbun =#{roadNameBonbun} and doroBubun = #{roadNameBubun}
+	</select>
+	
 </mapper>

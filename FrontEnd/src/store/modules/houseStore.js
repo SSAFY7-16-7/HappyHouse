@@ -6,6 +6,8 @@ import {
   housDeal,
   houseAddress,
   houseName,
+  getKapt,
+  houseDetail,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -19,6 +21,7 @@ const houseStore = {
     deals: null,
     none: true,
     markerPositions: [],
+    detail: null,
   },
 
   getters: {},
@@ -70,6 +73,10 @@ const houseStore = {
     },
     SET_NONE: (state, data) => {
       state.none = data;
+    },
+    SET_DETAIL: (state, data) => {
+      state.detail = data.response.body.item;
+      console.log("SET_DETAIL", data.response.body.item);
     },
   },
 
@@ -182,6 +189,31 @@ const houseStore = {
         },
         (error) => {
           console.log("houseAddress 에러", error);
+        }
+      );
+    },
+    getDetail: ({ commit }, houseinfo) => {
+      console.log("houseinfo : ", houseinfo);
+
+      getKapt(
+        houseinfo,
+        (data) => {
+          console.log("getKapt : ", data.data);
+          const params = {
+            kaptCode: data.data,
+          };
+          houseDetail(
+            params,
+            ({ data }) => {
+              commit("SET_DETAIL", data);
+            },
+            (error) => {
+              console.log("houseDetail 에러", error);
+            }
+          );
+        },
+        (error) => {
+          console.log("getKapt 에러", error);
         }
       );
     },

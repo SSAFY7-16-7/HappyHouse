@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.Address;
 import com.ssafy.happyhouse.model.dto.HappyHouseException;
@@ -27,7 +27,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-@Controller
+@RestController
 @RequestMapping("/deal")
 @CrossOrigin("*")
 @Api(tags = {"실거래가 아파트 컨트롤러"})
@@ -54,7 +54,6 @@ public class HouseController {
 	
 	@ApiOperation(value="동으로 아파트 목록 조회", notes = "dongName로 houseinfo 검색")
 	@GetMapping("/dong")
-	@ResponseBody
 	public ResponseEntity<?> getDongList(@RequestParam String dongName) throws Exception {
 		logger.info("dongList....................{}", dongName);
 		List<HouseInfo> list = service.getDongList(dongName);
@@ -64,7 +63,6 @@ public class HouseController {
 	
 	@ApiOperation(value="좌표로 아파트 목록 조회", notes = "남서, 북동 좌표로 houseinfo 검색")
 	@GetMapping("/address")
-	@ResponseBody
 	public ResponseEntity<?> getAddressList(@RequestParam String qa,@RequestParam String pa,@RequestParam String ha,@RequestParam String oa) throws Exception {
 		Address address = new Address(null, null, null, null, qa, pa, ha, oa);
 		logger.info("addressList....................{}",address);
@@ -75,7 +73,6 @@ public class HouseController {
 	
 	@ApiOperation(value="아파트 이름으로 아파트 목록 조회", notes = "apartmentName로 houseinfo 검색")
 	@GetMapping("/name")
-	@ResponseBody
 	public ResponseEntity<?> getNameList(@RequestParam String apartmentName) throws Exception {
 		logger.info("nameList....................{}", apartmentName);
 		List<HouseInfo> list = service.getNameList(apartmentName);
@@ -85,11 +82,23 @@ public class HouseController {
 	
 	@ApiOperation(value="아파트 거래내역 조회", notes = "aptCode로 housedeal 검색")
 	@GetMapping("/deal")
-	@ResponseBody
 	public ResponseEntity<?> getDealList(@RequestParam String aptCode) throws Exception {
 		logger.info("addressList....................{}");
 		List<HouseDeal> list = service.getDealList(aptCode);
 		logger.info("addressList: {}", list);
 		return new ResponseEntity<List<HouseDeal>>(list, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="kaptcode 조회", notes = "houseinfo 도로명주소로 kaptcode 조회")
+	@GetMapping("/kapt")
+	public ResponseEntity<?> getKapt(HouseInfo houseinfo) throws Exception {
+		logger.info("getKapt....................{}",houseinfo);
+		String kapt = service.getKapt(houseinfo);
+		logger.info("getKapt Result....................{}",kapt);
+		if(kapt == null) {
+			return new ResponseEntity<String>("NO", HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<String>(kapt, HttpStatus.OK);
+		}
 	}
 }
