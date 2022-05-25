@@ -18,14 +18,14 @@
                     >
                   </div>
                   <div class="inter-sells" v-if="category === 'sell'">
-                    <h3>관심매물리스트</h3>
+                    <h3 style="padding-bottom: 35px">관심매물리스트</h3>
                     <interest-list
                       :list="listSell"
                       category="sell"
                     ></interest-list>
                   </div>
                   <div class="ineter-apts" v-else>
-                    <h3>관심 아파트 리스트</h3>
+                    <h3 style="padding-bottom: 35px">관심 아파트 리스트</h3>
                     <interest-list
                       :list="listApt"
                       category="apt"

@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 324px">
+  <div style="width: 331px">
     <div style="padding-bottom: 20px">
       <div class="flex">
         <img
@@ -19,35 +19,37 @@
       </div>
     </div>
 
-    <table class="table">
-      <thead></thead>
-      <tbody>
-        <tr>
-          <td class="th">
-            <b-icon-pin-map-fill style="margin-right: 5px" />부대, 복리시설
-          </td>
-        </tr>
-        <tr>
-          <td>{{ detail2.welfareFacility }}</td>
-        </tr>
-        <tr>
-          <td class="th">
-            <b-icon-pin-map-fill style="margin-right: 5px" />편의시설
-          </td>
-        </tr>
-        <tr>
-          <td>{{ detail2.convenientFacility }}</td>
-        </tr>
-        <tr>
-          <td class="th">
-            <b-icon-pin-map-fill style="margin-right: 5px" />교육시설
-          </td>
-        </tr>
-        <tr>
-          <td>{{ detail2.educationFacility }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="width: 300px">
+      <table class="table">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td class="th">
+              <b-icon-pin-map-fill style="margin-right: 5px" />부대, 복리시설
+            </td>
+          </tr>
+          <tr>
+            <td>{{ detail2.welfareFacility }}</td>
+          </tr>
+          <tr>
+            <td class="th">
+              <b-icon-pin-map-fill style="margin-right: 5px" />편의시설
+            </td>
+          </tr>
+          <tr>
+            <td>{{ detail2.convenientFacility }}</td>
+          </tr>
+          <tr>
+            <td class="th">
+              <b-icon-pin-map-fill style="margin-right: 5px" />교육시설
+            </td>
+          </tr>
+          <tr>
+            <td>{{ detail2.educationFacility }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -88,5 +90,9 @@ export default {
 .flex {
   display: flex;
   align-items: center;
+}
+.table td,
+.table th {
+  white-space: break-spaces;
 }
 </style>

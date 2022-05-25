@@ -1,10 +1,10 @@
 <template>
   <div class="inter-item" @click="itemClick">
     <div class="item-info">
-      <div v-if="category === 'sell'">
+      <div v-if="category === 'sell'" class="info-text">
         {{ item.address }} / {{ item.price }}
       </div>
-      <div v-else>{{ item.apartmentName }}</div>
+      <div v-else class="info-text">{{ item.apartmentName }}</div>
     </div>
     <like-button
       :isLiked="likeStatus"
@@ -92,5 +92,13 @@ export default {
 <style>
 .inter-item {
   display: flex;
+  justify-content: space-between;
+  width: 320px;
+  margin-left: 16px;
+  padding-bottom: 18px;
+}
+.info-text {
+  font-weight: bold;
+  font-size: 19px;
 }
 </style>

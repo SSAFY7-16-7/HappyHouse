@@ -16,9 +16,21 @@
       <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
     </div>
     <div class="detail-menu-bar">
-      <router-link to="/house/info" class="detail-menu">매물정보</router-link> |
-      <router-link to="/house/deal" class="detail-menu">실거래가</router-link> |
-      <router-link to="/house/infra" class="detail-menu">인프라</router-link>
+      <div>
+        <router-link to="/house/info" class="menu" id="info"
+          >매물정보</router-link
+        >
+      </div>
+      <div>
+        <router-link to="/house/deal" class="menu" id="deal"
+          >실거래가</router-link
+        >
+      </div>
+      <div>
+        <router-link to="/house/infra" class="menu" id="infra"
+          >인프라</router-link
+        >
+      </div>
     </div>
     <router-view />
   </div>
@@ -57,6 +69,14 @@ export default {
   },
   methods: {
     ...mapActions(houseStore, ["setNoneFalse"]),
+    hi() {
+      alert("hi");
+    },
+    classOn() {
+      // const target = event.currentTarget.id;
+      alert("target");
+      // document.getElementById(target).className = "on";
+    },
     dispalynone() {
       this.setNoneFalse(true);
     },
@@ -149,5 +169,21 @@ export default {
 }
 .detail-menu-bar {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 326px;
+}
+
+.on {
+  font-weight: bold;
+  color: #2196f3;
+}
+.table td,
+.table th {
+  white-space: break-spaces;
+}
+
+.detail-menu-bar .menu {
+  font-weight: bold;
 }
 </style>

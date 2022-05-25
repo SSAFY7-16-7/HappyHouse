@@ -96,6 +96,6 @@ export default {
 }
 .apt-icon {
   font-size: 25px;
-  color: #bcb81e;
+  color: #2196f3;
 }
 </style>

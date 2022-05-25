@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="padding: 0 391px">
     <hr />
     <div class="qna-div">
       <h4 class="qna-type">Question</h4>
       <div>
         <div class="b-padding">
-          <h3 v-text="qna.title" style="font-weight: bold" />
+          <h3 v-text="qna.title" sFCardtyle="font-weight: bold" />
         </div>
         <div class="b-padding">
           <h6 v-text="qna.content" />
@@ -36,7 +36,13 @@
       </div>
 
       <div :class="{ answerInput: isActive }">
-        <input type="text" v-model="qna.answer" />
+        <textarea
+          type="text"
+          v-model="qna.answer"
+          class="form-controll"
+          cols="80"
+          rows="10"
+        />
         <button
           class="btn btn-secondary"
           style="width: 84px"
@@ -63,13 +69,7 @@
         :class="{ answerInput: !isActive }"
         v-if="qna.answer == null && isAdmin"
       >
-        <button
-          class="btn btn-secondary"
-          style="width: 84px"
-          @click="openInput"
-        >
-          글쓰기
-        </button>
+        <button class="btn btn-secondary" @click="openInput">글쓰기</button>
       </div>
     </div>
     <hr />
@@ -198,7 +198,7 @@ img.profile {
 }
 
 .qna-div {
-  padding: 20px 160px 20px 160px;
+  padding: 20px 76px;
 }
 
 h4.qna-type {
@@ -209,6 +209,10 @@ h4.qna-type {
 
 .b-padding {
   padding-bottom: 15px;
+}
+
+.a-bottom {
+  text-align: end;
 }
 
 .q-bottom {

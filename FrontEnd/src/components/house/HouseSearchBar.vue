@@ -2,19 +2,19 @@
   <div>
     <div class="map-select-div">
       <select class="form-control" v-model="sido" @change="gugunList">
-        <option value="all" disabled selected>시/도</option>
+        <option value="all">시/도</option>
         <option v-for="(sido, index) in sidos" :key="index" :value="sido">
           {{ sido }}
         </option>
       </select>
       <select class="form-control" v-model="gugun" @change="dongList">
-        <option value="all" disabled selected>구/군</option>
+        <option value="all">구/군</option>
         <option v-for="(gugun, index) in guguns" :key="index" :value="gugun">
           {{ gugun }}
         </option>
       </select>
       <select class="form-control" v-model="dong" @change="houseList">
-        <option value="all" disabled selected>동</option>
+        <option value="all">동</option>
         <option v-for="(dong, index) in dongs" :key="index" :value="dong">
           {{ dong }}
         </option>
@@ -49,10 +49,10 @@ export default {
   name: "HouseSearchBar",
   data() {
     return {
-      sido: null,
-      gugun: null,
-      dong: null,
-      name: null,
+      sido: "시/도",
+      gugun: "구/군",
+      dong: "동",
+      name: "",
     };
   },
   created() {
