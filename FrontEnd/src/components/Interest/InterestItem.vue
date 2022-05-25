@@ -81,8 +81,9 @@ export default {
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
     showHouseDetail() {
       console.log("아파트 디테일", this.item);
+      this.setNoneFalse(true);
       this.detailHouse(this.item);
-      this.$store.state.houseStore.none = false;
+      // this.$store.state.houseStore.none = false;
     },
   },
 };

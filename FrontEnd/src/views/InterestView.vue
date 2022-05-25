@@ -10,10 +10,12 @@
               <div class="list-div type1">
                 <div class="house-list">
                   <div class="buttons">
-                    <b-button @click="SET_CATEGORY('apt')"
+                    <b-button @click="changeCategory('apt')"
                       >관심 아파트</b-button
                     >
-                    <b-button @click="SET_CATEGORY('sell')">관심 매물</b-button>
+                    <b-button @click="changeCategory('sell')"
+                      >관심 매물</b-button
+                    >
                   </div>
                   <div class="inter-sells" v-if="category === 'sell'">
                     <h3>관심매물리스트</h3>
@@ -34,7 +36,7 @@
             </div>
             <div
               class="detail-div type1"
-              :class="{ none: this.$store.state.houseStore.none }"
+              v-if="!this.$store.state.houseStore.none"
             >
               <div v-if="category === 'apt'">
                 <house-detail class="house-detail" />
@@ -92,6 +94,10 @@ export default {
   },
   methods: {
     ...mapMutations("interestStore", ["SET_CATEGORY"]),
+    changeCategory(category) {
+      this.$store.state.houseStore.none = true;
+      this.SET_CATEGORY(category);
+    },
   },
   created() {
     http.get("/interest/aptlist/ssafy").then(({ data }) => {

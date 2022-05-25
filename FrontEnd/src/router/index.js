@@ -17,6 +17,7 @@ import SellRegist from "@/components/Sell/SellRegist.vue";
 import SellList from "@/components/Sell/SellList.vue";
 import SellItemDetail from "@/components/Sell/SellItemDetail.vue";
 import InterestView from "@/views/InterestView.vue";
+import DealChart from "@/components/Chart/DealChart.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
     path: "/",
     name: "/",
     redirect: "/home",
+  },
+  {
+    path: "/chart",
+    name: "/chart",
+    component: DealChart,
   },
   {
     path: "/home",

@@ -51,7 +51,11 @@ export default {
         lat: this.house.lat,
         lng: this.house.lng,
       });
+
+      // house deals가 바뀔 때 마다 새로운 detail창 불러오기
+      this.setNoneFalse(true);
       this.detailHouse(this.house);
+
       this.setNoneFalse(false);
 
       this.houseinfo.roadName = this.house.roadName;
