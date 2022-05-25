@@ -1,13 +1,10 @@
 <template>
   <div>
     <div class="sell-header">
-      <h2>사용자 등록 매물 목록</h2>
-      <b-icon
-        @click="moveRegist"
-        class="sell-add-icon"
-        icon="plus-square-fill"
-        font-scale="1.5"
-      ></b-icon>
+      <h2>사용자들이 등록한 매물입니다</h2>
+      <b-button class="sell-add-btn" pill variant="info" @click="moveRegist"
+        >매물 등록하기
+      </b-button>
     </div>
 
     <div class="sell-list">
@@ -60,10 +57,12 @@ export default {
 .sell-header {
   display: flex;
   align-items: center;
+  justify-content: center;
+  justify-content: space-around;
 }
 
-.sell-add-icon {
-  margin-left: 10px;
-  margin-bottom: 3px;
+.sell-add-btn {
+  margin: 0 !important;
+  margin-left: 20px;
 }
 </style>

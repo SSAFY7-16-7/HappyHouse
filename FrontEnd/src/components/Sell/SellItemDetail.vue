@@ -2,31 +2,9 @@
   <div>
     <div class="container">
       <b-card title="Card Title" no-body>
-        <b-card-body>
-          <div class="sell_user_upload_info">
-            <div>
-              <img :src="img_url" alt="Image 1" />
-            </div>
-            <div>
-              <div class="title-area">
-                <like-button
-                  :isLiked="likeStatus"
-                  @btnClick="setLike"
-                  class="sellLikebtn"
-                ></like-button>
-                <h3>{{ this.item.title }}</h3>
-              </div>
-              <p>{{ this.item.content }}</p>
-            </div>
-          </div>
-
+        <b-card-body class="sell-info-detail-area">
           <table class="table align-items-center justify-content-center mb-0">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
+            <!-- <thead></thead> -->
             <tbody>
               <tr>
                 <td>거래 종류</td>
@@ -77,6 +55,22 @@
               </tr>
             </tbody>
           </table>
+          <div class="sell_user_upload_info">
+            <div class="sell_upload_img">
+              <img :src="img_url" alt="Image 1" width="400" height="400" />
+            </div>
+            <div>
+              <div class="sell-detail-title">
+                <like-button
+                  :isLiked="likeStatus"
+                  @btnClick="setLike"
+                  class="sellLikebtn"
+                ></like-button>
+                <h3>{{ this.item.title }}</h3>
+                <p>{{ this.item.content }}</p>
+              </div>
+            </div>
+          </div>
         </b-card-body>
       </b-card>
     </div>
@@ -163,17 +157,35 @@ export default {
 </script>
 
 <style>
-.sell_user_upload_info {
+.sell-info-detail-area {
+  height: 90vh;
+  padding: 50px !important;
+
   display: flex;
   justify-content: space-around;
 }
-.title-area {
+.sell_user_upload_info {
+  display: flex;
+  justify-content: flex-start;
+  align-content: space-around;
+  flex-direction: column;
+  width: 90%;
+  margin-left: 20px;
+  border-left: 1px solid #cecece70;
+}
+.sell-detail-title {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  margin-top: 20px;
+  flex-direction: column;
 }
 .sellLikebtn {
   margin-right: 5px;
   height: 2em;
+}
+.sell_upload_img {
+  display: flex;
+  width: 500px;
+  justify-content: center;
 }
 </style>

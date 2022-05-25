@@ -1,226 +1,223 @@
 <template>
-  <div>
-    <div class="mx-3 mt-3 border-radius-xl position-relative">
-      <main class="mt-0 main-content main-content-bg">
-        <section>
-          <div class="page-header min-vh-75">
-            <div class="container">
-              <b-card title="Card Title" no-body>
-                <b-card-body>
-                  <b-form
-                    @submit="onSubmit"
-                    @reset="onReset"
-                    v-if="show"
-                    class="regist-form"
-                  >
-                    <h2>매물 등록 하기</h2>
-                    <div class="regist-input-group">
-                      <div class="group-1">
+  <div class="mx-3 mt-3 border-radius-xl position-relative sell-regist">
+    <main class="mt-0 main-content main-content-bg">
+      <section>
+        <div class="page-header min-vh-75">
+          <div class="container">
+            <b-card title="Card Title" no-body>
+              <b-card-body>
+                <b-form
+                  @submit="onSubmit"
+                  @reset="onReset"
+                  v-if="show"
+                  class="regist-form"
+                >
+                  <h2>매물 등록 하기</h2>
+                  <div class="regist-input-group">
+                    <div class="group-1">
+                      <b-form-group
+                        id="title-group"
+                        label="제목"
+                        label-for="type"
+                      >
+                        <b-form-input
+                          id="title"
+                          v-model="form.title"
+                          type="text"
+                          placeholder="글 제목을 입력하세요."
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="content-group"
+                        label="글 내용 작성 "
+                        label-for="content"
+                      >
+                        <b-form-textarea
+                          id="content"
+                          v-model="form.content"
+                          placeholder="글 내용을 작성 해주세요."
+                          rows="4"
+                          max-rows="7"
+                          required
+                        ></b-form-textarea>
+                      </b-form-group>
+                      <div class="type-group">
                         <b-form-group
-                          id="title-group"
-                          label="제목"
+                          id="type-group"
+                          label="거래 방식"
                           label-for="type"
                         >
-                          <b-form-input
-                            id="title"
-                            v-model="form.title"
-                            type="text"
-                            placeholder="Enter title"
+                          <b-form-select
+                            id="type"
+                            v-model="form.type"
+                            :options="types"
                             required
-                          ></b-form-input>
+                          ></b-form-select>
                         </b-form-group>
-
                         <b-form-group
-                          id="content-group"
-                          label="글 내용 작성 "
-                          label-for="content"
+                          id="room_type-group"
+                          label="방 개수"
+                          label-for="room_type"
                         >
-                          <b-form-textarea
-                            id="content"
-                            v-model="form.content"
-                            placeholder="Enter content"
-                            rows="4"
-                            max-rows="7"
+                          <b-form-select
+                            id="room_type"
+                            name="방개수"
+                            v-model="form.room_type"
+                            :options="room_types"
                             required
-                          ></b-form-textarea>
+                          ></b-form-select>
                         </b-form-group>
-                        <div class="type-group">
-                          <b-form-group
-                            id="type-group"
-                            label="type:"
-                            label-for="type"
-                          >
-                            <b-form-select
-                              id="type"
-                              v-model="form.type"
-                              :options="types"
-                              required
-                            ></b-form-select>
-                          </b-form-group>
-                          <b-form-group
-                            id="room_type-group"
-                            label="room_type:"
-                            label-for="room_type"
-                          >
-                            <b-form-select
-                              id="room_type"
-                              name="방개수"
-                              v-model="form.room_type"
-                              :options="room_types"
-                              required
-                            ></b-form-select>
-                          </b-form-group>
+                      </div>
+
+                      <b-form-group
+                        id="image-group"
+                        label="이미지 "
+                        label-for="image"
+                      >
+                        <b-form-input
+                          id="image"
+                          v-model="form.image"
+                          placeholder="이미지 첨부"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+                    </div>
+                    <div class="group-2">
+                      <b-form-group
+                        id="price-group"
+                        label="가격 "
+                        label-for="price"
+                      >
+                        <b-form-input
+                          id="price"
+                          v-model="form.price"
+                          placeholder="월세라면 보증금/월세 모두 기입"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="admin_price-group"
+                        label="관리비  "
+                        label-for="admin_price"
+                      >
+                        <b-form-input
+                          id="admin_price"
+                          v-model="form.admin_price"
+                          placeholder=""
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="admin_desc-group"
+                        label="관리비 포함 항목  "
+                        label-for="admin_desc"
+                      >
+                        <b-form-input
+                          id="admin_desc"
+                          v-model="form.admin_desc"
+                          placeholder="예) 수도,전기,인터넷 등"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="floor_now-group"
+                        label="층수"
+                        label-for="floor_now"
+                      >
+                        <b-form-input
+                          id="floor_now"
+                          v-model="form.floor_now"
+                          placeholder="해당 매물의 층"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="floor_tot-group"
+                        label="건물 전체 층"
+                        label-for="floor_tot"
+                      >
+                        <b-form-input
+                          id="floor_tot"
+                          v-model="form.floor_tot"
+                          placeholder="건물의 전체 층수"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="size-group"
+                        label="크기"
+                        label-for="size"
+                      >
+                        <b-form-input
+                          id="size"
+                          v-model="form.size"
+                          placeholder=" 크기 (평)"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
+
+                      <b-form-group
+                        id="address-group"
+                        label="주소 "
+                        label-for="address1"
+                      >
+                        <div class="address-group">
+                          <b-form-input
+                            id="address1"
+                            v-model="form.address"
+                            placeholder="주소 (검색 버튼으로 검색)"
+                            readonly
+                          ></b-form-input>
+                          <b-button @click="juso" class="btn-addrSearch"
+                            ><i class="fa-solid fa-magnifying-glass"></i
+                          ></b-button>
                         </div>
 
-                        <b-form-group
-                          id="image-group"
-                          label="이미지 "
-                          label-for="image"
-                        >
-                          <b-form-input
-                            id="image"
-                            v-model="form.image"
-                            placeholder="Enter image"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-                      </div>
-                      <div class="group-2">
-                        <b-form-group
-                          id="price-group"
-                          label="price :  "
-                          label-for="price"
-                        >
-                          <b-form-input
-                            id="price"
-                            v-model="form.price"
-                            placeholder="Enter price"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
+                        <b-form-input
+                          id="address2"
+                          v-model="address2"
+                          placeholder="상세 주소 (동,호 등)"
+                          required
+                        ></b-form-input>
+                      </b-form-group>
 
-                        <b-form-group
-                          id="admin_price-group"
-                          label="admin_price :  "
-                          label-for="admin_price"
-                        >
-                          <b-form-input
-                            id="admin_price"
-                            v-model="form.admin_price"
-                            placeholder="Enter admin_price"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="admin_desc-group"
-                          label="admin_desc :  "
-                          label-for="admin_desc"
-                        >
-                          <b-form-input
-                            id="admin_desc"
-                            v-model="form.admin_desc"
-                            placeholder="Enter admin_desc"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="floor_now-group"
-                          label="floor_now :  "
-                          label-for="floor_now"
-                        >
-                          <b-form-input
-                            id="floor_now"
-                            v-model="form.floor_now"
-                            placeholder="Enter floor_now"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="floor_tot-group"
-                          label="floor_tot :  "
-                          label-for="floor_tot"
-                        >
-                          <b-form-input
-                            id="floor_tot"
-                            v-model="form.floor_tot"
-                            placeholder="Enter floor_tot"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="size-group"
-                          label="size :  "
-                          label-for="size"
-                        >
-                          <b-form-input
-                            id="size"
-                            v-model="form.size"
-                            placeholder="Enter size"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="address-group"
-                          label="address :  "
-                          label-for="address1"
-                        >
-                          <div class="address-group">
-                            <b-form-input
-                              id="address1"
-                              v-model="form.address"
-                              placeholder="주소 (검색 버튼으로 검색)"
-                              readonly
-                            ></b-form-input>
-                            <b-button @click="juso" class="btn-addrSearch"
-                              ><i class="fa-solid fa-magnifying-glass"></i
-                            ></b-button>
-                          </div>
-
-                          <b-form-input
-                            id="address2"
-                            v-model="address2"
-                            placeholder="상세 주소 입력"
-                            required
-                          ></b-form-input>
-                        </b-form-group>
-
-                        <b-form-group
-                          id="keyword-group"
-                          v-slot="{ ariaDescribedby }"
-                        >
-                          <b-form-checkbox-group
-                            v-model="form.keyword"
-                            id="keyword"
-                            :aria-describedby="ariaDescribedby"
-                            :options="keywords"
-                          >
-                          </b-form-checkbox-group>
-                        </b-form-group>
-                      </div>
-                    </div>
-
-                    <div class="buttons">
-                      <b-button type="submit" variant="primary"
-                        >Submit</b-button
+                      <b-form-group
+                        id="keyword-group"
+                        v-slot="{ ariaDescribedby }"
                       >
-                      <b-button type="reset" variant="danger">Reset</b-button>
-                      <b-button varient="info" @click="setTest"
-                        >test input</b-button
-                      >
+                        <b-form-checkbox-group
+                          v-model="form.keyword"
+                          id="keyword"
+                          :aria-describedby="ariaDescribedby"
+                          :options="keywords"
+                          class="key-option"
+                        >
+                        </b-form-checkbox-group>
+                      </b-form-group>
                     </div>
-                  </b-form>
-                </b-card-body>
-              </b-card>
-            </div>
+                  </div>
+
+                  <div class="buttons">
+                    <b-button type="submit" variant="primary">Submit</b-button>
+                    <b-button type="reset" variant="danger">Reset</b-button>
+                    <b-button varient="info" @click="setTest"
+                      >test input</b-button
+                    >
+                  </div>
+                </b-form>
+              </b-card-body>
+            </b-card>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -374,7 +371,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .form-group {
   display: flex;
   align-items: center;
@@ -391,6 +388,7 @@ export default {
 }
 .regist-input-group {
   display: flex;
+  margin: 5px;
 }
 
 .regist-form {
@@ -409,5 +407,14 @@ export default {
 }
 .btn-addrSearch {
   margin: 0 0 0 3px !important ;
+}
+
+.key-option {
+  & div {
+    margin: 2px;
+  }
+}
+.sell-regist {
+  height: 90vh;
 }
 </style>
