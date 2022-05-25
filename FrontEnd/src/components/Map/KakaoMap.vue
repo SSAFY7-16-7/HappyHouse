@@ -69,7 +69,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["house", "markerPositions"]),
+    ...mapState(houseStore, ["house", "markerPositions", "houseDetail"]),
     // house() {
     //   return this.$store.state.house;
     // },
@@ -78,6 +78,8 @@ export default {
     BUS.$on("change-hposition", (position) => {
       this.position = position;
       this.changePosition(position);
+
+      //
     });
   },
   mounted() {

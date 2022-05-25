@@ -47,13 +47,11 @@ export default {
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse", "getDetail"]),
     selectHouse() {
       console.log("선택:", this.house);
-      BUS.$emit("change-hposition", {
-        lat: this.house.lat,
-        lng: this.house.lng,
-      });
+
       this.detailHouse(this.house);
       this.setNoneFalse(false);
 
+      //디테일 정보
       this.houseinfo.roadName = this.house.roadName;
 
       let roadNameBonbun = this.house.roadNameBonbun;
@@ -65,6 +63,11 @@ export default {
       this.houseinfo.roadNameBubun = roadNameBubun;
       console.log("houseinfo", this.houseinfo);
       this.getDetail(this.houseinfo);
+
+      BUS.$emit("change-hposition", {
+        lat: this.house.lat,
+        lng: this.house.lng,
+      });
     },
     colorChange(flag) {
       this.isColor = flag;
