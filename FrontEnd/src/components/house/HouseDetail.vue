@@ -5,11 +5,7 @@
     </div>
     <div class="detail-name">
       <div class="title-area">
-        <like-button
-          @btnClick="setLike"
-          :isLiked="likeStatus"
-          class="sellLikebtn"
-        ></like-button>
+        <like-button @btnClick="setLike" :isLiked="likeStatus"></like-button>
         <h3>{{ house.apartmentName }}</h3>
       </div>
       <div class="title-sub-info">
@@ -18,16 +14,19 @@
     </div>
     <div class="detail-img-div">
       <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
-      <deal-chart></deal-chart>
     </div>
-    <house-info />
+    <div class="detail-menu-bar">
+      <router-link to="/house/info" class="detail-menu">매물정보</router-link> |
+      <router-link to="/house/deal" class="detail-menu">실거래가</router-link> |
+      <router-link to="/house/infra" class="detail-menu">인프라</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
 import LikeButton from "@/components/Interest/LikeButton.vue";
 import HouseInfo from "@/components/house/detail/HouseInfo.vue";
-import DealChart from "@/components/Chart/DealChart.vue";
 import { BUS } from "@/store/modules/EventBus";
 import { mapActions, mapState } from "vuex";
 import { apiInstance } from "@/api/index.js";
@@ -46,7 +45,6 @@ export default {
   components: {
     LikeButton,
     HouseInfo,
-    DealChart,
   },
   computed: {
     ...mapState(houseStore, ["house", "none"]),
@@ -111,6 +109,12 @@ export default {
 </script>
 
 <style>
+.title-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start !important;
+  width: 325px !important;
+}
 .mouse-over-bgcolor {
   background-color: rgb(214, 211, 211);
 }
@@ -142,5 +146,8 @@ export default {
   padding: 11px 0px 40px 0;
   width: 328px;
   height: 300px;
+}
+.detail-menu-bar {
+  margin-bottom: 20px;
 }
 </style>

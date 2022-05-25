@@ -1,20 +1,75 @@
 <template>
-  <div>
-    <div
-      v-for="(deal, index) in deals"
-      :key="index"
-      class="dealList"
-      @mouseover="colorChange(true, index)"
-      @mouseout="colorChange(false, index)"
-      :class="{ 'mouse-over-bgcolor': columnHoverCheck(index) }"
-    >
-      <h4 style="font-color: blue">매매 {{ deal.dealAmount }} 만원</h4>
-      <div>{{ deal.floor }}층 | {{ deal.area }}㎡</div>
-      <div>
-        거래일자 : {{ deal.dealYear }} / {{ deal.dealMonth }} /
-        {{ deal.dealDay }}
-      </div>
-    </div>
+  <div style="width: 324px">
+    <table class="table table-bordered table-hover">
+      <thead></thead>
+      <tbody>
+        <!-- <tr >
+          <td class="th">사용승인일</td>
+          <td>{{ detail1.kaptUsedate }}</td>
+        </tr> -->
+        <tr>
+          <td class="th">대장 전용면접합계</td>
+          <td>{{ detail1.privArea }}</td>
+        </tr>
+        <tr>
+          <td class="th">건물구조</td>
+          <td>{{ detail2.codeStr }}</td>
+        </tr>
+        <tr>
+          <td class="th">복도유형</td>
+          <td>{{ detail1.codeHallNm }}</td>
+        </tr>
+
+        <tr>
+          <td class="th">동수</td>
+          <td>{{ detail1.kaptDongCnt }}</td>
+        </tr>
+        <tr>
+          <td class="th">호수</td>
+          <td>{{ detail1.hoCnt }}</td>
+        </tr>
+        <tr>
+          <td class="th">세대수</td>
+          <td>{{ detail1.kaptdaCnt }}</td>
+        </tr>
+        <tr>
+          <td class="th">난방방식</td>
+          <td>{{ detail1.codeHeatNm }}</td>
+        </tr>
+        <tr>
+          <td class="th">급수방식</td>
+          <td>{{ detail2.codeWsupply }}</td>
+        </tr>
+        <tr>
+          <td class="th">수전용량</td>
+          <td>{{ detail2.kaptdEcapa }}</td>
+        </tr>
+        <tr>
+          <td class="th">주차대수(지상/지하)</td>
+          <td>{{ detail2.kaptdPcnt }} / {{ detail2.kaptdPcntu }}</td>
+        </tr>
+        <tr>
+          <td class="th">승강기대수</td>
+          <td>{{ detail2.kaptdEcnt }}</td>
+        </tr>
+
+        <tr>
+          <td class="th" colspan="2">전용면적별 세대현황</td>
+        </tr>
+        <tr>
+          <td class="th text-end">60㎡ ~ 85㎡</td>
+          <td>{{ detail1.kaptMparea_85 }}</td>
+        </tr>
+        <tr>
+          <td class="th text-end">85㎡ ~ 135㎡</td>
+          <td>{{ detail1.kaptMparea_135 }}</td>
+        </tr>
+        <tr>
+          <td class="th text-end">135㎡~</td>
+          <td>{{ detail1.kaptMparea_136 }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -24,87 +79,17 @@ const houseStore = "houseStore";
 
 export default {
   name: "HouseInfo",
-  data() {
-    return {
-      overColumn: null,
-    };
-  },
   computed: {
-    ...mapState(houseStore, ["deals"]),
-  },
-  methods: {
-    colorChange(flag, index) {
-      if (flag) {
-        this.overColumn = index;
-      } else {
-        this.overColumn = null;
-      }
-    },
-    columnHoverCheck(index) {
-      if (index === this.overColumn) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    dispalynone() {
-      this.setNoneFalse(true);
-    },
+    ...mapState(houseStore, ["detail1", "detail2"]),
   },
 };
 </script>
 
 <style>
-.mouse-over-bgcolor {
-  background-color: rgb(214, 211, 211);
-}
-
-.close-div {
-  position: relative;
-  width: 323px;
-  padding-top: 31px;
-  right: -295px;
-}
-
-.close {
-  background-color: #9ca3b1;
-  width: 32px;
-  height: 32px;
-  color: white;
-  padding: 9px;
-  border-radius: 3px;
-}
-
-.detail-row {
-  /* text-align: end; */
-  font-size: 19px;
+.th {
   font-weight: bold;
-  padding-top: 10px;
 }
-
-.house-detail {
-  padding: 0px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.detail-info-div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 90%;
-}
-
-.detail-row {
-  font-size: 19px;
-  font-weight: bold;
-  padding-top: 10px;
-}
-
-.dealList {
-  border-top: 2px solid #aeb4bf;
-  width: 323px;
-  padding: 14px;
+.text-end {
+  text-align: end;
 }
 </style>

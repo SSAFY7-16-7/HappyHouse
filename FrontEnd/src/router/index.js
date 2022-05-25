@@ -18,6 +18,9 @@ import SellList from "@/components/Sell/SellList.vue";
 import SellItemDetail from "@/components/Sell/SellItemDetail.vue";
 import InterestView from "@/views/InterestView.vue";
 import DealChart from "@/components/Chart/DealChart.vue";
+import HouseInfo from "@/components/house/detail/HouseInfo.vue";
+import HouseDeal from "@/components/house/detail/HouseDeal.vue";
+import HouseInfra from "@/components/house/detail/HouseInfra.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -40,6 +43,23 @@ const routes = [
     path: "/house",
     name: "house",
     component: HouseView,
+    children: [
+      {
+        path: "info",
+        name: "info",
+        component: HouseInfo,
+      },
+      {
+        path: "deal",
+        name: "deal",
+        component: HouseDeal,
+      },
+      {
+        path: "infra",
+        name: "infra",
+        component: HouseInfra,
+      },
+    ],
   },
   {
     path: "/sell",

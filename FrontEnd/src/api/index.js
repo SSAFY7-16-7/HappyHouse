@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { API_BASE_URL, APT_DEAL_URL, APT_DETAIL_URL } from "@/config/index.js";
+import {
+  API_BASE_URL,
+  APT_DEAL_URL,
+  APT_DETAIL_URL1,
+  APT_DETAIL_URL2,
+} from "@/config/index.js";
 
 // axios 객체 생성
 function apiInstance() {
@@ -35,9 +40,18 @@ function kakaoInstance() {
 }
 
 const SERVICE_KEY = process.env.VUE_APP_APT_DETAIL_API_KEY;
-function detailInstance() {
+function detailInstance1() {
   const instance = axios.create({
-    baseURL: APT_DETAIL_URL + "?serviceKey=" + SERVICE_KEY,
+    baseURL: APT_DETAIL_URL1 + "?serviceKey=" + SERVICE_KEY,
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  return instance;
+}
+function detailInstance2() {
+  const instance = axios.create({
+    baseURL: APT_DETAIL_URL2 + "?serviceKey=" + SERVICE_KEY,
     headers: {
       "Content-type": "application/json",
     },
@@ -45,4 +59,10 @@ function detailInstance() {
   return instance;
 }
 
-export { apiInstance, houseInstance, kakaoInstance, detailInstance };
+export {
+  apiInstance,
+  houseInstance,
+  kakaoInstance,
+  detailInstance1,
+  detailInstance2,
+};

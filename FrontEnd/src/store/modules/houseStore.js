@@ -7,7 +7,8 @@ import {
   houseAddress,
   houseName,
   getKapt,
-  houseDetail,
+  houseDetail1,
+  houseDetail2,
 } from "@/api/house.js";
 
 const houseStore = {
@@ -33,7 +34,8 @@ const houseStore = {
     ],
     none: true,
     markerPositions: [],
-    detail: null,
+    detail1: [],
+    detail2: [],
   },
 
   getters: {},
@@ -86,9 +88,15 @@ const houseStore = {
     SET_NONE: (state, data) => {
       state.none = data;
     },
-    SET_DETAIL: (state, data) => {
-      state.detail = data.response.body.item;
-      console.log("SET_DETAIL", data.response.body.item);
+    SET_DETAIL1: (state, data) => {
+      state.detail1 = [];
+      state.detail1 = data.response.body.item;
+      console.log("SET_DETAIL1, detail1:", state.detail1);
+    },
+    SET_DETAIL2: (state, data) => {
+      state.detail2 = [];
+      state.detail2 = data.response.body.item;
+      console.log("SET_DETAIL2 , :detail2:", state.detail2);
     },
   },
 
@@ -206,7 +214,7 @@ const houseStore = {
       );
     },
     getDetail: ({ commit }, houseinfo) => {
-      console.log("houseinfo : ", houseinfo);
+      console.log("getDetail--------------------------");
 
       getKapt(
         houseinfo,
@@ -215,13 +223,22 @@ const houseStore = {
           const params = {
             kaptCode: data.data,
           };
-          houseDetail(
+          houseDetail1(
             params,
             ({ data }) => {
-              commit("SET_DETAIL", data);
+              commit("SET_DETAIL1", data);
             },
             (error) => {
-              console.log("houseDetail 에러", error);
+              console.log("houseDetail1 에러", error);
+            }
+          );
+          houseDetail2(
+            params,
+            ({ data }) => {
+              commit("SET_DETAIL2", data);
+            },
+            (error) => {
+              console.log("houseDetail2 에러", error);
             }
           );
         },

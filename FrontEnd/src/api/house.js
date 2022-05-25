@@ -1,7 +1,8 @@
-import { apiInstance, detailInstance } from "./index.js";
+import { apiInstance, detailInstance1, detailInstance2 } from "./index.js";
 
 const api = apiInstance();
-const detail = detailInstance();
+const detail1 = detailInstance1();
+const detail2 = detailInstance2();
 
 function sidoList(success, fail) {
   api.get(`/address/sido`).then(success).catch(fail);
@@ -36,8 +37,11 @@ function getKapt(params, success, fail) {
   api.get(`/deal/kapt`, { params: params }).then(success).catch(fail);
 }
 
-function houseDetail(params, success, fail) {
-  detail.get(``, { params: params }).then(success).catch(fail);
+function houseDetail1(params, success, fail) {
+  detail1.get(``, { params: params }).then(success).catch(fail);
+}
+function houseDetail2(params, success, fail) {
+  detail2.get(``, { params: params }).then(success).catch(fail);
 }
 
 export {
@@ -49,5 +53,6 @@ export {
   houseAddress,
   houseName,
   getKapt,
-  houseDetail,
+  houseDetail1,
+  houseDetail2,
 };

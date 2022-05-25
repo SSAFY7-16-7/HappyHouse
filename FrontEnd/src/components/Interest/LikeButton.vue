@@ -40,7 +40,7 @@ export default {
   border-radius: 5px;
   justify-content: center;
   align-items: center;
-  padding: 3px;
-  margin: 2px;
+  padding: 17px;
+  margin-right: 21px;
 }
 </style>

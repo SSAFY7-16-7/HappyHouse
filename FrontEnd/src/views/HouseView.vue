@@ -66,7 +66,7 @@ export default {
 .search-div {
   position: absolute;
   width: 418px;
-  height: 100vh;
+  height: 94vh;
   z-index: 2;
   top: 54px;
   left: 0;
@@ -76,20 +76,22 @@ export default {
 .list-div {
   position: relative;
   width: 418px;
-  height: 100vh;
+  height: 76vh;
   top: 142px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .detail-div {
   position: absolute;
   width: 401px;
-  height: 100vh;
+  height: 94vh;
   z-index: 2;
   top: 54px;
   left: 417px;
   background-color: #fcfbf6e0;
   overflow-y: scroll;
+  /* overflow-x: hidden; */
 }
 
 .none {
