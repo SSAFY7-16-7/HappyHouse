@@ -5,10 +5,7 @@
         <b-card-body>
           <div class="sell_user_upload_info">
             <div>
-              <img
-                src="https://picsum.photos/250/250/?image=54"
-                alt="Image 1"
-              />
+              <img :src="img_url" alt="Image 1" />
             </div>
             <div>
               <div class="title-area">
@@ -90,7 +87,7 @@
 const http = apiInstance();
 import { apiInstance } from "@/api/index.js";
 import LikeButton from "@/components/Interest/LikeButton.vue";
-
+import { ramdomImg } from "@/api/image.js";
 export default {
   name: "SellItemDetail",
   components: {
@@ -101,9 +98,11 @@ export default {
       item: {},
       likeStatus: false,
       category: "sell",
+      img_url: "",
     };
   },
   created() {
+    this.img_url = ramdomImg();
     const sellCode = this.$route.query.no;
     http
       .get(`/sell/${sellCode}`)

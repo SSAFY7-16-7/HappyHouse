@@ -17,7 +17,8 @@
       </div>
     </div>
     <div class="detail-img-div">
-      <img :src="require('@/assets/img/apt.png')" />
+      <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
+      <deal-chart></deal-chart>
     </div>
     <div
       v-for="(deal, index) in deals"
@@ -39,28 +40,34 @@
 
 <script>
 import LikeButton from "@/components/Interest/LikeButton.vue";
+import DealChart from "@/components/Chart/DealChart.vue";
 import { BUS } from "@/store/modules/EventBus";
 import { mapActions, mapState } from "vuex";
 import { apiInstance } from "@/api/index.js";
 const http = apiInstance();
 const houseStore = "houseStore";
-
+import { ramdomImg } from "@/api/image.js";
 export default {
   name: "HouseDetail",
   data() {
     return {
       overColumn: null,
       likeStatus: true,
+      img_url: "",
     };
   },
   components: {
     LikeButton,
+    DealChart,
   },
   computed: {
     ...mapState(houseStore, ["house", "deals", "none"]),
     // house() {
     //   return this.$store.state.house;
     // },
+  },
+  created() {
+    this.img_url = ramdomImg();
   },
   methods: {
     ...mapActions(houseStore, ["setNoneFalse"]),
@@ -183,6 +190,7 @@ export default {
 .detail-img-div img {
   padding: 11px 0px 40px 0;
   width: 328px;
+  height: 300px;
 }
 
 .detail-info-div {
