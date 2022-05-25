@@ -41,6 +41,12 @@
                       size="lg"
                       >로그인
                     </b-button>
+                    <div @click="kakaoLoginBtn">
+                      <img
+                        src="@/assets/img/pyj/kakao_login_medium_narrow.png"
+                        alt=""
+                      />
+                    </div>
                   </div>
                 </form>
               </div>
@@ -66,7 +72,8 @@
                 class="bg-cover oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                 :style="{
                   backgroundImage:
-                    'url(' + require('@/assets/img/apt/apt2.jpeg') + ')',
+                    //'url(' + require('@/assets/img/apt/apt2.jpeg') + ')',
+                    'url(https://ifh.cc/g/WslfFc.jpg)',
                 }"
               ></div>
             </div>
@@ -106,7 +113,6 @@ export default {
     VsudSwitch,
     VsudButton,
   },
-
   computed: {
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
@@ -120,11 +126,47 @@ export default {
         this.$router.push({ name: "home" });
       }
     },
+    kakaoLoginBtn: function () {
+      window.Kakao.init("ff39ee8d511b533648d3baac6dd7efff"); // Kakao Developers에서 요약 정보 -> JavaScript 키
+
+      if (window.Kakao.Auth.getAccessToken()) {
+        window.Kakao.API.request({
+          url: "/v1/user/unlink",
+          success: function (response) {
+            console.log(response);
+          },
+          fail: function (error) {
+            console.log(error);
+          },
+        });
+        window.Kakao.Auth.setAccessToken(undefined);
+      }
+
+      window.Kakao.Auth.login({
+        success: function () {
+          window.Kakao.API.request({
+            url: "/v2/user/me",
+            data: {
+              property_keys: ["kakao_account.email"],
+            },
+            success: async function (response) {
+              console.log(response);
+            },
+            fail: function (error) {
+              console.log(error);
+            },
+          });
+        },
+        fail: function (error) {
+          console.log(error);
+        },
+      });
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .sigin-card {
   border: 1px solid #9a9a9a4f !important;
   padding: 30px;
@@ -137,4 +179,46 @@ export default {
   display: flex;
   align-items: center;
 }
+.text-gradient.text-success {
+  background-image: linear-gradient(310deg, #d5ee53, #2196f3);
+}
+.btn-success {
+  color: #000;
+  background-color: #2598f3;
+  border-color: #2196f3;
+}
+
+/* 카카오로그인 */
+/* .test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+div {
+  width: 200px;
+  height: 40px;
+  background-color: #fdd101;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+div {
+  width: 200px;
+  height: 40px;
+  background-color: #fdd101;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+} */
 </style>

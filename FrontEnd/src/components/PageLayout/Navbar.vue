@@ -11,7 +11,8 @@
         v-bind="$attrs"
         :class="isBlur ? 'text-dark' : 'text-white'"
       >
-        Happy House
+        <!-- Happy House -->
+        <img src="https://ifh.cc/g/8vjkpZ.png" alt="" style="width: 80px" />
       </router-link>
       <button
         class="navbar-toggler shadow-none ms-2"

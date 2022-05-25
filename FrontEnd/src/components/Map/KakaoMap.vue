@@ -469,6 +469,8 @@ export default {
             // }
           });
         }
+
+        new kakao.maps.Marker({});
       });
     },
     // displayInfoWindow() {

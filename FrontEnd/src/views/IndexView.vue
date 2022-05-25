@@ -2,7 +2,7 @@
   <div class="main-bg">
     <section class="logo-section">
       <div class="HappyHouse">
-        <div class="text">Happy House</div>
+        <img src="@/assets/img/pyj/편집 배너.png" style="width: 1300px" />
       </div>
     </section>
     <!-- <section class="main-section0"></section> -->

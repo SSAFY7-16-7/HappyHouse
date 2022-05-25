@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 0 391px">
+  <div style="padding: 0px 555px">
     <hr />
     <div class="qna-div">
       <h4 class="qna-type">Question</h4>
