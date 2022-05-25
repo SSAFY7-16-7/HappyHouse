@@ -11,7 +11,7 @@
                 <house-list class="house-list" />
               </div>
             </div>
-            <div class="detail-div type1" :class="{ none: none }">
+            <div v-if="!none" class="detail-div type1">
               <house-detail class="house-detail" />
             </div>
           </div>

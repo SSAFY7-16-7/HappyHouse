@@ -21,7 +21,10 @@
       설명 : {{ house.content }}<br />
     </div>
     <div class="detail-img-div">
-      <img :src="require('@/assets/img/apt.png')" />
+      <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
+    </div>
+    <div class="detail-img-div">
+      <img class="sell-thumbnail" :src="img_url2" alt="Image 1" />
     </div>
   </div>
 </template>
@@ -31,6 +34,7 @@ import { mapActions, mapState } from "vuex";
 import LikeButton from "@/components/Interest/LikeButton.vue";
 import { BUS } from "@/store/modules/EventBus";
 import { apiInstance } from "@/api/index.js";
+import { ramdomImg } from "@/api/image.js";
 const Store = "interestStore";
 const http = apiInstance();
 export default {
@@ -39,6 +43,8 @@ export default {
     return {
       overColumn: null,
       likeStatus: true,
+      img_url: "",
+      img_url2: "",
     };
   },
   components: {
@@ -49,6 +55,10 @@ export default {
     // house() {
     //   return this.$store.state.house;
     // },
+  },
+  created() {
+    this.img_url = ramdomImg();
+    this.img_url2 = ramdomImg();
   },
   methods: {
     ...mapActions(Store, ["setNoneFalse"]),
@@ -130,6 +140,7 @@ export default {
 .detail-img-div img {
   padding: 11px 0px 40px 0;
   width: 328px;
+  height: 300px;
 }
 
 .detail-info-div {

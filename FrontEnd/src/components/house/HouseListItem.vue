@@ -21,7 +21,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { BUS } from "@/store/modules/EventBus";
-import { LineElement } from "chart.js";
 
 const houseStore = "houseStore";
 
@@ -47,9 +46,14 @@ export default {
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse", "getDetail"]),
     selectHouse() {
       console.log("선택:", this.house);
+      BUS.$emit("change-hposition", {
+        lat: this.house.lat,
+        lng: this.house.lng,
+      });
 
+      // house deals가 바뀔 때 마다 새로운 detail창 불러오기
+      this.setNoneFalse(true);
       this.detailHouse(this.house);
-      this.setNoneFalse(false);
 
       //디테일 정보
       this.houseinfo.roadName = this.house.roadName;
@@ -63,11 +67,6 @@ export default {
       this.houseinfo.roadNameBubun = roadNameBubun;
       console.log("houseinfo", this.houseinfo);
       this.getDetail(this.houseinfo);
-
-      BUS.$emit("change-hposition", {
-        lat: this.house.lat,
-        lng: this.house.lng,
-      });
     },
     colorChange(flag) {
       this.isColor = flag;

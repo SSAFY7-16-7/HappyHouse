@@ -18,7 +18,19 @@ const houseStore = {
     dongs: {},
     houses: [],
     house: null,
-    deals: null,
+    deals: [
+      {
+        no: 115602104000060,
+        dealAmount: "193,000",
+        dealYear: 2021,
+        dealMonth: 4,
+        dealDay: 25,
+        area: "93.06",
+        floor: "2",
+        cancelDealType: "",
+        aptCode: "11560000000025",
+      },
+    ],
     none: true,
     markerPositions: [],
     detail: null,
@@ -147,6 +159,7 @@ const houseStore = {
         ({ data }) => {
           // 나중에 house.일련번호를 이용하여 API 호출
           commit("SET_DETAIL_DEAL", data);
+          commit("SET_NONE", false);
         },
         (error) => {
           console.log("detailHouse 에러", error);
