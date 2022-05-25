@@ -51,6 +51,7 @@ export default {
 <style>
 .sell-card {
   background-color: #fff;
+  border: 1px solid rgba(115, 115, 138, 0.249) !important;
   border-radius: 20px;
   width: 300px;
   height: 450px;

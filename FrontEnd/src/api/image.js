@@ -579,18 +579,7 @@ const img = {
       original: "https://pbs.twimg.com/media/DhV9ODHVQAUNNBU.jpg",
       is_product: false,
     },
-    {
-      position: 51,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkMrJegGlDXLflJVH_VXzioZO9vjFL4QWuoQ&usqp=CAU",
-      source: "realty.chosun.com",
-      title:
-        '599% 진짜 닭장이네"…용적률에 따른 아파트 풍경 차이 - 땅집고 > 뉴스',
-      link: "https://realty.chosun.com/site/data/html_dir/2022/04/10/2022041000203.html",
-      original:
-        "https://image.chosun.com/sitedata/image/202204/10/2022041000203_2.jpg",
-      is_product: false,
-    },
+
     {
       position: 52,
       thumbnail:
@@ -903,18 +892,7 @@ const img = {
         "http://segyelocalnews.com/news/data/20181112/p1065577581323572_783_thum.jpg",
       is_product: false,
     },
-    {
-      position: 81,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuSoADHIqWiO-zbGiobyDKldSNDBr6JwXiIQ&usqp=CAU",
-      source: "realty.chosun.com",
-      title:
-        '599% 진짜 닭장이네"…용적률에 따른 아파트 풍경 차이 - 땅집고 > 뉴스',
-      link: "https://realty.chosun.com/site/data/html_dir/2022/04/10/2022041000203.html",
-      original:
-        "https://image.chosun.com/sitedata/image/202204/10/2022041000203_1.jpg",
-      is_product: false,
-    },
+
     {
       position: 82,
       thumbnail:
@@ -1027,18 +1005,7 @@ const img = {
         "https://cdn-asia.heykorean.com/community/uploads/images/2022/04/1649992403.jpg",
       is_product: false,
     },
-    {
-      position: 92,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwVK8PFJCgbnnVcsBQEAOtK35DCwKtjXX5vA&usqp=CAU",
-      source: "realty.chosun.com",
-      title:
-        '599% 진짜 닭장이네"…용적률에 따른 아파트 풍경 차이 - 땅집고 > 뉴스',
-      link: "https://realty.chosun.com/site/data/html_dir/2022/04/10/2022041000203.html",
-      original:
-        "https://image.chosun.com/sitedata/image/202204/10/2022041000203_0.jpg",
-      is_product: false,
-    },
+
     {
       position: 93,
       thumbnail:
@@ -1280,15 +1247,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV6TBLpV2RMyXE2UFwz0VY4hlx3LSSEUbwnKcquMGbWy0f2tM&s",
     },
-    {
-      position: 116,
-      original: "https://cdn.mground.kr/mground/2021/09/01-9.jpg",
-      source: "mground.kr",
-      title: "프리미엄만 2억' 유독 한국인들이 가장 좋아하는 아파트 층수 ...",
-      link: "https://mground.kr/33808/",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkXbXyQawQECieUDkGUHFVX-gxy6HGfTJBLXrdqUt0tLgB9_r&s",
-    },
+
     {
       position: 117,
       original:
@@ -1328,16 +1287,6 @@ const img = {
       link: "https://www.ytn.co.kr/_ln/0103_202108031440017421",
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2EGooj_-fk56H9W43tbjp00Exe0XjISOmgTZZHQ3WLsQUcHT&s",
-    },
-    {
-      position: 121,
-      original:
-        "https://travelview.co.kr/wp-content/uploads/2021/01/imgcache/20-1-591x731_lqip.jpg",
-      source: "travelview.co.kr",
-      title: "한국 처음 온 외국인들이 '아파트'보고 놀란 이유 - 트래블뷰",
-      link: "https://travelview.co.kr/?p=22794",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYezP6dBwIRKgr8x-AMcD9Gv10lshiYgJr_ujBuueTInkyDO0&s",
     },
     {
       position: 122,
@@ -1636,15 +1585,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbZ_em5x3hg_rpnY9I9M7nCnqQq_2hOmHWL7c9fxYxn4zpKmS3&s",
     },
-    {
-      position: 152,
-      original: "https://cdn.ynenews.kr/news/photo/202107/26470_16855_1730.jpg",
-      source: "www.ynenews.kr",
-      title: "부동산 동향]대구 아파트 양극화 심화…아파트 가격 격차 10억원 ...",
-      link: "https://www.ynenews.kr/news/articleView.html?idxno=26470",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFvT6-7cQdjRUM45sPEWdtzU2B_WXoaGb3Wz5wvkVtM-OJ_xw&s",
-    },
+
     {
       position: 153,
       original:
@@ -1665,26 +1606,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD9V1RNtHsSBsJB_hib6UfMwSIwuJdCacUkoBUv-X5RUOWhKiX&s",
     },
-    {
-      position: 155,
-      original:
-        "https://file.kbland.kr/image/kbstar/land/img/home/liivcon/date/20220523/6276b1edf77bcb77.jpeg",
-      source: "kbland.kr",
-      title: "KB부동산 - 아파트 시세, 실거래가, 분양, 빌라시세, AI예측시세 ...",
-      link: "https://kbland.kr/",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV0oqFMy1ffqBIuEc6wF8fqfo-TkHewR1V3HNrKcngZNQQQKs&s",
-    },
-    {
-      position: 156,
-      original:
-        "https://img.khan.co.kr/news/2022/04/15/l_2022041501001862700164441.jpg",
-      source: "m.khan.co.kr",
-      title: '대구 아파트 "살 사람이 없다"···미분양·하락 거래 속출',
-      link: "https://m.khan.co.kr/article/202204151024001",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVZyRo9wi06t0_F5CXZh9lm4CgZogl7vol63GUJn0g61zMk6E&s",
-    },
+
     {
       position: 157,
       original:
@@ -1911,16 +1833,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMuOBX2xb-p6mmnRsNTAFCbW_GnPwJYqtAvN3dSmlhefH-fkYf&s",
     },
-    {
-      position: 180,
-      original:
-        "https://blog.kakaocdn.net/dn/bz0llz/btqV0FfB3G3/C7ehbBadZK8vnvL9atDWZK/img.jpg",
-      source: "www.tokyodomin.com",
-      title: "일본의 아파트와 맨션의 차이에 대해",
-      link: "https://www.tokyodomin.com/1088",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnB5xSAi_XyGT0Y8aS8QEG8-ntOWHvF9cWLEGTDg4vQPH0Px0&s",
-    },
+
     {
       position: 181,
       original:
@@ -2069,16 +1982,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXBlnKQt_Cns_33aX79Mq54jgU8HTKT_OXi_Azh_dE1yzeCCE&s",
     },
-    {
-      position: 196,
-      original: "https://i.ytimg.com/vi/kWjOtbrKtoo/maxresdefault.jpg",
-      source: "www.youtube.com",
-      title:
-        '"21년째 공사중"…보면 혈압 빡 오르는 기막힌 인천 아파트 | 땅집고GO',
-      link: "https://www.youtube.com/watch?v=kWjOtbrKtoo",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnLPAZbPCbAR_ZTtcZojZcVOdVCJ0lphY2A34VrcKdBE3Sc0LY&s",
-    },
+
     {
       position: 197,
       original:
@@ -2089,16 +1993,7 @@ const img = {
       thumbnail:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0vh37c1Gl87vvSw1pt3qAH5AOHhKIIcnLcPfA9dxFnFPuyWY&s",
     },
-    {
-      position: 198,
-      original:
-        "https://cdn.cctoday.co.kr/news/photo/202108/2147300_579772_87.jpg",
-      source: "www.cctoday.co.kr",
-      title: "둔산동 크로바 아파트 대전 서구 첫 실거래가 20억원 돌파 ...",
-      link: "https://www.cctoday.co.kr/news/articleView.html?idxno=2147300",
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFPn46bDVQfFrIWvqKZud8zlFnlx3z19l0tHNnYuqz7-MV4CDR&s",
-    },
+
     {
       position: 199,
       original:

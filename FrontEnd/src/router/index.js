@@ -17,6 +17,7 @@ import SellRegist from "@/components/Sell/SellRegist.vue";
 import SellList from "@/components/Sell/SellList.vue";
 import SellItemDetail from "@/components/Sell/SellItemDetail.vue";
 import InterestView from "@/views/InterestView.vue";
+import IndexView from "@/views/IndexView.vue";
 import DealChart from "@/components/Chart/DealChart.vue";
 import HouseInfo from "@/components/house/detail/HouseInfo.vue";
 import HouseDeal from "@/components/house/detail/HouseDeal.vue";
@@ -37,7 +38,7 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: HomeView,
+    component: IndexView,
   },
   {
     path: "/house",

@@ -8,9 +8,7 @@
         :dark-mode="true"
       />
     </div>
-    <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
-    >
+    <main class="main-content position-relative border-radius-lg">
       <transition name="slide-fade" mode="out-in">
         <router-view />
       </transition>
@@ -44,6 +42,20 @@ export default {
 </script>
 
 <style>
+body {
+  /* background-image: linear-gradient(
+    to right top,
+    #4f91f5,
+    #5c97f8,
+    #689dfa,
+    #73a3fd,
+    #7da9ff
+  );
+  background-size: cover;
+  background-position: center;
+  background: url("@/assets/img/bg/mesh-gradient.png") no-repeat center;
+  background-size: cover; */
+}
 .fade-enter {
   opacity: 0;
 }

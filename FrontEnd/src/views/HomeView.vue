@@ -206,11 +206,4 @@ export default {
 };
 </script>
 
-<style>
-.main-bg {
-  height: 100vh;
-  position: absolute;
-  width: 100vw;
-  top: 0;
-}
-</style>
+<style></style>
