@@ -164,6 +164,7 @@ export default {
   z-index: 3;
   top: 91px;
   left: 27px;
+  height: 100vh;
 }
 
 .kakao-map {

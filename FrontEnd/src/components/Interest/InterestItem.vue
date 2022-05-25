@@ -1,16 +1,18 @@
 <template>
-  <div class="inter-item" @click="itemClick">
+  <div
+    class="inter-item m-2"
+    @click="itemClick"
+    style="display: flex; align-items: center"
+  >
+    <div class="apt-icon-div">
+      <b-icon-house-door-fill class="apt-icon" />
+    </div>
     <div class="item-info">
       <div v-if="category === 'sell'" class="info-text">
         {{ item.address }} / {{ item.price }}
       </div>
       <div v-else class="info-text">{{ item.apartmentName }}</div>
     </div>
-    <like-button
-      :isLiked="likeStatus"
-      size="1"
-      @btnClick="setLike"
-    ></like-button>
   </div>
 </template>
 
@@ -90,15 +92,15 @@ export default {
 </script>
 
 <style>
+ul {
+  padding: 0;
+}
 .inter-item {
   display: flex;
-  justify-content: space-between;
-  width: 320px;
-  margin-left: 16px;
-  padding-bottom: 18px;
-}
-.info-text {
-  font-weight: bold;
-  font-size: 19px;
+
+  margin: 10px 0;
+  font-weight: 700;
+  border-bottom: 1px solid #ffffffc4;
+  width: 380px;
 }
 </style>
