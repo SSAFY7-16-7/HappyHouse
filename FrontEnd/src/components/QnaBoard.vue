@@ -11,7 +11,12 @@
           </select>
         </div>
         <div class="col-5">
-          <input class="form-control" type="text" v-model="word" />
+          <input
+            class="form-control"
+            type="text"
+            v-model="word"
+            placeholder="검색어를 입력해주세요"
+          />
         </div>
         <div class="col-2">
           <button

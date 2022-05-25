@@ -25,7 +25,7 @@
         <input
           type="text"
           class="form-control name-search"
-          default="아파트명 검색"
+          placeholder="아파트명"
           style="width: 256px"
           v-model="name"
         />
@@ -49,9 +49,9 @@ export default {
   name: "HouseSearchBar",
   data() {
     return {
-      sido: "시/도",
-      gugun: "구/군",
-      dong: "동",
+      sido: "all",
+      gugun: "all",
+      dong: "all",
       name: "",
     };
   },
