@@ -118,7 +118,7 @@ export default {
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
   methods: {
-    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+    ...mapActions(memberStore, ["userConfirm", "getUserInfo", "testUser"]),
     async confirm() {
       await this.userConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
@@ -134,14 +134,16 @@ export default {
         window.Kakao.API.request({
           url: "/v1/user/unlink",
           success: function (response) {
-            console.log(response);
+            console.log("accessToken", response);
           },
           fail: function (error) {
-            console.log(error);
+            console.log("accessToken error", error);
           },
         });
         window.Kakao.Auth.setAccessToken(undefined);
       }
+
+      const base = this;
 
       window.Kakao.Auth.login({
         success: function () {
@@ -151,7 +153,10 @@ export default {
               property_keys: ["kakao_account.email"],
             },
             success: async function (response) {
-              console.log(response);
+              console.log("login", response.kakao_account.email);
+              // this.user = response.kakao_account.email;
+              base.testUser();
+              base.$router.push({ name: "home" });
             },
             fail: function (error) {
               console.log(error);
