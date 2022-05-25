@@ -431,9 +431,21 @@ export default {
       kakao.maps.load(() => {
         console.log("displayMarker-----------------", markerPositions);
 
-        const positions = markerPositions.map(
-          (position) => new kakao.maps.LatLng(...position)
-        );
+        // const positions = markerPositions.map(
+        //   (position) => new kakao.maps.LatLng(...position)
+        // );
+
+        let positions = [];
+        markerPositions.forEach((ele) => {
+          if (
+            this.marker &&
+            parseFloat(ele[0]) === this.marker.getLat() &&
+            parseFloat(ele[1]) === this.marker.getLng()
+          ) {
+          } else {
+            positions.push(new kakao.maps.LatLng(...ele));
+          }
+        });
 
         console.log("markers : ", this.markers);
         console.log("positions : ", positions);
@@ -451,23 +463,29 @@ export default {
           imgOptions
         );
 
+        // console.log("빨간 마커 ", this.marker);
+        // if (this.marker) {
+        //   console.log("빨간마커 있음");
+
+        //   console.log(this.marker.lat, this.marker.lng);
+        //   console.log(this.marker.getLat());
+        //   console.log(this.marker.getLng());
+        //   console.log("positions", markerPositions);
+        // }
         if (positions.length > 0) {
+          console.log("마커들 생성");
+
           this.markers = positions.map((position) => {
-            // if (
-            //   this.marker == null ||
-            //   (this.marker != null &&
-            //     !(
-            //       position.lat == this.marker.lat &&
-            //       position.lng == this.marker.lng
-            //     ))
-            // ) {
             new kakao.maps.Marker({
               map: this.map,
               position: position,
               image: markerImage,
             });
-            // }
           });
+
+          // if (this.markers.getPosition().equals(this.marker)) {
+          //   console.log("빨간마커와 같음");
+          // }
         }
       });
     },
