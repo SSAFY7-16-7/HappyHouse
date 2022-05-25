@@ -32,7 +32,7 @@
                   <vsud-switch id="rememberMe" name="rememberMe" checked>
                     Remember me
                   </vsud-switch>
-                  <div class="text-center">
+                  <div class="text-center login-btn-div">
                     <b-button
                       block
                       @click="confirm"
@@ -43,8 +43,9 @@
                     </b-button>
                     <div @click="kakaoLoginBtn">
                       <img
-                        src="@/assets/img/pyj/kakao_login_medium_narrow.png"
+                        src="@/assets/img/pyj/kakao_login_medium.png"
                         alt=""
+                        style="margin-bottom: 8px"
                       />
                     </div>
                   </div>
@@ -188,37 +189,10 @@ export default {
   border-color: #2196f3;
 }
 
-/* 카카오로그인 */
-/* .test {
+.login-btn-div {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-around;
 }
-div {
-  width: 200px;
-  height: 40px;
-  background-color: #fdd101;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.test {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-div {
-  width: 200px;
-  height: 40px;
-  background-color: #fdd101;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-} */
 </style>

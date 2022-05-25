@@ -1,24 +1,33 @@
 <template>
-  <div>
-    <h2 class="text-center">질문 등록</h2>
+  <div style="padding: 30px 400px">
+    <h2 class="text-center" style="padding-bottom: 30px">질문 등록</h2>
     <div>
-      <table class="table">
+      <table class="table" style="table-layout: fixed">
         <thead></thead>
         <tbody>
           <tr>
-            <td>제목</td>
+            <td style="font-weight: bold; width: 10%">제목</td>
             <td>
-              <input type="text" id="title" ref="title" v-model="qna.title" />
+              <textarea
+                class="form-control"
+                type="text"
+                id="title"
+                ref="title"
+                v-model="qna.title"
+                style="height: 150px"
+              />
             </td>
           </tr>
           <tr>
-            <td>내용</td>
+            <td style="font-weight: bold">내용</td>
             <td>
-              <input
+              <textarea
+                class="form-control"
                 type="text"
                 id="content"
                 ref="content"
                 v-model="qna.content"
+                style="height: 150px"
               />
             </td>
           </tr>
@@ -40,7 +49,7 @@
                 >
                   등록
                 </button>
-                <button class="btn btn-primary" @click="moveHandler">
+                <button class="btn btn-secondary" @click="moveHandler">
                   목록
                 </button>
               </div>

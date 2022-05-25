@@ -19,8 +19,8 @@
       </div>
     </div>
 
-    <div style="width: 300px">
-      <table class="table">
+    <div style="width: 360px">
+      <table class="table" style="width: 90%">
         <thead></thead>
         <tbody>
           <tr>
@@ -68,7 +68,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.table td,
+.table th {
+  white-space: break-spaces;
+}
 .th {
   font-weight: bold;
 }

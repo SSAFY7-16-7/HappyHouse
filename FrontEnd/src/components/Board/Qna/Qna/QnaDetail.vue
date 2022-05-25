@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 0px 555px">
+  <div style="padding: 0px 437px">
     <hr />
     <div class="qna-div">
       <h4 class="qna-type">Question</h4>
@@ -13,7 +13,7 @@
         <div class="q-bottom">
           <div class="q-user">
             <div style="margin-right: 15px">
-              <img src="" class="profile" />
+              <img src="@/assets/img/pyj/profile.png" class="profile" />
             </div>
             <div>{{ qna.userid }}</div>
           </div>
@@ -153,7 +153,7 @@ export default {
     },
     removeHandler() {
       http
-        .delete(`/qna/delete/${this.idx}`)
+        .delete(`/qna/qdelete/${this.idx}`)
         .then((response) => {
           if (response.data == "success") {
             alert("삭제 성공");
