@@ -21,7 +21,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { BUS } from "@/store/modules/EventBus";
-import { LineElement } from "chart.js";
 
 const houseStore = "houseStore";
 
