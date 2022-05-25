@@ -188,7 +188,7 @@ export default {
         http
           .post("/user/remove", { ...this.user })
           .then(() => console.log("회원 삭제 완료 "));
-        // this.users.splice(idx, 1);
+        this.users.splice(idx, 1);
       }
     },
   },

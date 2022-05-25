@@ -240,7 +240,7 @@ export default {
         price: "", //월세면 보증금/월세(만원)
         admin_price: "", //관리비(만원)
         admin_desc: "", // 관리비포함내역 설명(ex.전기세, 관리비 포함)
-        room_type: "방 개수", // 원룸/투룸/쓰리룸+
+        room_type: "", // 원룸/투룸/쓰리룸+
         floor_now: "", // 현재 층
         floor_tot: "", // 총 층수
         size: "", //
@@ -253,8 +253,13 @@ export default {
         lng: "",
       },
       address2: "", //상세 주소 (사용자가 입력할 상세 주소 )
-      types: [{ text: "거래방식", value: null }, "매매", "전세", "월세"],
-      room_types: [{ text: "방 개수", value: null }, "원룸", "투룸", "쓰리룸+"],
+      types: [{ text: "거래방식", value: "null" }, "매매", "전세", "월세"],
+      room_types: [
+        { text: "방 개수", value: "방 개수" },
+        "원룸",
+        "투룸",
+        "쓰리룸+",
+      ],
       show: true,
       keywords: [
         { text: "안전", value: "안전" },

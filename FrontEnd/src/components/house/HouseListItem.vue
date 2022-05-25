@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .apt {
   width: 50px;
 }
