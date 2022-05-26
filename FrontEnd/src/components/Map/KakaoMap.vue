@@ -41,6 +41,9 @@ import { mapActions, mapState } from "vuex";
 import { BUS } from "@/store/modules/EventBus";
 
 const houseStore = "houseStore";
+function closeOverlay() {
+  console.log("closeEvent!!");
+}
 
 export default {
   name: "KakaoMap",
@@ -69,7 +72,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["house", "markerPositions", "houseDetail"]),
+    ...mapState(houseStore, [
+      "house",
+      "houses",
+      "markerPositions",
+      "houseDetail",
+    ]),
     // house() {
     //   return this.$store.state.house;
     // },
@@ -95,7 +103,12 @@ export default {
     );
   },
   methods: {
-    ...mapActions(houseStore, ["addressHouse"]),
+    ...mapActions(houseStore, [
+      "addressHouse",
+      "detailHouse",
+      "setNoneFalse",
+      "getDetail",
+    ]),
     changePosition(position) {
       // 지도 중심 이동
       const adjLng = parseFloat(position.lng) - 0.005; // 센터 경도 조정
@@ -435,19 +448,21 @@ export default {
         // );
 
         let positions = [];
+
+        // 해당 좌표가 현재 활성화 된 마커(빨간 마커)라면 기본 마커 생성하지 않음 )
         markerPositions.forEach((ele) => {
-          if (
-            this.marker &&
-            parseFloat(ele[0]) === this.marker.getLat() &&
-            parseFloat(ele[1]) === this.marker.getLng()
-          ) {
-          } else {
-            positions.push(new kakao.maps.LatLng(...ele));
-          }
+          // if (
+          //   this.marker &&
+          //   parseFloat(ele[0]) === this.marker.getLat() &&
+          //   parseFloat(ele[1]) === this.marker.getLng()
+          // ) {
+          // } else {
+          positions.push(new kakao.maps.LatLng(...ele));
+          // }
         });
 
-        console.log("markers : ", this.markers);
-        console.log("positions : ", positions);
+        // console.log("markers : ", this.markers);
+        // console.log("positions : ", positions);
 
         const imageSrc = "https://ifh.cc/g/bNWdz3.png";
         // var imageSrc =
@@ -462,33 +477,84 @@ export default {
           imgOptions
         );
 
-        // console.log("빨간 마커 ", this.marker);
-        // if (this.marker) {
-        //   console.log("빨간마커 있음");
-
-        //   console.log(this.marker.lat, this.marker.lng);
-        //   console.log(this.marker.getLat());
-        //   console.log(this.marker.getLng());
-        //   console.log("positions", markerPositions);
-        // }
         if (positions.length > 0) {
-          console.log("마커들 생성");
+          // console.log("마커들 생성");
 
-          this.markers = positions.map((position) => {
-            new kakao.maps.Marker({
+          // this.markers = positions.map((position) => {
+          //   // 좌표로 하나씩 마커 생성
+          //   new kakao.maps.Marker({
+          //     map: this.map,
+          //     position: position,
+          //     image: markerImage,
+          //     clickable: true,
+          //   });
+
+          // });
+          positions.forEach((pos, index) => {
+            const new_marker = new kakao.maps.Marker({
               map: this.map,
-              position: position,
+              position: pos,
               image: markerImage,
+              clickable: true,
             });
-          });
 
-          // if (this.markers.getPosition().equals(this.marker)) {
-          //   console.log("빨간마커와 같음");
-          // }
+            kakao.maps.event.addListener(new_marker, "click", () => {
+              console.log("클릭 마커 !!", this.houses[index].apartmentName);
+
+              //오버레이 설정 및 등록
+              const overlay = new kakao.maps.CustomOverlay({
+                // content: overlay_content,
+                map: this.map,
+                position: new_marker.getPosition(),
+              });
+
+              const overlay_ele = document.createElement("div");
+              overlay_ele.innerHTML = this.makeOverlay(index);
+              overlay_ele.onclick = function () {
+                overlay.setMap(null);
+              };
+              overlay.setContent(overlay_ele);
+
+              overlay.setMap(this.map);
+
+              //오버레이 설정
+
+              // 클릭한 집 detail보여주기
+              this.detailHouse(this.houses[index]);
+              this.setNoneFalse(true);
+            });
+
+            //forEach end
+          });
         }
 
         new kakao.maps.Marker({});
       });
+    },
+    closeOverlay() {
+      console.log("closeEvent!!");
+    },
+    makeOverlay(index) {
+      const clicked = this.houses[index];
+      var content = `<div class="wrap">
+                <div class="info">
+                    <div class="title">
+                        ${clicked.apartmentName}
+                        <div class="close"  title="닫기"></div>
+                    </div>
+                    <div class="body">
+                        <div class="img">
+                            <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/v_collection_png/512x512/shadow/office_building.png" width="73" height="70">
+                       </div>
+                        <div class="desc">
+                            <div class="ellipsis">${clicked.roadName}</div>
+                            <div class="jibun ellipsis"> ${clicked.dong}(지번) ${clicked.jibun}</div>
+                            <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+      return content;
     },
     // displayInfoWindow() {
     //   if (this.infowindow && this.infowindow.getMap()) {
@@ -668,5 +734,97 @@ button {
   color: #999;
   font-size: 11px;
   margin-top: 0;
+}
+.wrap {
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  width: 288px;
+  height: 132px;
+  margin-left: -144px;
+  text-align: left;
+  overflow: hidden;
+  font-size: 12px;
+  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
+  line-height: 1.5;
+}
+.wrap * {
+  padding: 0;
+  margin: 0;
+}
+.wrap .info {
+  width: 286px;
+  height: 120px;
+  border-radius: 5px;
+  border-bottom: 2px solid #ccc;
+  border-right: 1px solid #ccc;
+  overflow: hidden;
+  background: #fff;
+}
+.wrap .info:nth-child(1) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+.info .title {
+  padding: 5px 0 0 10px;
+  height: 30px;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: bold;
+}
+.info .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #888;
+  width: 17px;
+  height: 17px;
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png");
+}
+.info .close:hover {
+  cursor: pointer;
+}
+.info .body {
+  position: relative;
+  overflow: hidden;
+}
+.info .desc {
+  position: relative;
+  margin: 13px 0 0 90px;
+  height: 75px;
+}
+.desc .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.desc .jibun {
+  font-size: 11px;
+  color: #888;
+  margin-top: -2px;
+}
+.info .img {
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 73px;
+  height: 71px;
+  border: 1px solid #ddd;
+  color: #888;
+  overflow: hidden;
+}
+.info:after {
+  content: "";
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: 0;
+  width: 22px;
+  height: 12px;
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
+}
+.info .link {
+  color: #5085bb;
 }
 </style>
