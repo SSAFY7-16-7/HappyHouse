@@ -23,7 +23,28 @@ import HouseInfo from "@/components/house/detail/HouseInfo.vue";
 import HouseDeal from "@/components/house/detail/HouseDeal.vue";
 import HouseInfra from "@/components/house/detail/HouseInfra.vue";
 import InformationView from "@/views/InformationView.vue";
+
+import store from "@/store/index.js";
 Vue.use(VueRouter);
+const onlyAuthUser = async (to, from, next) => {
+  console.log(store);
+  const checkUserInfo = store.getters["memberStore/checkUserInfo"];
+  console.log(checkUserInfo);
+  const getUserInfo = store._actions["memberStore/getUserInfo"];
+  console.log(getUserInfo);
+  let token = sessionStorage.getItem("access-token");
+  if (checkUserInfo == null && token) {
+    await getUserInfo(token);
+  }
+  if (checkUserInfo === null) {
+    alert("로그인이 필요한 페이지입니다..");
+    next({ name: "signin" });
+    // router.push({ name: "signIn" });
+  } else {
+    // console.log("로그인 했다.");
+    next();
+  }
+};
 
 const routes = [
   {
@@ -87,6 +108,7 @@ const routes = [
       {
         path: "sellregist",
         name: "sellregist",
+        beforeEnter: onlyAuthUser,
         component: SellRegist,
       },
     ],
@@ -100,6 +122,7 @@ const routes = [
   {
     path: "/interest",
     name: "interest",
+    beforeEnter: onlyAuthUser,
     component: InterestView,
   },
   {
@@ -115,11 +138,13 @@ const routes = [
   {
     path: "/mypage",
     name: "mypage",
+    beforeEnter: onlyAuthUser,
     component: MypageView,
   },
   {
     path: "/admin",
     name: "admin",
+    beforeEnter: onlyAuthUser,
     component: AdminView,
   },
   {
@@ -146,6 +171,7 @@ const routes = [
       },
       {
         path: "qnaregist",
+        beforeEnter: onlyAuthUser,
         component: QnaRegist,
         name: "QnaRegist",
       },

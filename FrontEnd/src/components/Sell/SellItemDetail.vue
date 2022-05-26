@@ -62,6 +62,7 @@
             <div>
               <div class="sell-detail-title">
                 <like-button
+                  v-if="isLogin"
                   :isLiked="likeStatus"
                   @btnClick="setLike"
                   class="sellLikebtn"
@@ -82,6 +83,7 @@ const http = apiInstance();
 import { apiInstance } from "@/api/index.js";
 import LikeButton from "@/components/Interest/LikeButton.vue";
 import { ramdomImg } from "@/api/image.js";
+import { mapState } from "vuex";
 export default {
   name: "SellItemDetail",
   components: {
@@ -94,6 +96,9 @@ export default {
       category: "sell",
       img_url: "",
     };
+  },
+  computed: {
+    ...mapState("memberStore", ["userInfo", "isLogin"]),
   },
   created() {
     this.img_url = ramdomImg();

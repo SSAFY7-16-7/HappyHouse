@@ -6,6 +6,7 @@
     <div class="detail-name">
       <div class="title-area">
         <like-button
+          v-if="isLogin"
           @btnClick="setLike"
           :isLiked="likeStatus"
           class="sellLikebtn"
@@ -71,6 +72,7 @@ export default {
   },
   computed: {
     ...mapState(Store, ["house", "deals", "none"]),
+    ...mapState("memberStore", ["userInfo", "isLogin"]),
     // house() {
     //   return this.$store.state.house;
     // },

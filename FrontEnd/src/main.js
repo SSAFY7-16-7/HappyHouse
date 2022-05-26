@@ -12,11 +12,11 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import SoftUIDashboard from "./soft-ui-dashboard";
 
 Vue.config.productionTip = false;
-Vue.use(router);
+// Vue.use(router);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(SoftUIDashboard);
-Vue.use(store);
+// Vue.use(store);
 
 new Vue({
   router,

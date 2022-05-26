@@ -5,7 +5,11 @@
     </div>
     <div class="detail-name">
       <div class="title-area">
-        <like-button @btnClick="setLike" :isLiked="likeStatus"></like-button>
+        <like-button
+          v-if="isLogin"
+          @btnClick="setLike"
+          :isLiked="likeStatus"
+        ></like-button>
         <h3>{{ house.apartmentName }}</h3>
       </div>
       <div class="title-sub-info">
@@ -84,6 +88,7 @@ export default {
   },
   computed: {
     ...mapState(houseStore, ["house", "none"]),
+    ...mapState("memberStore", ["userInfo", "isLogin"]),
     // house() {
     //   return this.$store.state.house;
     // },

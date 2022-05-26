@@ -154,7 +154,7 @@ export default {
   },
   methods: {
     moveNews() {
-      this.$router.push("/information");
+      this.$router.push({ name: "information" });
     },
     moveSell() {
       this.$router.push("/sell");
