@@ -34,12 +34,13 @@ export default {
   background-color: #fff;
   border: 1px solid #73738a3f !important;
   border-radius: 0 !important;
-  width: 300px;
+  width: 290px;
   height: 450px;
   /* margin: 15px; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 13px;
 }
 
 .news-card:hover {
@@ -69,7 +70,7 @@ export default {
   position: absolute;
   top: 25px;
   left: 30px;
-  background-color: #00fbff !important;
+  background-color: #beefff !important;
 }
 .room-type {
   position: absolute;

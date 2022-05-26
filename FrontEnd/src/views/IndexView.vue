@@ -6,50 +6,84 @@
       </div>
     </section>
     <!-- <section class="main-section0"></section> -->
-    <section class="main-section1">
-      <div class="glassBox">
-        <div class="glassBox__imgBox">
-          <img
-            src="https://www.pngmart.com/files/1/House-Transparent-PNG.png"
-            alt=""
-          />
-          <h3 class="glassBox__title">매물 보기</h3>
-        </div>
+    <section class="main-section1" style="flex-direction: column">
+      <div class="main-info-title">
+        <span class="impress">편한</span> 집을
+        <span class="impress">편하게</span> 찾는법?
       </div>
-      <div class="glassBox">
-        <div class="glassBox__imgBox">
-          <img
-            src="https://www.pngfind.com/pngs/m/1-16561_business-growth-chart-png-transparent-images-graph-clipart.png"
-            alt=""
-          />
-          <h3 class="glassBox__title">거래 내역 정보</h3>
+      <div class="main-info-icon" style="display: flex">
+        <div class="main-info-div">
+          <div class="main-info-img-div">
+            <img
+              src="@/assets/img/icons/house_marker.png"
+              alt=""
+              class="main-info-img"
+            />
+          </div>
+          <div class="main-info-text">
+            <div><h3>지도 검색</h3></div>
+            <div>
+              <span class="main-info-desc"
+                >움직이면 보이는<br />
+                실시간 마커로 빠르게!</span
+              >
+            </div>
+          </div>
         </div>
-        <div class="glassBox__content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae sunt
-          veniam adipisci fugit qui quaerat!
+        <div class="main-info-div">
+          <div>
+            <img
+              src="@/assets/img/icons/like.png"
+              alt=""
+              class="main-info-img"
+            />
+          </div>
+          <div class="main-info-text">
+            <div><h3>관심 설정</h3></div>
+            <div>
+              <span class="main-info-desc"
+                >내 취향의 맞는 집은<br />
+                바로 저장 꾹~</span
+              >
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="glassBox">
-        <div class="glassBox__imgBox">
-          <img src="https://i.ibb.co/s5phbkg/shoe-golden.png" alt="" />
-          <h3 class="glassBox__title">주변 상권</h3>
-        </div>
-        <div class="glassBox__content">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae sunt
-          veniam adipisci fugit qui quaerat!
+
+        <div class="main-info-div">
+          <div>
+            <img
+              src="@/assets/img/icons/add.png"
+              alt=""
+              class="main-info-img"
+              style="width: 91px; padding-bottom: 10px"
+            />
+          </div>
+          <div class="main-info-text">
+            <div><h3>매물 등록</h3></div>
+            <div>
+              <span class="main-info-desc"
+                >유저들간의 집거래도<br />
+                도와줄게요</span
+              >
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <section class="main-section">
-      <div class="drop-shadow">
-        <div class="glass"></div>
-        <span>GLASS</span>
-      </div>
-    </section>
-    <section class="main-section">
-      <div class="drop-shadow">
-        <div class="glass"></div>
-        <span>GLASS</span>
+    <section>
+      <div class="main-list">
+        <div class="news">
+          <div class="list-title">
+            <div><h3>뉴스</h3></div>
+            <div><button>더보기</button></div>
+          </div>
+        </div>
+        <div class="qna">
+          <div class="list-title">
+            <div><h3>뉴스</h3></div>
+            <div><button>더보기</button></div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -61,6 +95,7 @@ import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
+
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
 
@@ -76,8 +111,42 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+.main-info-div {
+  margin: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6f6f6a8;
+  width: 237px;
+  padding: 41px 37px;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgb(0 0 0 / 10%);
+}
+.main-info-img {
+  width: 104px;
+}
+.main-info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  text-align: center;
+}
+.main-info-title {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+span.impress {
+  font-weight: bold;
+  color: #2196f3;
+}
+
+.main-info-img:hover {
+  transform: translateY(-20px);
+  transition: 400ms;
+}
 
 $blur: 20px;
 $shadow-opacity: 0.3;
@@ -113,6 +182,7 @@ $image: "@/assets/img/apt/apt1.png";
 
 .main-bg {
   position: relative;
+  background: linear-gradient(80deg, #ebfbd5, #ebe5eb, #dbeef9);
 
   // display: flex;
   // justify-content: center;
@@ -276,13 +346,7 @@ $image: "@/assets/img/apt/apt1.png";
     opacity: 0;
   }
   &:hover &__imgBox {
-    transform: translateY(-50px);
-  }
-  &:hover &__imgBox img {
-    transform: translate(-20px, -40px) rotate(-15deg) scale(1.4);
-  }
-  &:hover &__title {
-    //margin-top: 40px;
+    transform: translateY(-20px);
   }
 }
 </style>

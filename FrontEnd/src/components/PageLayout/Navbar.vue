@@ -41,16 +41,7 @@
               실거래
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/interest">
-              <i
-                class="fa-solid fa-house opacity-6 me-1"
-                aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"
-              ></i>
-              관심 리스트
-            </router-link>
-          </li>
+
           <li class="nav-item">
             <router-link class="nav-link me-2" to="/sell">
               <i
@@ -62,13 +53,23 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link me-2" to="/interest">
+              <i
+                class="fa-solid fa-heart opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              찜한 집
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link me-2" to="/infomation">
               <i
                 class="fa-solid fa-newspaper opacity-6 me-1"
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              NEWS
+              뉴스
             </router-link>
           </li>
           <!-- <li class="nav-item">
@@ -89,7 +90,7 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              HELP DESK
+              QNA
             </router-link>
           </li>
           <!-- 
@@ -111,7 +112,7 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              My Page
+              마이페이지
             </router-link>
           </li>
           <li class="nav-item" v-else>
@@ -121,7 +122,7 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              Sign In
+              회원가입
             </router-link>
           </li>
           <li class="nav-item" v-if="isAdmin">
@@ -131,7 +132,7 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              Admin
+              관리자
             </router-link>
           </li>
         </ul>

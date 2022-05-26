@@ -51,6 +51,7 @@ export default {
   align-items: center;
   justify-content: center;
   justify-content: space-around;
+  padding: 50px 0 30px;
 }
 
 .infos-add-btn {
