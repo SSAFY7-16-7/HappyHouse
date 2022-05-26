@@ -15,6 +15,8 @@
 <script>
 import { getNews } from "@/api/news.js";
 import SellListItem from "./SellListItem.vue";
+import { apiInstance } from "@/api/index.js";
+const http = apiInstance();
 
 export default {
   components: { SellListItem },
@@ -24,7 +26,14 @@ export default {
     };
   },
   created() {
-    this.news = getNews();
+    // this.news = getNews();
+    http
+      .get(
+        `https://serpapi.com/search.json?engine=naver&query=%08%EB%B6%80%EB%8F%99%EC%82%B0&where=news&api_key=${process.env.VUE_APP_SEARCH_API_KEY}`
+      )
+      .then(({ data }) => {
+        this.news = data.news_results;
+      });
   },
 };
 </script>
