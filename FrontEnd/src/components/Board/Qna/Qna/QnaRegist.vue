@@ -100,22 +100,22 @@ export default {
       http
         .get(url)
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           this.qna = response.data;
         })
         .catch((response) => {
-          console.log(response.data);
+          //console.log(response.data);
         });
     },
     qRegistHandler() {
-      console.log("userid:", this.userInfo.id);
+      //console.log("userid:", this.userInfo.id);
       this.qna.userid = this.userInfo.id;
       //데이타 검증
       let err = false;
 
       let msg = "";
 
-      console.log(this.qna);
+      //console.log(this.qna);
       !this.qna.title &&
         ((msg = "제목을 입력해 주세요"),
         (err = true),

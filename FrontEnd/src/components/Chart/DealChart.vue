@@ -54,10 +54,10 @@ export default {
     },
   },
   mounted() {
-    console.log("chart");
+    //console.log("chart");
     this.context = document.getElementById("chart");
 
-    console.log(this.context);
+    //console.log(this.context);
     this.makeChart();
   },
 };

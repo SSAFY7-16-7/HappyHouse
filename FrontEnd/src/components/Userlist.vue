@@ -171,14 +171,13 @@ export default {
   methods: {
     modify() {
       http.put("/user/update", this.user).then((res) => {
-        console.log(res);
         this.$set(this.users, this.useridx, this.user);
         alert("회원 정보 수정 완료!");
         this.$bvModal.hide("modal-center");
       });
     },
     setUser(user, idx) {
-      console.log("클릭");
+      //console.log("클릭");
       this.useridx = idx;
       this.user = user;
     },
@@ -186,10 +185,8 @@ export default {
       const isDelete = confirm("회원을 삭제 하시겠습니까?");
       if (isDelete) {
         this.setUser(user, idx);
-        console.log({ ...this.user });
-        http
-          .post("/user/remove", { ...this.user })
-          .then(() => console.log("회원 삭제 완료 "));
+        //console.log({ ...this.user });
+        http.post("/user/remove", { ...this.user }).then(() => {});
         this.users.splice(idx, 1);
       }
     },

@@ -76,7 +76,7 @@ const houseStore = {
         state.houses.push(house);
         state.markerPositions.push([house.lat, house.lng]);
       });
-      console.log("SET_HOUSE_LIST", state.markerPositions);
+      //console.log("SET_HOUSE_LIST", state.markerPositions);
       // state.houses = houses;
     },
     SET_DETAIL_HOUSE: (state, house) => {
@@ -91,12 +91,12 @@ const houseStore = {
     SET_DETAIL1: (state, data) => {
       state.detail1 = [];
       state.detail1 = data.response.body.item;
-      console.log("SET_DETAIL1, detail1:", state.detail1);
+      //console.log("SET_DETAIL1, detail1:", state.detail1);
     },
     SET_DETAIL2: (state, data) => {
       state.detail2 = [];
       state.detail2 = data.response.body.item;
-      console.log("SET_DETAIL2 , :detail2:", state.detail2);
+      //console.log("SET_DETAIL2 , :detail2:", state.detail2);
     },
   },
 
@@ -104,11 +104,11 @@ const houseStore = {
     getSido: ({ commit }) => {
       sidoList(
         ({ data }) => {
-          // console.log(data);
+          // //console.log(data);
           commit("SET_SIDO_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -119,11 +119,11 @@ const houseStore = {
       gugunList(
         params,
         ({ data }) => {
-          // console.log(commit, response);
+          // //console.log(commit, response);
           commit("SET_GUGUN_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -134,11 +134,11 @@ const houseStore = {
       dongList(
         params,
         ({ data }) => {
-          // console.log(commit, response);
+          // //console.log(commit, response);
           commit("SET_DONG_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -152,7 +152,7 @@ const houseStore = {
           commit("SET_HOUSE_LIST", data);
         },
         (error) => {
-          console.log("getHouseList 에러", error);
+          //console.log("getHouseList 에러", error);
         }
       );
     },
@@ -170,7 +170,7 @@ const houseStore = {
           commit("SET_NONE", false);
         },
         (error) => {
-          console.log("detailHouse 에러", error);
+          //console.log("detailHouse 에러", error);
         }
       );
     },
@@ -178,7 +178,7 @@ const houseStore = {
       commit("SET_NONE", data);
     },
     addressHouse: ({ commit }, data) => {
-      console.log("addressHouse", data);
+      //console.log("addressHouse", data);
       const params = {
         pa: data.pa,
         qa: data.qa,
@@ -193,7 +193,7 @@ const houseStore = {
           commit("SET_HOUSE_LIST", data);
         },
         (error) => {
-          console.log("addressHouse 에러", error);
+          //console.log("addressHouse 에러", error);
         }
       );
     },
@@ -209,17 +209,17 @@ const houseStore = {
           commit("SET_HOUSE_LIST", data);
         },
         (error) => {
-          console.log("houseAddress 에러", error);
+          //console.log("houseAddress 에러", error);
         }
       );
     },
     getDetail: ({ commit }, houseinfo) => {
-      console.log("getDetail--------------------------");
+      //console.log("getDetail--------------------------");
 
       getKapt(
         houseinfo,
         (data) => {
-          console.log("getKapt : ", data.data);
+          //console.log("getKapt : ", data.data);
           const params = {
             kaptCode: data.data,
           };
@@ -229,7 +229,7 @@ const houseStore = {
               commit("SET_DETAIL1", data);
             },
             (error) => {
-              console.log("houseDetail1 에러", error);
+              //console.log("houseDetail1 에러", error);
             }
           );
           houseDetail2(
@@ -238,12 +238,12 @@ const houseStore = {
               commit("SET_DETAIL2", data);
             },
             (error) => {
-              console.log("houseDetail2 에러", error);
+              //console.log("houseDetail2 에러", error);
             }
           );
         },
         (error) => {
-          console.log("getKapt 에러", error);
+          //console.log("getKapt 에러", error);
         }
       );
     },

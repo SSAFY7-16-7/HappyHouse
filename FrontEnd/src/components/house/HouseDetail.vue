@@ -143,29 +143,29 @@ export default {
 
       param.code = this.house.aptCode;
 
-      console.log(param);
+      //console.log(param);
       if (this.likeStatus) {
         http
           .post(`/interest/delete/apt`, param)
           .then(() => {
-            console.log("좋아요 취소 성공 ");
+            //console.log("좋아요 취소 성공 ");
             this.likeStatus = !this.likeStatus;
 
             BUS.$emit("deleteLike", param.code);
           })
           .catch(() => {
-            console.log("좋아요 취소 실패 ");
+            //console.log("좋아요 취소 실패 ");
           });
       } else {
-        console.log("좋아요 설정");
+        //console.log("좋아요 설정");
         http
           .post(`/interest/apt`, param)
           .then(() => {
-            console.log("좋아요 성공 ");
+            //console.log("좋아요 성공 ");
             BUS.$emit("addLike", this.house);
           })
           .catch(() => {
-            console.log("좋아요 실패 ");
+            //console.log("좋아요 실패 ");
           });
         this.likeStatus = !this.likeStatus;
       }

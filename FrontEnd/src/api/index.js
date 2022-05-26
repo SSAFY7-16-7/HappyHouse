@@ -30,7 +30,7 @@ function houseInstance() {
 // const KAKAO_SERVICE_KEY = process.env.VUE_APP_KAKAO_API_KEY;
 const KAKAO_SERVICE_KEY = "f32bd5255a9a29d56ae3facd7549dc3a";
 function kakaoInstance() {
-  console.log("kakaoInstane", KAKAO_SERVICE_KEY);
+  //console.log("kakaoInstane", KAKAO_SERVICE_KEY);
   const instance = axios.create({
     baseURL: "https://dapi.kakao.com/v2/local",
     headers: {

@@ -49,13 +49,13 @@ const memberStore = {
         (response) => {
           if (response.data.message === "success") {
             let token = response.data["access-token"];
-            console.log(token);
+            //console.log(token);
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             sessionStorage.setItem("access-token", token);
             if (user.id === "admin") commit("SET_IS_ADMIN", true);
           } else {
-            console.log(response);
+            //console.log(response);
             commit("SET_IS_LOGIN", false);
             commit("SET_IS_LOGIN_ERROR", true);
           }
@@ -77,20 +77,20 @@ const memberStore = {
           if (response.data.message === "success") {
             commit("SET_USER_INFO", response.data.userInfo);
           } else {
-            console.log("유저 정보 없음!!");
+            //console.log("유저 정보 없음!!");
           }
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
     async updateUserInfo({ commit }, user) {
-      console.log("updateuser");
+      //console.log("updateuser");
       await update(
         user,
         (res) => {
-          console.log(res.data);
+          //console.log(res.data);
           commit("SET_USER_INFO", res.data);
           alert("회원 정보 수정 완료 !");
         },

@@ -1158,13 +1158,13 @@ $.fn.selected = function(select) {
 // expose debug var
 $.fn.ajaxSubmit.debug = false;
 
-// helper fn for console logging
+// helper fn for //console logging
 function log() {
     if (!$.fn.ajaxSubmit.debug)
         return;
     var msg = '[jquery.form] ' + Array.prototype.join.call(arguments,'');
-    if (window.console && window.console.log) {
-        window.console.log(msg);
+    if (window.//console && window.//console.log) {
+        window.//console.log(msg);
     }
     else if (window.opera && window.opera.postError) {
         window.opera.postError(msg);

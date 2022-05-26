@@ -28,11 +28,11 @@ import FindpasswordView from "@/views/FindpasswordView.vue";
 import store from "@/store/index.js";
 Vue.use(VueRouter);
 const onlyAuthUser = async (to, from, next) => {
-  console.log(store);
+  //console.log(store);
   const checkUserInfo = store.getters["memberStore/checkUserInfo"];
-  console.log(checkUserInfo);
+  //console.log(checkUserInfo);
   const getUserInfo = store._actions["memberStore/getUserInfo"];
-  console.log(getUserInfo);
+  //console.log(getUserInfo);
   let token = sessionStorage.getItem("access-token");
   if (checkUserInfo == null && token) {
     await getUserInfo(token);
@@ -42,7 +42,7 @@ const onlyAuthUser = async (to, from, next) => {
     next({ name: "signin" });
     // router.push({ name: "signIn" });
   } else {
-    // console.log("로그인 했다.");
+    // //console.log("로그인 했다.");
     next();
   }
 };

@@ -55,7 +55,7 @@ const interestStore = {
       state.houses = [];
     },
     SET_HOUSE_LIST: (state, houses) => {
-      console.log("SET_HOUSE_LIST", houses);
+      //console.log("SET_HOUSE_LIST", houses);
       houses.forEach((house) => {
         state.houses.push(house);
       });
@@ -65,7 +65,7 @@ const interestStore = {
       state.house = house;
     },
     SET_DETAIL_DEAL: (state, deals) => {
-      console.log("SET_DETAIL_DEAL", deals);
+      //console.log("SET_DETAIL_DEAL", deals);
       state.deals = deals;
     },
     SET_NONE: (state, data) => {
@@ -77,11 +77,11 @@ const interestStore = {
     getSido: ({ commit }) => {
       sidoList(
         ({ data }) => {
-          // console.log(data);
+          // //console.log(data);
           commit("SET_SIDO_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -92,11 +92,11 @@ const interestStore = {
       gugunList(
         params,
         ({ data }) => {
-          // console.log(commit, response);
+          // //console.log(commit, response);
           commit("SET_GUGUN_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -107,11 +107,11 @@ const interestStore = {
       dongList(
         params,
         ({ data }) => {
-          // console.log(commit, response);
+          // //console.log(commit, response);
           commit("SET_DONG_LIST", data);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     },
@@ -125,7 +125,7 @@ const interestStore = {
           commit("SET_HOUSE_LIST", data);
         },
         (error) => {
-          console.log("getHouseList 에러", error);
+          //console.log("getHouseList 에러", error);
         }
       );
     },
@@ -139,20 +139,20 @@ const interestStore = {
         params,
         ({ data }) => {
           // 나중에 house.일련번호를 이용하여 API 호출
-          console.log("detailHouse", data);
+          //console.log("detailHouse", data);
           commit("SET_DETAIL_DEAL", data);
         },
         (error) => {
-          console.log("detailHouse 에러", error);
+          //console.log("detailHouse 에러", error);
         }
       );
     },
     setNoneFalse: ({ commit }, data) => {
-      console.log("setNoneFalse");
+      //console.log("setNoneFalse");
       commit("SET_NONE", data);
     },
     setCategory: ({ commit }, data) => {
-      console.log("set category");
+      //console.log("set category");
       commit("SET_CATEGORY", data);
     },
   },

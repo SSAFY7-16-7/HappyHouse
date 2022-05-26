@@ -45,7 +45,7 @@ export default {
   methods: {
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse", "getDetail"]),
     selectHouse() {
-      console.log("선택:", this.house);
+      //console.log("선택:", this.house);
       BUS.$emit("change-hposition", {
         lat: this.house.lat,
         lng: this.house.lng,
@@ -65,7 +65,7 @@ export default {
       let roadNameBubun = this.house.roadNameBubun;
       roadNameBubun = Number(roadNameBubun).toString();
       this.houseinfo.roadNameBubun = roadNameBubun;
-      console.log("houseinfo", this.houseinfo);
+      //console.log("houseinfo", this.houseinfo);
       this.getDetail(this.houseinfo);
     },
     colorChange(flag) {

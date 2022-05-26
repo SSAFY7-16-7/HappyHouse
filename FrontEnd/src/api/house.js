@@ -33,7 +33,7 @@ function houseName(params, success, fail) {
 }
 
 function getKapt(params, success, fail) {
-  console.log("houseinfo", params);
+  //console.log("houseinfo", params);
   api.get(`/deal/kapt`, { params: params }).then(success).catch(fail);
 }
 

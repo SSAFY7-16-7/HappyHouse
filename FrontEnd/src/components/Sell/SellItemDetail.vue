@@ -109,7 +109,7 @@ export default {
         this.item = data;
       })
       .catch(() => {
-        console.log("거래 매물 정보 가져오기오류 ");
+        //console.log("거래 매물 정보 가져오기오류 ");
       });
 
     http
@@ -130,29 +130,29 @@ export default {
       } else {
         param.code = this.item.aptCode;
       }
-      console.log(param);
+      //console.log(param);
       if (this.likeStatus) {
         http
           .post(`/interest/delete/${this.category}`, param)
           .then(() => {
-            console.log("좋아요 취소 성공 ");
+            //console.log("좋아요 취소 성공 ");
             this.likeStatus = !this.likeStatus;
 
             this.$emit("deleteLkie", this.index);
           })
           .catch(() => {
-            console.log("좋아요 취소 실패 ");
+            //console.log("좋아요 취소 실패 ");
           });
       } else {
-        console.log("좋아요 설정");
+        //console.log("좋아요 설정");
         http
           .post(`/interest/${this.category}`, param)
           .then(() => {
-            console.log("좋아요 성공 ");
+            //console.log("좋아요 성공 ");
             // this.likeStatus = !this.likeStatus;
           })
           .catch(() => {
-            console.log("좋아요 실패 ");
+            //console.log("좋아요 실패 ");
           });
         this.likeStatus = !this.likeStatus;
       }

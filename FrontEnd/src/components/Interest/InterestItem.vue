@@ -49,21 +49,21 @@ export default {
         http
           .post(`/interest/delete/${this.category}`, param)
           .then(() => {
-            console.log("좋아요 취소 성공 ");
+            //console.log("좋아요 취소 성공 ");
             // this.likeStatus = !this.likeStatus;
 
             this.$emit("deleteLkie", this.index);
           })
           .catch(() => {
-            console.log("좋아요 취소 실패 ");
+            //console.log("좋아요 취소 실패 ");
           });
       } else {
-        console.log("좋아요 설정");
+        //console.log("좋아요 설정");
         this.likeStatus = !this.likeStatus;
       }
     },
     itemClick() {
-      // console.log("아이템 클릭", this.index);
+      // //console.log("아이템 클릭", this.index);
 
       BUS.$emit("change-postion", {
         lat: this.item.lat,
@@ -76,13 +76,13 @@ export default {
       }
     },
     showSellDetail() {
-      // console.log(this.item);
+      // //console.log(this.item);
       this.$store.state.interestStore.house = this.item;
       this.$store.state.houseStore.none = false;
     },
     ...mapActions(houseStore, ["detailHouse", "setNoneFalse"]),
     showHouseDetail() {
-      console.log("아파트 디테일", this.item);
+      //console.log("아파트 디테일", this.item);
       this.setNoneFalse(true);
       this.detailHouse(this.item);
       // this.$store.state.houseStore.none = false;

@@ -239,7 +239,7 @@ export default {
           alert("환영합니다 ! ");
           this.moveLogin();
         },
-        (err) => console.log(err)
+        (err) => {}
       );
     },
     moveLogin() {

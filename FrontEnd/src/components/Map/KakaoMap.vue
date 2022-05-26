@@ -42,7 +42,7 @@ import { BUS } from "@/store/modules/EventBus";
 
 const houseStore = "houseStore";
 function closeOverlay() {
-  console.log("closeEvent!!");
+  //console.log("closeEvent!!");
 }
 
 export default {
@@ -97,7 +97,7 @@ export default {
     BUS.$on(
       "moveDong",
       function (dong) {
-        console.log("moveDong", this.place);
+        //console.log("moveDong", this.place);
         this.place.keywordSearch(dong, this.dongSearchCB);
       }.bind(this)
     );
@@ -148,18 +148,18 @@ export default {
         this.bounds.ha = bounds.ha;
         this.bounds.oa = bounds.oa;
 
-        console.log("3.getBounds----------------------", this.bounds);
+        //console.log("3.getBounds----------------------", this.bounds);
         this.addressHouse(this.bounds);
         this.displayMarker(this.markerPositions);
       });
     },
     mountMap() {
-      console.log("1.mountMap------------------------");
+      //console.log("1.mountMap------------------------");
       this.initMap();
       this.getBounds();
     },
     initMap() {
-      console.log("2.initMap--------------------------");
+      //console.log("2.initMap--------------------------");
       kakao.maps.load(() => {
         const container = document.getElementById("map");
         // const adjLng = -0.018 + parseFloat(this.position.lng);
@@ -259,7 +259,7 @@ export default {
     },
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
     placesSearchCB(data, status) {
-      console.log("placesSearchCB", data);
+      //console.log("placesSearchCB", data);
       if (status === kakao.maps.services.Status.OK) {
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
         this.displayPlaces(data);
@@ -376,7 +376,7 @@ export default {
 
     // 각 카테고리에 클릭 이벤트를 등록합니다
     addCategoryClickEvent() {
-      console.log("addCategoryClickEvent");
+      //console.log("addCategoryClickEvent");
       const category = document.getElementById("category");
       const children = category.children;
 
@@ -386,7 +386,7 @@ export default {
         children[i].onclick = () => {
           this.onClickCategory(el);
         };
-        console.log("이벤트 등록 완료");
+        //console.log("이벤트 등록 완료");
       }
     },
 
@@ -409,7 +409,7 @@ export default {
 
     // 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
     changeCategoryClass(el) {
-      console.log("el", el);
+      //console.log("el", el);
       var category = document.getElementById("category"),
         children = category.children,
         i;
@@ -441,7 +441,7 @@ export default {
     },
     displayMarker(markerPositions) {
       kakao.maps.load(() => {
-        console.log("displayMarker-----------------", markerPositions);
+        //console.log("displayMarker-----------------", markerPositions);
 
         // const positions = markerPositions.map(
         //   (position) => new kakao.maps.LatLng(...position)
@@ -461,8 +461,8 @@ export default {
           // }
         });
 
-        // console.log("markers : ", this.markers);
-        // console.log("positions : ", positions);
+        // //console.log("markers : ", this.markers);
+        // //console.log("positions : ", positions);
 
         const imageSrc = "https://ifh.cc/g/bNWdz3.png";
         // var imageSrc =
@@ -478,7 +478,7 @@ export default {
         );
 
         if (positions.length > 0) {
-          // console.log("마커들 생성");
+          // //console.log("마커들 생성");
 
           // this.markers = positions.map((position) => {
           //   // 좌표로 하나씩 마커 생성
@@ -499,7 +499,7 @@ export default {
             });
 
             kakao.maps.event.addListener(new_marker, "click", () => {
-              console.log("클릭 마커 !!", this.houses[index].apartmentName);
+              //console.log("클릭 마커 !!", this.houses[index].apartmentName);
 
               //오버레이 설정 및 등록
               const overlay = new kakao.maps.CustomOverlay({
@@ -532,7 +532,7 @@ export default {
       });
     },
     closeOverlay() {
-      console.log("closeEvent!!");
+      //console.log("closeEvent!!");
     },
     makeOverlay(index) {
       const clicked = this.houses[index];

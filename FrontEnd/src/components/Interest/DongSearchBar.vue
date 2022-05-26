@@ -69,7 +69,7 @@ export default {
       if (this.gugun) this.getDong(this.gugun);
     },
     houseList() {
-      console.log("houselist vue", this.dong);
+      //console.log("houselist vue", this.dong);
       this.CLEAR_HOUSE_LIST();
       if (this.dong) this.getHouseList(this.dong);
     },

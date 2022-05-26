@@ -141,10 +141,10 @@ export default {
         window.Kakao.API.request({
           url: "/v1/user/unlink",
           success: function (response) {
-            console.log("accessToken", response);
+            //console.log("accessToken", response);
           },
           fail: function (error) {
-            console.log("accessToken error", error);
+            //console.log("accessToken error", error);
           },
         });
         window.Kakao.Auth.setAccessToken(undefined);
@@ -160,18 +160,18 @@ export default {
               property_keys: ["kakao_account.email"],
             },
             success: async function (response) {
-              console.log("login", response.kakao_account.email);
+              //console.log("login", response.kakao_account.email);
               // this.user = response.kakao_account.email;
               base.testUser();
               base.$router.push({ name: "home" });
             },
             fail: function (error) {
-              console.log(error);
+              //console.log(error);
             },
           });
         },
         fail: function (error) {
-          console.log(error);
+          //console.log(error);
         },
       });
     },

@@ -184,7 +184,7 @@ function regist() {
     };
 
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(user);
+    //console.log(user);
     alert('사용자 등록 성공!');
     window.location.replace('login.html');
   }
@@ -203,8 +203,8 @@ function login() {
     user.password === password
   ) {
     alert('로그인 성공 !');
-    console.log('login');
-    console.log('id : ' + id + ' password : ' + password);
+    //console.log('login');
+    //console.log('id : ' + id + ' password : ' + password);
     window.location.replace('index logout.html');
   } else {
     alert('로그인 실패 !');
@@ -215,8 +215,8 @@ function remove() {
   alert('삭제 완료 !');
 }
 
-function logout_console() {
-  console.log('logout');
+function logout_//console() {
+  //console.log('logout');
 }
 
 

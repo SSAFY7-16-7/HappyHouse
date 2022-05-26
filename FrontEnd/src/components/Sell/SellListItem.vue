@@ -37,7 +37,7 @@ export default {
   created() {
     this.keywords = this.item.keyword.split(",");
 
-    // console.log(img_num);
+    // //console.log(img_num);
     this.img_url = ramdomImg();
   },
   methods: {

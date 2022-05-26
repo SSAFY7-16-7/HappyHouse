@@ -50,12 +50,12 @@ export default {
   },
   created() {
     BUS.$on("change-postion", (position) => {
-      console.log("아이템 클릭 - 변경할 좌표:", position);
+      //console.log("아이템 클릭 - 변경할 좌표:", position);
       this.position = position;
       this.changeItem(position);
     });
     BUS.$on("init-position", (position) => {
-      console.log("관심리스트 오픈 - 초기 좌표:", position);
+      //console.log("관심리스트 오픈 - 초기 좌표:", position);
       this.position = position;
     });
   },
@@ -71,7 +71,7 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const adjLng = -0.018 + parseFloat(this.position.lng);
-      console.log("조정 lng", adjLng);
+      //console.log("조정 lng", adjLng);
       const options = {
         center: new kakao.maps.LatLng(this.position.lat, adjLng),
         level: 5,

@@ -34,7 +34,7 @@ export default {
     BUS.$on(
       "deleteLike",
       function (code) {
-        console.log("delete", this.category, code);
+        //console.log("delete", this.category, code);
         if (this.category === "apt") {
           this.list.forEach((item, index) => {
             if (item.aptCode === code) {
@@ -55,8 +55,8 @@ export default {
     BUS.$on(
       "addLike",
       function (house) {
-        console.log("addlike");
-        console.log(house);
+        //console.log("addlike");
+        //console.log(house);
         this.list.push(house);
       }.bind(this)
     );

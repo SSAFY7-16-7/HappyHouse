@@ -296,20 +296,20 @@ export default {
           this.sendData(form);
         })
         .catch((error) => {
-          console.log("getPosition() 에러 ", error);
+          //console.log("getPosition() 에러 ", error);
         });
     },
     sendData(form) {
-      console.log("send:", form);
+      //console.log("send:", form);
 
       http
         .post("/sell", form)
         .then((res) => {
-          console.log("매물 등록 성공");
+          //console.log("매물 등록 성공");
           this.$router.push({ name: "sellList" });
         })
         .catch(() => {
-          console.log("매물 등록 실패 ");
+          //console.log("매물 등록 실패 ");
         });
     },
     onSubmit(event) {
@@ -362,10 +362,10 @@ export default {
       this.address2 = "1층 101호";
     },
     juso() {
-      console.log(this);
+      //console.log(this);
       new daum.Postcode({
         oncomplete: (data) => {
-          console.log(data);
+          //console.log(data);
           // 행정동코드 : bcode , 동이름 :bname
           this.form.address = data.address;
           this.form.dong = data.bname;

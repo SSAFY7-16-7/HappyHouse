@@ -33,10 +33,10 @@ export default {
       .get(`/sell?pageNo=1`)
       .then(({ data }) => {
         this.list = data;
-        console.log(this.list);
+        //console.log(this.list);
       })
       .catch(() => {
-        console.log("거래 매물 정보 가져오기오류 ");
+        //console.log("거래 매물 정보 가져오기오류 ");
       });
   },
   methods: {

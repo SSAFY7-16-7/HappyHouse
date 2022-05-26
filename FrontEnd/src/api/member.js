@@ -7,7 +7,7 @@ async function login(user, success, fail) {
 }
 
 async function findById(userid, success, fail) {
-  console.log("인증할 아이디:", userid);
+  //console.log("인증할 아이디:", userid);
 
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api.get(`/user/info/${userid}`).then(success).catch(fail);

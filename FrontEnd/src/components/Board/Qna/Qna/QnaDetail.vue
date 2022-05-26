@@ -121,10 +121,10 @@ export default {
         .get(url)
         .then((response) => {
           this.qna = response.data;
-          console.log("질문", this.qna);
+          //console.log("질문", this.qna);
         })
         .catch((response) => {
-          console.log(response.data);
+          //console.log(response.data);
         });
     },
     goList() {
