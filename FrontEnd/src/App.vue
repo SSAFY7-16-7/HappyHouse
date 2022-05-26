@@ -18,15 +18,11 @@
   </div>
 </template>
 <script>
-import Sidenav from "@/components/Sidenav";
-import Configurator from "@/components/Configurator.vue";
 import Navbar from "@/components/PageLayout/Navbar.vue";
 import AppFooter from "@/components/Footer.vue";
 export default {
   name: "App",
   components: {
-    Sidenav,
-    Configurator,
     Navbar,
     AppFooter,
   },
