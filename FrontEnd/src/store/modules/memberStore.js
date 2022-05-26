@@ -92,6 +92,7 @@ const memberStore = {
         (res) => {
           console.log(res.data);
           commit("SET_USER_INFO", res.data);
+          alert("회원 정보 수정 완료 !");
         },
         () => {}
       );

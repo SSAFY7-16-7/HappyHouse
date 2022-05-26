@@ -7,9 +7,12 @@
             <div class="mt-8 card sigin-card">
               <div class="text-start">
                 <h3 class="font-weight-bolder text-success text-gradient">
-                  Welcome back
+                  임시 비밀번호 발급
                 </h3>
-                <p class="mb-0">아이디와 패스워드를 입력하세요.</p>
+                <p class="mb-0">
+                  임시 비밀번호를 발급 받을 아이디와<br />
+                  회원 정보를 입력하세요.
+                </p>
               </div>
               <div class="card-body signin-body">
                 <form role="form" class="text-start">
@@ -21,33 +24,33 @@
                     placeholder="Id"
                     name="email"
                   ></b-form-input>
-                  <label>Password</label>
+                  <label>이름</label>
                   <b-form-input
-                    v-model="user.password"
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    name="password"
+                    v-model="user.name"
+                    id="name"
+                    type="text"
+                    placeholder="name"
+                    name="name"
                   ></b-form-input>
-                  <vsud-switch id="rememberMe" name="rememberMe" checked>
-                    Remember me
-                  </vsud-switch>
+                  <label>이메일</label>
+                  <b-form-input
+                    v-model="user.email"
+                    id="email"
+                    type="text"
+                    placeholder="email"
+                    name="email"
+                  ></b-form-input>
+
                   <div class="text-center login-btn-div">
                     <b-button
                       block
-                      @click="confirm"
+                      @click="getTempPassword"
                       class="my-4 mb-2 logbtn"
                       variant="success"
                       size="lg"
-                      >로그인
+                    >
+                      임시 비밀번호 발급 받기
                     </b-button>
-                    <div @click="kakaoLoginBtn">
-                      <img
-                        src="@/assets/img/pyj/kakao_login_medium.png"
-                        alt=""
-                        style="margin-bottom: 8px"
-                      />
-                    </div>
                   </div>
                 </form>
               </div>
@@ -55,18 +58,19 @@
                 class="px-1 pt-0 text-center card-footer signin-body px-lg-2"
               >
                 <p class="mx-auto mb-4 text-sm">
+                  <router-link
+                    :to="{ name: 'signin' }"
+                    class="text-success text-gradient font-weight-bold"
+                  >
+                    로그인 하러 가기
+                  </router-link>
+                </p>
+                <p class="mx-auto mb-4 text-sm">
                   계정이 없다면?
                   <router-link
                     :to="{ name: 'signup' }"
                     class="text-success text-gradient font-weight-bold"
                     >회원가입</router-link
-                  >
-                </p>
-                <p class="mx-auto mb-4 text-sm">
-                  <router-link
-                    :to="{ name: 'findpassword' }"
-                    class="text-secondary font-weight-bold"
-                    >비밀번호 찾기</router-link
                   >
                 </p>
               </div>
@@ -89,6 +93,24 @@
         </div>
       </div>
     </main>
+    <div>
+      <b-modal id="temp-pass" centered title="임시비밀번호 발급 ">
+        <div v-if="!isError">
+          <p class="my-4">
+            임시 비밀 번호는 :<span
+              class="temppass-area"
+              v-text="tempPass"
+            ></span>
+            입니다.
+          </p>
+          <p>로그인 후 비밀번호를 변경 해주세요.</p>
+        </div>
+        <div v-else>
+          <p class="my-4" style="color: red">Error</p>
+          <p>{{ this.ErrorMessage }}</p>
+        </div>
+      </b-modal>
+    </div>
   </div>
 </template>
 
@@ -101,17 +123,23 @@ import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 
 import { mapState, mapActions } from "vuex";
 import { login } from "@/api/member.js";
-
+import { apiInstance } from "@/api/index.js";
 const memberStore = "memberStore";
-
+const http = apiInstance();
 export default {
-  name: "SigninView",
+  name: "FindpasswordView",
   data() {
     return {
       user: {
+        age: "",
+        email: null,
         id: null,
-        password: null,
+        name: null,
+        password: "",
       },
+      tempPass: "",
+      isError: false,
+      ErorMessage: "",
     };
   },
   components: {
@@ -124,62 +152,37 @@ export default {
   computed: {
     ...mapState(memberStore, ["isLogin", "isLoginError"]),
   },
+  mounted() {
+    this.$root.$on("bv::modal::hide", (bvEvent, modalid) => {
+      console.log("Modal is about to be shown", bvEvent, modalid);
+      this.isError = false;
+      this.ErrorMessage = "";
+    });
+  },
   methods: {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo", "testUser"]),
-    async confirm() {
-      await this.userConfirm(this.user);
-      let token = sessionStorage.getItem("access-token");
-      if (this.isLogin) {
-        await this.getUserInfo(token);
-        this.$router.push({ name: "home" });
-      }
-    },
-    kakaoLoginBtn: function () {
-      window.Kakao.init("ff39ee8d511b533648d3baac6dd7efff"); // Kakao Developers에서 요약 정보 -> JavaScript 키
-
-      if (window.Kakao.Auth.getAccessToken()) {
-        window.Kakao.API.request({
-          url: "/v1/user/unlink",
-          success: function (response) {
-            console.log("accessToken", response);
-          },
-          fail: function (error) {
-            console.log("accessToken error", error);
-          },
+    getTempPassword() {
+      http
+        .post("/user/password", this.user)
+        .then(({ data }) => {
+          this.tempPass = data.tempPass;
+          this.$bvModal.show("temp-pass");
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          this.isError = true;
+          this.ErrorMessage = response.data;
+          this.$bvModal.show("temp-pass");
         });
-        window.Kakao.Auth.setAccessToken(undefined);
-      }
-
-      const base = this;
-
-      window.Kakao.Auth.login({
-        success: function () {
-          window.Kakao.API.request({
-            url: "/v2/user/me",
-            data: {
-              property_keys: ["kakao_account.email"],
-            },
-            success: async function (response) {
-              console.log("login", response.kakao_account.email);
-              // this.user = response.kakao_account.email;
-              base.testUser();
-              base.$router.push({ name: "home" });
-            },
-            fail: function (error) {
-              console.log(error);
-            },
-          });
-        },
-        fail: function (error) {
-          console.log(error);
-        },
-      });
     },
   },
 };
 </script>
 
 <style scoped>
+.temppass-area {
+  background-color: #d5ee53;
+}
 .sigin-card {
   border: 1px solid #9a9a9a4f !important;
   padding: 30px;

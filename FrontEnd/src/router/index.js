@@ -23,6 +23,7 @@ import HouseInfo from "@/components/house/detail/HouseInfo.vue";
 import HouseDeal from "@/components/house/detail/HouseDeal.vue";
 import HouseInfra from "@/components/house/detail/HouseInfra.vue";
 import InformationView from "@/views/InformationView.vue";
+import FindpasswordView from "@/views/FindpasswordView.vue";
 
 import store from "@/store/index.js";
 Vue.use(VueRouter);
@@ -122,7 +123,7 @@ const routes = [
   {
     path: "/interest",
     name: "interest",
-    beforeEnter: onlyAuthUser,
+    // beforeEnter: onlyAuthUser,
     component: InterestView,
   },
   {
@@ -134,6 +135,11 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: SignupView,
+  },
+  {
+    path: "/findpassword",
+    name: "findpassword",
+    component: FindpasswordView,
   },
   {
     path: "/mypage",
