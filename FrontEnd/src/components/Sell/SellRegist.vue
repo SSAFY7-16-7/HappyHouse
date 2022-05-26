@@ -295,8 +295,8 @@ export default {
           };
           this.sendData(form);
         })
-        .catch(() => {
-          console.log("getPosition() 에러 ");
+        .catch((error) => {
+          console.log("getPosition() 에러 ", error);
         });
     },
     sendData(form) {

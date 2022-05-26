@@ -72,12 +72,22 @@
     </section>
     <section class="section-list">
       <div class="main-list">
-        <div class="news list-div">
+        <div class="sell list-div">
           <div class="list-title">
-            <div><h3>뉴스</h3></div>
-            <div><button class="btn btn-secondary">더보기</button></div>
+            <div><h3>매물</h3></div>
+            <div>
+              <button class="btn btn-secondary" @click="moveNews">
+                더보기
+              </button>
+            </div>
+          </div>
+          <div class="info-list">
+            <div v-for="(item, index) in list" :key="index" v-if="index <= 1">
+              <sell-list-item :item="item"></sell-list-item>
+            </div>
           </div>
         </div>
+
         <div class="qna list-div">
           <div class="list-title">
             <div><h3>뉴스</h3></div>
@@ -89,7 +99,7 @@
           </div>
           <div class="info-list">
             <div v-for="(item, index) in news" :key="index" v-if="index <= 1">
-              <sell-list-item :item="item"></sell-list-item>
+              <news-list-item :item="item"></news-list-item>
             </div>
           </div>
         </div>
@@ -99,13 +109,16 @@
 </template>
 
 <script>
+import { apiInstance } from "@/api/index.js";
 import Navbar from "@/components/PageLayout/Navbar.vue";
 import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
 import { getNews } from "@/api/news.js";
-import SellListItem from "@/components/Information/SellListItem.vue";
+import NewsListItem from "@/components/Information/SellListItem.vue";
+import SellListItem from "@/components/Sell/SellListItem.vue";
+const http = apiInstance();
 
 export default {
   name: "HomeView",
@@ -116,11 +129,24 @@ export default {
     VsudSwitch,
     VsudButton,
     SellListItem,
+    NewsListItem,
   },
   data() {
     return {
       news: null,
+      list: [],
     };
+  },
+  mounted() {
+    http
+      .get(`/sell?pageNo=1`)
+      .then(({ data }) => {
+        this.list = data;
+        console.log(this.list);
+      })
+      .catch(() => {
+        console.log("거래 매물 정보 가져오기오류 ");
+      });
   },
   created() {
     this.news = getNews();
@@ -136,12 +162,21 @@ export default {
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+.sell .sell-card {
+  margin: 0;
+  width: 274px;
+  margin-right: 5px;
+}
+
+.sell-card {
+  background-color: #ffffff6b;
+}
+
 .news-card {
   margin: 0;
 }
 .info-list {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   width: 550px;
