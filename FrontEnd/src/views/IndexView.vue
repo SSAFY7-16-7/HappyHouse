@@ -76,7 +76,7 @@
           <div class="list-title">
             <div><h3>매물</h3></div>
             <div>
-              <button class="btn btn-secondary" @click="moveNews">
+              <button class="btn btn-secondary" @click="moveSell">
                 더보기
               </button>
             </div>
@@ -155,6 +155,9 @@ export default {
   methods: {
     moveNews() {
       this.$router.push("/information");
+    },
+    moveSell() {
+      this.$router.push("/sell");
     },
   },
 };

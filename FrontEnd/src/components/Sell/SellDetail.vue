@@ -12,19 +12,38 @@
         ></like-button>
         <h3>{{ house.title }}</h3>
       </div>
-
-      가격 : {{ house.price }}<br />
-      주소: {{ house.address }} <br />
-      층수 : {{ house.floor_now }}층/{{ house.floor_tot }}<br />
-      타입 : {{ house.type }}<br />
-      크기 : {{ house.size }}<br />
-      설명 : {{ house.content }}<br />
-    </div>
-    <div class="detail-img-div">
-      <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
-    </div>
-    <div class="detail-img-div">
-      <img class="sell-thumbnail" :src="img_url2" alt="Image 1" />
+      <div class="detail-img-div">
+        <img class="sell-thumbnail" :src="img_url" alt="Image 1" />
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td class="th">가격</td>
+            <td>{{ house.price }}</td>
+          </tr>
+          <tr>
+            <td class="th">주소</td>
+            <td>{{ house.address }}</td>
+          </tr>
+          <tr>
+            <td class="th">층수</td>
+            <td>{{ house.floor_now }}층/{{ house.floor_tot }}</td>
+          </tr>
+          <tr>
+            <td class="th">타입</td>
+            <td>{{ house.type }}</td>
+          </tr>
+          <tr>
+            <td class="th">크기</td>
+            <td>{{ house.size }}</td>
+          </tr>
+          <tr>
+            <td class="th">설명</td>
+            <td>{{ house.content }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -116,6 +135,9 @@ export default {
 </script>
 
 <style>
+.th {
+  font-weight: bold;
+}
 .mouse-over-bgcolor {
   background-color: rgb(214, 211, 211);
 }
