@@ -63,8 +63,13 @@ const memberStore = {
         () => {}
       );
     },
-    getUserInfo({ commit }, token) {
-      console.log("get logininfo ");
+    logOut({ commit }, user) {
+      if (sessionStorage.getItem("access-token")) {
+        sessionStorage.removeItem("access-token");
+      }
+      testLogout();
+    },
+    async getUserInfo({ commit }, token) {
       let decode_token = jwt_decode(token);
       findById(
         decode_token.userid,
@@ -95,27 +100,28 @@ const memberStore = {
     testAdmin({ commit }) {
       commit("SET_IS_LOGIN", true);
       commit("SET_IS_ADMIN", true);
-      commit("SET_USER_INFO", {
-        id: "admin",
-        password: "admin",
-        email: "admin",
-        age: "1",
-        name: "admin",
-      });
+      // commit("SET_USER_INFO", {
+      //   id: "admin",
+      //   password: "admin",
+      //   email: "admin",
+      //   age: "1",
+      //   name: "admin",
+      // });
     },
     testUser({ commit }) {
       commit("SET_IS_LOGIN", true);
       commit("SET_IS_ADMIN", false);
 
-      commit("SET_USER_INFO", {
-        id: "ssafy",
-        password: "ssfay",
-        email: "ssafy123",
-        age: "1",
-        name: "ssafy",
-      });
+      // commit("SET_USER_INFO", {
+      //   id: "ssafy",
+      //   password: "ssfay",
+      //   email: "ssafy123",
+      //   age: "1",
+      //   name: "ssafy",
+      // });
     },
     testLogout({ commit }) {
+      sessionStorage.removeItem("access-token");
       commit("SET_USER_INFO", null);
       commit("SET_IS_LOGIN", false);
       commit("SET_IS_ADMIN", false);

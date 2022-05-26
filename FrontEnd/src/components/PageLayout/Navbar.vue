@@ -105,7 +105,7 @@
             </router-link>
           </li> -->
 
-          <li class="nav-item" v-if="userInfo">
+          <li class="nav-item" v-if="isLogin">
             <router-link class="nav-link me-2" to="/mypage">
               <i
                 class="fas fa-key opacity-6 me-1"
@@ -122,8 +122,18 @@
                 aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"
               ></i>
-              회원가입
+              로그인
             </router-link>
+          </li>
+          <li class="nav-item" v-if="isLogin">
+            <div class="nav-link me-2" @click="testLogout">
+              <i
+                class="fas fa-key opacity-6 me-1"
+                aria-hidden="true"
+                :class="isBlur ? 'text-dark' : 'text-white'"
+              ></i>
+              로그아웃
+            </div>
           </li>
           <li class="nav-item" v-if="isAdmin">
             <router-link class="nav-link me-2" to="/admin">
@@ -136,11 +146,11 @@
             </router-link>
           </li>
         </ul>
-        <div class="testbtns">
+        <!-- <div class="testbtns">
           <b-button @click="testAdmin" size="sm">관리자</b-button>
           <b-button @click="testUser" size="sm">일반유저 (id: ssafy)</b-button>
           <b-button @click="testLogout" size="sm">로그아웃 </b-button>
-        </div>
+        </div> -->
       </div>
     </div>
   </nav>
@@ -169,8 +179,17 @@ export default {
     },
   },
   methods: {
-    ...mapActions("memberStore", ["testAdmin", "testUser", "testLogout"]),
+    ...mapActions("memberStore", [
+      "testAdmin",
+      "testUser",
+      "testLogout",
+      "logOut",
+    ]),
+    userLogout() {
+      this.logOut;
+    },
   },
+
   computed: {
     ...mapState("memberStore", ["isLogin", "userInfo", "isAdmin"]),
 
