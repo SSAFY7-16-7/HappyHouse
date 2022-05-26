@@ -122,4 +122,28 @@ public class UserServiceImp implements userService {
 		return list;
 	}
 
+	@Override
+	public String changePassword(User user) {
+		char[] newPass = new char[8];
+		
+		User originUser = dao.search(user.getId());
+	
+		if(originUser==null ) {
+			throw new HappyHouseException("존재하지 않는 회원");
+		}
+		if(originUser.getEmail().equals(user.getEmail())&& originUser.getName().equals(user.getName())) {
+		
+			for(int i=0;i<8;i++) {
+				newPass[i] = (char)(int)(Math.random()*26);
+			}
+			System.out.println("임시 비밀번호 발급"+newPass.toString());
+			user.setPassword(newPass.toString());
+			dao.setNewPassword(user);
+			
+		}else {
+			throw new HappyHouseException("틀린 유저 정보 ");
+		}
+		return newPass.toString();
+	}
+
 }

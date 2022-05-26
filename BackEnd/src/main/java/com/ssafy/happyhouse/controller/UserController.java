@@ -67,6 +67,17 @@ public class UserController {
 		}
 	}
 
+	@PostMapping("/password")
+	@ApiOperation(value="비밀번호 찾기", notes = "회원 가입 데이터로 비밀번호 찾기 ")
+	public ResponseEntity<?> findPassword(@RequestBody User user) {
+		String tempPassword = service.changePassword(user);
+		Map<String,String> res = new HashMap<String, String>();
+		res.put("tempPass", tempPassword);
+		return new ResponseEntity<Map<String,String>>(res, HttpStatus.OK);
+		
+	
+
+	}
 	// 회원 목록 get /user
 	@ApiOperation(value="회원 목록 조회", notes = "회원목록을 조회하기")
 	@GetMapping("/user")

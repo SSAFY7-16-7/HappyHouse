@@ -15,6 +15,7 @@ public interface UserDAO {
 	public void update(User member);
 	public void remove(String id) ;
 	public List<User> keySearch(String key,String word);
+	public void setNewPassword(User user);
 }
 
 

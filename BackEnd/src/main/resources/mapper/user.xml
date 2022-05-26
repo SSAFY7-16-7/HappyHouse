@@ -41,6 +41,10 @@
 		where ${key}=#{word}
 	
 	</select>
+		<update id="setNewPassword" parameterType="User" >
+		update user set password =#{password},email=#{email},name=#{name},age=#{age} 
+		where id =#{id}
+	</update>
 	
 
 </mapper>

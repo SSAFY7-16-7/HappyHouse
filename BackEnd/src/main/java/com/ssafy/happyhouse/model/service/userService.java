@@ -20,4 +20,5 @@ public interface userService {
 	void removeLike(InterestApt info);
 	public List<User> findByKey(String key,String word);
 	public List<LikeCount> getLikeCntList();
+	public String changePassword(User user);
 }
