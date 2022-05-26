@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       overColumn: null,
-      likeStatus: true,
+      likeStatus: false,
       img_url: "",
       detail_type: { info: true, deal: false, infra: false },
       buttons: [
@@ -90,6 +90,20 @@ export default {
   },
   created() {
     this.img_url = ramdomImg();
+    // const path = this.$route.path;
+    // if (path === "/house") {
+    //   this.likeStatus = false;
+    // } else this.likeStatus = true;
+    const code = this.house.aptCode;
+    http
+      .post(`/interest/check/likeApt`, { code, user_id: "ssafy" })
+      .then(({ data }) => {
+        if (data.isLiked === "Y") {
+          this.likeStatus = true;
+        } else {
+          this.likeStatus = false;
+        }
+      });
   },
   methods: {
     showInfo() {
