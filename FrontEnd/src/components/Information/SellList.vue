@@ -14,27 +14,17 @@
 
 <script>
 import { getNews } from "@/api/news.js";
-import { getVideos } from "@/api/youtube.js";
 import SellListItem from "./SellListItem.vue";
-import VideoCard from "./VideoCard.vue";
 
 export default {
-  components: { SellListItem, VideoCard },
+  components: { SellListItem },
   data() {
     return {
       news: null,
-      videos: null,
     };
   },
   created() {
     this.news = getNews();
-    this.videos = getVideos();
-    console.log(this.videos);
-  },
-  methods: {
-    moveRegist() {
-      this.$router.push({ name: "sellregist" });
-    },
   },
 };
 </script>

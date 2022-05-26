@@ -70,18 +70,27 @@
         </div>
       </div>
     </section>
-    <section>
+    <section class="section-list">
       <div class="main-list">
-        <div class="news">
+        <div class="news list-div">
           <div class="list-title">
             <div><h3>뉴스</h3></div>
-            <div><button>더보기</button></div>
+            <div><button class="btn btn-secondary">더보기</button></div>
           </div>
         </div>
-        <div class="qna">
+        <div class="qna list-div">
           <div class="list-title">
             <div><h3>뉴스</h3></div>
-            <div><button>더보기</button></div>
+            <div>
+              <button class="btn btn-secondary" @click="moveNews">
+                더보기
+              </button>
+            </div>
+          </div>
+          <div class="info-list">
+            <div v-for="(item, index) in news" :key="index" v-if="index <= 1">
+              <sell-list-item :item="item"></sell-list-item>
+            </div>
           </div>
         </div>
       </div>
@@ -95,9 +104,8 @@ import AppFooter from "@/components/PageLayout/Footer.vue";
 import VsudInput from "@/components/soft-ui-components/VsudInput.vue";
 import VsudSwitch from "@/components/soft-ui-components/VsudSwitch.vue";
 import VsudButton from "@/components/soft-ui-components/VsudButton.vue";
-
-const body = document.getElementsByTagName("body")[0];
-import { mapMutations } from "vuex";
+import { getNews } from "@/api/news.js";
+import SellListItem from "@/components/Information/SellListItem.vue";
 
 export default {
   name: "HomeView",
@@ -107,12 +115,66 @@ export default {
     VsudInput,
     VsudSwitch,
     VsudButton,
+    SellListItem,
+  },
+  data() {
+    return {
+      news: null,
+    };
+  },
+  created() {
+    this.news = getNews();
+    console.log(this.news);
+  },
+  methods: {
+    moveNews() {
+      this.$router.push("/information");
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+.news-card {
+  margin: 0;
+}
+.info-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 550px;
+}
+.card.news-card {
+  width: 270px;
+  background-color: #ffffff6b;
+  margin-right: 5px;
+  margin-top: 10x;
+}
+section.section-list {
+  padding: 100px 246px;
+}
+.section-list {
+  display: flex;
+  justify-content: center;
+  padding: 68px;
+}
+.main-list {
+  display: flex;
+  justify-content: space-between;
+}
+.list-div {
+  width: 550px;
+  margin-right: 50px;
+}
+.list-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid #344767;
+}
+
 .main-info-div {
   margin: 18px;
   display: flex;
