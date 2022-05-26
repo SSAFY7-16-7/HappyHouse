@@ -172,8 +172,10 @@ export default {
     modify() {
       http.put("/user/update", this.user).then((res) => {
         console.log(res);
+        this.$set(this.users, this.useridx, this.user);
+        alert("회원 정보 수정 완료!");
+        this.$bvModal.hide("modal-center");
       });
-      this.$set(this.users, this.useridx, this.user);
     },
     setUser(user, idx) {
       console.log("클릭");
