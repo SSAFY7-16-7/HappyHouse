@@ -73,6 +73,7 @@ public class OpenApiController {
 				"&" + URLEncoder.encode("kaptCode", "UTF-8") + "=" + URLEncoder.encode(kaptCode, "UTF-8")); /* 단지코드 */
 		URL url = new URL(urlBuilder.toString());
 //		System.out.println(url.toString());
+		HttpURLConnection.setFollowRedirects(false);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-type", "application/json");
@@ -112,6 +113,7 @@ public class OpenApiController {
 				"&" + URLEncoder.encode("kaptCode", "UTF-8") + "=" + URLEncoder.encode(kaptCode, "UTF-8")); /* 단지코드 */
 		URL url = new URL(urlBuilder.toString());
 //		System.out.println(url.toString());
+		HttpURLConnection.setFollowRedirects(false);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-type", "application/json");
