@@ -154,7 +154,7 @@ export default {
   },
   mounted() {
     this.$root.$on("bv::modal::hide", (bvEvent, modalid) => {
-      console.log("Modal is about to be shown", bvEvent, modalid);
+      //console.log("Modal is about to be shown", bvEvent, modalid);
       this.isError = false;
       this.ErrorMessage = "";
     });
@@ -169,7 +169,7 @@ export default {
           this.$bvModal.show("temp-pass");
         })
         .catch(({ response }) => {
-          console.log(response);
+          //console.log(response);
           this.isError = true;
           this.ErrorMessage = response.data;
           this.$bvModal.show("temp-pass");

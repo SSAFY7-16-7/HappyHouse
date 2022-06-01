@@ -38,10 +38,12 @@ function getKapt(params, success, fail) {
 }
 
 function houseDetail1(params, success, fail) {
-  detail1.get(``, { params: params }).then(success).catch(fail);
+  // detail1.get(``, { params: params }).then(success).catch(fail);
+  api.get(`/api/detail1`, { params: params }).then(success).catch(fail);
 }
 function houseDetail2(params, success, fail) {
-  detail2.get(``, { params: params }).then(success).catch(fail);
+  // detail2.get(``, { params: params }).then(success).catch(fail);
+  api.get(`/api/detail2`, { params: params }).then(success).catch(fail);
 }
 
 export {

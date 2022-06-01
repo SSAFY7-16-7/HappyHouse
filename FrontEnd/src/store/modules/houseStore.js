@@ -235,6 +235,7 @@ const houseStore = {
           houseDetail2(
             params,
             ({ data }) => {
+              console.log(data);
               commit("SET_DETAIL2", data);
             },
             (error) => {
